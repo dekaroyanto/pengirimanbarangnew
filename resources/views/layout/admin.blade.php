@@ -30,13 +30,13 @@
             <span class="text">CV Firmos</span>
         </a>
         <ul class="side-menu top">
-            <li class="active">
+            <li class="{{ request()->is('/') ? 'active' : '' }}">
                 <a href="/">
                     <i class="bx bxs-dashboard"></i>
                     <span class="text">Dashboard</span>
                 </a>
             </li>
-            <li>
+            <li class="{{ request()->is('pesanan') ? 'active' : '' }}">
                 <a href="/pesanan">
                     <i class='bx bxs-shopping-bag'></i>
                     <span class="text">Pesanan</span>

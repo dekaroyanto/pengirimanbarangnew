@@ -18,9 +18,23 @@
     <i class="bx bxs-bell"></i>
     <span class="num">8</span>
 </a>
-<a href="#" class="profile">
-    <img src="img/people.png" />
-</a>
+<div class="btn-group">
+    <button type="button" class="btn dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+        <a href="#" class="profile">
+            <img src="img/people.png" />
+        </a>
+    </button>
+
+    <ul class="dropdown-menu">
+        <li><a class="dropdown-item" href="#">Action</a></li>
+        <li><a class="dropdown-item" href="#">Another action</a></li>
+        <li><a class="dropdown-item" href="#">Something else here</a></li>
+        <li>
+            <hr class="dropdown-divider">
+        </li>
+        <li><a class="dropdown-item" href="#">Separated link</a></li>
+    </ul>
+</div>
 @endsection
 
 @section('dashead')
@@ -72,7 +86,13 @@
                     <td>{{ $row->kdpsn }}</td>
                     <td>{{ $row->namabarang }}</td>
                     <td>{{ $row->kategori }}</td>
-                    <td>{{ $row->status }}</td>
+                    <td>
+                        @if ($row->status == 'Proses')
+                        <span class="status process">{{ $row->status }}</span>
+                        @else
+                        <span class="status completed">{{ $row->status }}</span>
+                        @endif
+                    </td>
                     <td>
                         <button type="button" class="btn btn-info" data-bs-toggle="modal"
                             data-bs-target="#exampleModalDetail{{ $row->id }}">
