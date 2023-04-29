@@ -2,7 +2,7 @@
 
 @section('navbar')
 <i class="bx bx-menu"></i>
-<a href="#" class="nav-link">Categories</a>
+<a href="#" class="nav-link">Utama</a>
 <form action="#">
     <div class="form-input">
         <input type="search" placeholder="Search..." />
@@ -25,13 +25,12 @@
     </button>
 
     <ul class="dropdown-menu">
-        <li><a class="dropdown-item" href="#">Action</a></li>
-        <li><a class="dropdown-item" href="#">Another action</a></li>
-        <li><a class="dropdown-item" href="#">Something else here</a></li>
+        <li><a class="dropdown-item" href="#">My Profile</a></li>
+        <li><a class="dropdown-item" href="#">Account Setting</a></li>
         <li>
             <hr class="dropdown-divider">
         </li>
-        <li><a class="dropdown-item" href="#">Separated link</a></li>
+        <li><a class="dropdown-item" href="#">Logout</a></li>
     </ul>
 </div>
 

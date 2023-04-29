@@ -37,3 +37,5 @@ Route::get('/deletepesanan/{id}', [PesananController::class, 'deletepesanan'])->
 
 // export PDF
 Route::get('/exportpdf', [PesananController::class, 'exportpdf'])->name('exportpdf');
+
+Route::get('/kurir', [PesananController::class, 'kurir'])->name('kurir');

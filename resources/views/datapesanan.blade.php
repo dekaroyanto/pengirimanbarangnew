@@ -2,11 +2,10 @@
 
 @section('navbar')
 <i class="bx bx-menu"></i>
-<a href="#" class="nav-link">Menu</a>
+<a href="#" class="nav-link">Pesanan</a>
 <form action="/pesanan" method="GET">
     <div class="form-input">
-        <input type="search" id="inputPassword6" name="search" class="form-control float-right" placeholder="Cari"
-            aria-describedby="passwordHelpInline" value="{{ request('search') }}" />
+        <input type="search" id="inputPassword6" name="search" class="form-control float-right" placeholder="Cari" aria-describedby="passwordHelpInline" value="{{ request('search') }}" />
         <button type="submit" class="search-btn">
             <i class="bx bx-search"></i>
         </button>
@@ -26,13 +25,12 @@
     </button>
 
     <ul class="dropdown-menu">
-        <li><a class="dropdown-item" href="#">Action</a></li>
-        <li><a class="dropdown-item" href="#">Another action</a></li>
-        <li><a class="dropdown-item" href="#">Something else here</a></li>
+        <li><a class="dropdown-item" href="#">My Profile</a></li>
+        <li><a class="dropdown-item" href="#">Account Setting</a></li>
         <li>
             <hr class="dropdown-divider">
         </li>
-        <li><a class="dropdown-item" href="#">Separated link</a></li>
+        <li><a class="dropdown-item" href="#">Logout</a></li>
     </ul>
 </div>
 @endsection
@@ -59,8 +57,7 @@
     <div class="order">
         <div class="head">
             <h3>Daftar Pesanan</h3>
-            <a href="/tambahpesanan" class="btn btn-outline-secondary" data-bs-toggle="modal"
-                data-bs-target="#exampleModal2">Tambah Data</a>
+            <a href="/tambahpesanan" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#exampleModal2">Tambah Data</a>
         </div>
         <table>
             <thead>
@@ -94,18 +91,15 @@
                         @endif
                     </td>
                     <td>
-                        <button type="button" class="btn btn-info" data-bs-toggle="modal"
-                            data-bs-target="#exampleModalDetail{{ $row->id }}">
+                        <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#exampleModalDetail{{ $row->id }}">
                             <i class="bi bi-eye-fill"></i>
                         </button>
 
-                        <button type="button" class="btn btn-warning" data-bs-toggle="modal"
-                            data-bs-target="#exampleModalUbah{{ $row->id }}">
+                        <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#exampleModalUbah{{ $row->id }}">
                             <i class="bi bi-pencil-square"></i>
                         </button>
 
-                        <a href="#" class="btn btn-danger delete" data-id="{{ $row->id }}"
-                            data-nama="{{ $row->namabarang }}"><i class="bi bi-trash3"></i></a>
+                        <a href="#" class="btn btn-danger delete" data-id="{{ $row->id }}" data-nama="{{ $row->namabarang }}"><i class="bi bi-trash3"></i></a>
                     </td>
 
                 </tr>
@@ -129,13 +123,11 @@
                     @csrf
                     <div class="mb-3">
                         <label for="exampleInputEmail1" class="form-label">Kode Pesanan</label>
-                        <input type="text" name="kdpsn" class="form-control" id="exampleInputEmail1"
-                            aria-describedby="emailHelp">
+                        <input type="text" name="kdpsn" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
                     </div>
                     <div class="mb-3">
                         <label for="exampleInputEmail1" class="form-label">Nama Barang</label>
-                        <input type="text" name="namabarang" class="form-control" id="exampleInputEmail1"
-                            aria-describedby="emailHelp">
+                        <input type="text" name="namabarang" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
                     </div>
                     <div class="mb-3">
                         <label for="exampleInputEmail1" class="form-label">Kategori</label>
@@ -147,8 +139,7 @@
                     </div>
                     <div class="mb-3">
                         <label for="exampleFormControlTextarea1" class="form-label">Alamat Lengkap</label>
-                        <textarea class="form-control" name="alamat" id="exampleFormControlTextarea1"
-                            rows="3"></textarea>
+                        <textarea class="form-control" name="alamat" id="exampleFormControlTextarea1" rows="3"></textarea>
                     </div>
                     <div class="mb-3">
                         <label for="exampleInputEmail1" class="form-label">Status</label>
@@ -173,8 +164,7 @@
 
 <!-- Modal Detail -->
 @foreach ($data as $index => $row)
-<div class="modal fade" id="exampleModalDetail{{ $row->id }}" tabindex="-1" aria-labelledby="exampleModalLabel"
-    aria-hidden="true">
+<div class="modal fade" id="exampleModalDetail{{ $row->id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -186,28 +176,23 @@
                     @csrf
                     <div class="mb-3">
                         <label for="exampleInputEmail1" class="form-label">Kode Pesanan</label>
-                        <input type="text" name="kdpsn" class="form-control" id="exampleInputEmail1"
-                            aria-describedby="emailHelp" value="{{ $row->kdpsn }}" readonly>
+                        <input type="text" name="kdpsn" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" value="{{ $row->kdpsn }}" readonly>
                     </div>
                     <div class="mb-3">
                         <label for="exampleInputEmail1" class="form-label">Nama Barang</label>
-                        <input type="text" name="namabarang" class="form-control" id="exampleInputEmail1"
-                            aria-describedby="emailHelp" value="{{ $row->namabarang }}" readonly>
+                        <input type="text" name="namabarang" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" value="{{ $row->namabarang }}" readonly>
                     </div>
                     <div class="mb-3">
                         <label for="exampleInputEmail1" class="form-label">Kategori</label>
-                        <input type="text" name="kategori" class="form-control" id="exampleInputEmail1"
-                            aria-describedby="emailHelp" value="{{ $row->kategori }}" readonly>
+                        <input type="text" name="kategori" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" value="{{ $row->kategori }}" readonly>
                     </div>
                     <div class="mb-3">
                         <label for="exampleFormControlTextarea1" class="form-label">Alamat Lengkap</label>
-                        <textarea class="form-control" name="alamat" id="exampleFormControlTextarea1" rows="3"
-                            readonly>{{ $row->alamat }}</textarea>
+                        <textarea class="form-control" name="alamat" id="exampleFormControlTextarea1" rows="3" readonly>{{ $row->alamat }}</textarea>
                     </div>
                     <div class="mb-3">
                         <label for="exampleInputEmail1" class="form-label">Status</label>
-                        <input type="text" name="status" class="form-control" id="exampleInputEmail1"
-                            aria-describedby="emailHelp" value="{{ $row->status }}" readonly>
+                        <input type="text" name="status" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" value="{{ $row->status }}" readonly>
 
                         </select>
                     </div>
@@ -222,8 +207,7 @@
 
 <!-- Modal Edit -->
 @foreach ($data as $index => $row)
-<div class="modal fade" id="exampleModalUbah{{ $row->id }}" tabindex="-1" aria-labelledby="exampleModalLabel"
-    aria-hidden="true">
+<div class="modal fade" id="exampleModalUbah{{ $row->id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -235,13 +219,11 @@
                     @csrf
                     <div class="mb-3">
                         <label for="exampleInputEmail1" class="form-label">Kode Pesanan</label>
-                        <input type="text" name="kdpsn" class="form-control" id="exampleInputEmail1"
-                            aria-describedby="emailHelp" value="{{ $row->kdpsn }}">
+                        <input type="text" name="kdpsn" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" value="{{ $row->kdpsn }}">
                     </div>
                     <div class="mb-3">
                         <label for="exampleInputEmail1" class="form-label">Nama Barang</label>
-                        <input type="text" name="namabarang" class="form-control" id="exampleInputEmail1"
-                            aria-describedby="emailHelp" value="{{ $row->namabarang }}">
+                        <input type="text" name="namabarang" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" value="{{ $row->namabarang }}">
                     </div>
                     <div class="mb-3">
                         <label for="exampleInputEmail1" class="form-label">Kategori</label>
@@ -258,8 +240,7 @@
                     </div>
                     <div class="mb-3">
                         <label for="exampleFormControlTextarea1" class="form-label">Alamat Lengkap</label>
-                        <textarea class="form-control" name="alamat" id="exampleFormControlTextarea1"
-                            rows="3">{{ $row->alamat }}</textarea>
+                        <textarea class="form-control" name="alamat" id="exampleFormControlTextarea1" rows="3">{{ $row->alamat }}</textarea>
                     </div>
                     <div class="mb-3">
                         <label for="exampleInputEmail1" class="form-label">Status</label>
