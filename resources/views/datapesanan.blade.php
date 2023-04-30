@@ -1,113 +1,117 @@
-@extends('layout.admin')
+@extends('layout.mazer')
 
-@section('navbar')
-<i class="bx bx-menu"></i>
-<a href="#" class="nav-link">Pesanan</a>
-<form action="/pesanan" method="GET">
-    <div class="form-input">
-        <input type="search" id="inputPassword6" name="search" class="form-control float-right" placeholder="Cari" aria-describedby="passwordHelpInline" value="{{ request('search') }}" />
-        <button type="submit" class="search-btn">
-            <i class="bx bx-search"></i>
-        </button>
-    </div>
-</form>
-<input type="checkbox" id="switch-mode" hidden />
-<label for="switch-mode" class="switch-mode"></label>
-<a href="#" class="notification">
-    <i class="bx bxs-bell"></i>
-    <span class="num">8</span>
-</a>
-<div class="btn-group">
-    <button type="button" class="btn dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-        <a href="#" class="profile">
-            <img src="img/people.png" />
-        </a>
-    </button>
 
-    <ul class="dropdown-menu">
-        <li><a class="dropdown-item" href="#">My Profile</a></li>
-        <li><a class="dropdown-item" href="#">Account Setting</a></li>
-        <li>
-            <hr class="dropdown-divider">
-        </li>
-        <li><a class="dropdown-item" href="#">Logout</a></li>
-    </ul>
-</div>
-@endsection
 
-@section('dashead')
-<div class="head-title">
-    <div class="left">
-        <h1>Pesanan</h1>
-        <ul class="breadcrumb">
-            <li>
-                <a href="/">Home</a>
-            </li>
-            <li><i class="bx bx-chevron-right"></i></li>
-            <li>
-                <a class="active" href="/pesanan">Pesanan</a>
-            </li>
-        </ul>
-    </div>
-</div>
-@endsection
+@section('content')
+<div class="page-content">
 
-@section('main')
-<div class="table-data">
-    <div class="order">
-        <div class="head">
-            <h3>Daftar Pesanan</h3>
-            <a href="/tambahpesanan" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#exampleModal2">Tambah Data</a>
+    <section class="section">
+        <div class="row" id="table-head">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+
+                        <h1>Data Pesanan</h1>
+
+                    </div>
+                    <div class="card-content">
+
+                        <div class="row">
+                            <div class="col-md-4 mb-1">
+                                <form action="/pesanan" method="GET">
+                                    <div class="input-group mb-3 ms-3">
+
+                                        <span class="input-group-text" id="basic-addon1"><i
+                                                class="bi bi-search"></i></span>
+                                        <input type="search" name="search" class="form-control"
+                                            placeholder="Cari data..." aria-label="Recipient's username"
+                                            aria-describedby="button-addon2" value="{{ request('search') }}" />
+                                        <button class="btn btn-outline-secondary" type="submit" id="button-addon2">
+                                            Cari
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="col-md-4 mb-1">
+                                <div class="input-group mb-3">
+                                    <a href="/tambahpesanan" class="btn btn-outline-secondary" data-bs-toggle="modal"
+                                        data-bs-target="#exampleModal2">Tambah Data</a>
+                                </div>
+                            </div>
+                            <div class="col-md-4 mb-1">
+                                <div class="input-group mb-3">
+                                    <a href="/tambahpesanan" class="btn btn-outline-secondary" data-bs-toggle="modal"
+                                        data-bs-target="#exampleModal2">Download</a>
+                                </div>
+                            </div>
+
+                        </div>
+
+
+
+
+                        <!-- table head dark -->
+                        <div class="table-responsive">
+                            <table class="table mb-0">
+                                <thead class="thead-dark">
+                                    <tr class="text-center">
+                                        <th>No</th>
+                                        <th>Kode Pesanan</th>
+                                        <th>Nama Barang</th>
+                                        <th>Kategori</th>
+                                        <th>Status</th>
+                                        <th>Aksi</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @php
+                                    $no = 1;
+                                    @endphp
+
+                                    @foreach ($data as $index => $row)
+
+                                    <tr class="text-center">
+                                        <th scope="row">{{ $index + $data->firstItem() }}</th>
+                                        <td>{{ $row->kdpsn }}</td>
+                                        <td>{{ $row->namabarang }}</td>
+                                        <td>{{ $row->kategori }}</td>
+                                        <td>
+                                            @if ($row->status == 'Proses')
+                                            <span class="badge bg-light-warning">{{ $row->status }}</span>
+                                            @else
+                                            <span class="badge bg-light-success">{{ $row->status }}</span>
+                                            @endif
+                                        </td>
+                                        <td>
+                                            <button type="button" class="btn btn-info" data-bs-toggle="modal"
+                                                data-bs-target="#exampleModalDetail{{ $row->id }}">
+                                                <i class="bi bi-eye-fill"></i>
+                                            </button>
+
+                                            <button type="button" class="btn btn-warning" data-bs-toggle="modal"
+                                                data-bs-target="#exampleModalUbah{{ $row->id }}">
+                                                <i class="bi bi-pencil-square"></i>
+                                            </button>
+
+                                            <a href="{{ route('deletepesanan', $row->id) }}"
+                                                class="btn btn-danger delete" id="delete" data-id="{{ $row->id }}"
+                                                data-nama="{{ $row->namabarang }}"><i class="bi bi-trash3"></i></a>
+                                            {{-- <a href="{{ route('pesanan', $row->id) }}"
+                                                class="btn btn-danger delete" id="delete" data-id="{{ $row->id }}"
+                                                data-nama="{{ $row->namabarang }}"><i class="bi bi-trash3"></i></a> --}}
+                                        </td>
+                                    </tr>
+
+                                </tbody>
+                                @endforeach
+                            </table>
+                            {{ $data->links() }}
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <table>
-            <thead>
-                <tr>
-                    <th>No</th>
-                    <th>Kode Pesanan</th>
-                    <th>Nama Barang</th>
-                    <th>Kategori</th>
-                    <th>Status</th>
-                    <th>Aksi</th>
-                </tr>
-            </thead>
-            <tbody>
-                @php
-                $no = 1;
-                @endphp
-
-                @foreach ($data as $index => $row)
-
-
-                <tr class="text-center">
-                    <th scope="row">{{ $index + $data->firstItem() }}</th>
-                    <td>{{ $row->kdpsn }}</td>
-                    <td>{{ $row->namabarang }}</td>
-                    <td>{{ $row->kategori }}</td>
-                    <td>
-                        @if ($row->status == 'Proses')
-                        <span class="status process">{{ $row->status }}</span>
-                        @else
-                        <span class="status completed">{{ $row->status }}</span>
-                        @endif
-                    </td>
-                    <td>
-                        <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#exampleModalDetail{{ $row->id }}">
-                            <i class="bi bi-eye-fill"></i>
-                        </button>
-
-                        <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#exampleModalUbah{{ $row->id }}">
-                            <i class="bi bi-pencil-square"></i>
-                        </button>
-
-                        <a href="#" class="btn btn-danger delete" data-id="{{ $row->id }}" data-nama="{{ $row->namabarang }}"><i class="bi bi-trash3"></i></a>
-                    </td>
-
-                </tr>
-                @endforeach
-            </tbody>
-        </table>
-        {{ $data->links() }}
-    </div>
+    </section>
 </div>
 
 <!-- Modal Tambah -->
@@ -123,11 +127,13 @@
                     @csrf
                     <div class="mb-3">
                         <label for="exampleInputEmail1" class="form-label">Kode Pesanan</label>
-                        <input type="text" name="kdpsn" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                        <input type="text" name="kdpsn" class="form-control" id="exampleInputEmail1"
+                            aria-describedby="emailHelp">
                     </div>
                     <div class="mb-3">
                         <label for="exampleInputEmail1" class="form-label">Nama Barang</label>
-                        <input type="text" name="namabarang" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                        <input type="text" name="namabarang" class="form-control" id="exampleInputEmail1"
+                            aria-describedby="emailHelp">
                     </div>
                     <div class="mb-3">
                         <label for="exampleInputEmail1" class="form-label">Kategori</label>
@@ -139,7 +145,8 @@
                     </div>
                     <div class="mb-3">
                         <label for="exampleFormControlTextarea1" class="form-label">Alamat Lengkap</label>
-                        <textarea class="form-control" name="alamat" id="exampleFormControlTextarea1" rows="3"></textarea>
+                        <textarea class="form-control" name="alamat" id="exampleFormControlTextarea1"
+                            rows="3"></textarea>
                     </div>
                     <div class="mb-3">
                         <label for="exampleInputEmail1" class="form-label">Status</label>
@@ -164,7 +171,8 @@
 
 <!-- Modal Detail -->
 @foreach ($data as $index => $row)
-<div class="modal fade" id="exampleModalDetail{{ $row->id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="exampleModalDetail{{ $row->id }}" tabindex="-1" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -176,23 +184,28 @@
                     @csrf
                     <div class="mb-3">
                         <label for="exampleInputEmail1" class="form-label">Kode Pesanan</label>
-                        <input type="text" name="kdpsn" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" value="{{ $row->kdpsn }}" readonly>
+                        <input type="text" name="kdpsn" class="form-control" id="exampleInputEmail1"
+                            aria-describedby="emailHelp" value="{{ $row->kdpsn }}" readonly>
                     </div>
                     <div class="mb-3">
                         <label for="exampleInputEmail1" class="form-label">Nama Barang</label>
-                        <input type="text" name="namabarang" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" value="{{ $row->namabarang }}" readonly>
+                        <input type="text" name="namabarang" class="form-control" id="exampleInputEmail1"
+                            aria-describedby="emailHelp" value="{{ $row->namabarang }}" readonly>
                     </div>
                     <div class="mb-3">
                         <label for="exampleInputEmail1" class="form-label">Kategori</label>
-                        <input type="text" name="kategori" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" value="{{ $row->kategori }}" readonly>
+                        <input type="text" name="kategori" class="form-control" id="exampleInputEmail1"
+                            aria-describedby="emailHelp" value="{{ $row->kategori }}" readonly>
                     </div>
                     <div class="mb-3">
                         <label for="exampleFormControlTextarea1" class="form-label">Alamat Lengkap</label>
-                        <textarea class="form-control" name="alamat" id="exampleFormControlTextarea1" rows="3" readonly>{{ $row->alamat }}</textarea>
+                        <textarea class="form-control" name="alamat" id="exampleFormControlTextarea1" rows="3"
+                            readonly>{{ $row->alamat }}</textarea>
                     </div>
                     <div class="mb-3">
                         <label for="exampleInputEmail1" class="form-label">Status</label>
-                        <input type="text" name="status" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" value="{{ $row->status }}" readonly>
+                        <input type="text" name="status" class="form-control" id="exampleInputEmail1"
+                            aria-describedby="emailHelp" value="{{ $row->status }}" readonly>
 
                         </select>
                     </div>
@@ -207,7 +220,8 @@
 
 <!-- Modal Edit -->
 @foreach ($data as $index => $row)
-<div class="modal fade" id="exampleModalUbah{{ $row->id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="exampleModalUbah{{ $row->id }}" tabindex="-1" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -219,11 +233,13 @@
                     @csrf
                     <div class="mb-3">
                         <label for="exampleInputEmail1" class="form-label">Kode Pesanan</label>
-                        <input type="text" name="kdpsn" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" value="{{ $row->kdpsn }}">
+                        <input type="text" name="kdpsn" class="form-control" id="exampleInputEmail1"
+                            aria-describedby="emailHelp" value="{{ $row->kdpsn }}">
                     </div>
                     <div class="mb-3">
                         <label for="exampleInputEmail1" class="form-label">Nama Barang</label>
-                        <input type="text" name="namabarang" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" value="{{ $row->namabarang }}">
+                        <input type="text" name="namabarang" class="form-control" id="exampleInputEmail1"
+                            aria-describedby="emailHelp" value="{{ $row->namabarang }}">
                     </div>
                     <div class="mb-3">
                         <label for="exampleInputEmail1" class="form-label">Kategori</label>
@@ -240,7 +256,8 @@
                     </div>
                     <div class="mb-3">
                         <label for="exampleFormControlTextarea1" class="form-label">Alamat Lengkap</label>
-                        <textarea class="form-control" name="alamat" id="exampleFormControlTextarea1" rows="3">{{ $row->alamat }}</textarea>
+                        <textarea class="form-control" name="alamat" id="exampleFormControlTextarea1"
+                            rows="3">{{ $row->alamat }}</textarea>
                     </div>
                     <div class="mb-3">
                         <label for="exampleInputEmail1" class="form-label">Status</label>
@@ -266,5 +283,4 @@
 </div>
 @endforeach
 <!-- End Modal Edit -->
-
 @endsection
