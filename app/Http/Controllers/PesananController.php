@@ -32,6 +32,14 @@ class PesananController extends Controller
 
     public function insertpesanan(Request $request)
     {
+
+        $validated = $request->validate([
+            'kdpsn' => 'required|unique:pesanans',
+            'penerima' => 'required',
+            'alamat' => 'required',
+        ]);
+
+
         $data = Pesanan::create($request->all());
         if ($request->hasFile('foto')) {
             $request->file('foto')->move('fotopesanan/', $request->file('foto')->getClientOriginalName());

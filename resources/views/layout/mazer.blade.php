@@ -110,6 +110,13 @@
                                 <span>Kendaraan</span>
                             </a>
                         </li>
+
+                        <li class="{{ request()->is('register') ? 'sidebar-item active' : '' }}">
+                            <a href="/register" class="sidebar-link">
+                                <i class="bi bi-person-fill-add"></i>
+                                <span>Tambah Akun</span>
+                            </a>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -201,7 +208,7 @@
                                     <div class="user-menu d-flex">
                                         <div class="user-name text-end me-3">
                                             <h6 class="mb-0 text-gray-600">
-                                                Hi, Nama!
+                                                Hi, {{ Auth::user()->name }}!
                                             </h6>
                                             <p class="mb-0 text-sm text-gray-600">
                                                 Role
@@ -241,7 +248,7 @@
                                         <hr class="dropdown-divider" />
                                     </li>
                                     <li>
-                                        <a class="dropdown-item" href="#"><i
+                                        <a class="dropdown-item" href="/logout"><i
                                                 class="icon-mid bi bi-box-arrow-left me-2"></i>
                                             Logout</a>
                                     </li>
