@@ -5,6 +5,7 @@ use App\Http\Controllers\LoginController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PesananController;
 use App\Models\Pesanan;
+use App\Models\User;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,8 +21,9 @@ use App\Models\Pesanan;
 Route::get('/', function () {
 
     $jumlahpesanan = Pesanan::count();
+    $jumlahuser = User::count();
     $data = Pesanan::latest()->paginate(3);
-    return view('welcome', compact('jumlahpesanan', 'data'));
+    return view('welcome', compact('jumlahpesanan', 'jumlahuser', 'data'));
 })->middleware('auth');
 
 // Route::get('/', [HomedashController::class, 'index']);
@@ -51,3 +53,7 @@ Route::post('/registeruser', [LoginController::class, 'registeruser'])->name('re
 
 //logout
 Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
+
+//user
+Route::get('/register', [LoginController::class, 'index'])->name('user')->middleware('auth');
+// Route::get('/register', 'LoginController@index');

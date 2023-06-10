@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Pesanan;
 use PDF;
+use App\Models\Pesanan;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Session;
 // use GuzzleHttp\Promise\Create;
 // use App\Http\Controllers\Controller;
 
@@ -19,8 +21,10 @@ class PesananController extends Controller
                 ->orWhere('alamat', 'LIKE', '%' . $request->search . '%')
                 ->orWhere('status', 'LIKE', '%' . $request->search . '%')
                 ->paginate(5);
+            Session::put('halaman_url', request()->fullUrl());
         } else {
             $data = Pesanan::paginate(5);
+            Session::put('halaman_url', request()->fullUrl());
         }
         return view('datapesanan', compact('data'));
     }
@@ -35,9 +39,17 @@ class PesananController extends Controller
 
         $validated = $request->validate([
             'kdpsn' => 'required|unique:pesanans',
-            'penerima' => 'required',
+            'penerima' => 'required|min:5',
+            'notelp' => 'required',
+            'namabarang' => 'required',
+            'prov' => 'required',
+            'kota' => 'required',
+            'kec' => 'required',
+            'kdpos' => 'required',
             'alamat' => 'required',
         ]);
+
+
 
 
         $data = Pesanan::create($request->all());
@@ -62,6 +74,9 @@ class PesananController extends Controller
     {
         $data = Pesanan::find($id);
         $data->update($request->all());
+        if (session('halaman_url')) {
+            return Redirect(session('halaman_url'))->with('success', 'Data Berhasil Di Ubah');
+        }
 
         return redirect()->route('pesanan')->with('success', 'Data Berhasil Di Ubah');
     }

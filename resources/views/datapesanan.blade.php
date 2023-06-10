@@ -26,7 +26,7 @@
 
                     </div>
                     <div class="card-content mt-2">
-
+                        {{ Session::get('halaman_url') }}
                         <div class="row">
                             <div class="col-md-4 mb-1">
                                 <form action="/pesanan" method="GET">
@@ -57,62 +57,6 @@
                             </div>
 
                         </div>
-
-
-                        <!-- table head dark -->
-                        {{-- <div class="table-responsive">
-                            <table class="table mb-0">
-                                <thead class="thead-dark">
-                                    <tr class="text-center">
-                                        <th>No</th>
-                                        <th>Kode Pesanan</th>
-                                        <th>Nama Barang</th>
-                                        <th>Kategori</th>
-                                        <th>Status</th>
-                                        <th>Aksi</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @php
-                                    $no = 1;
-                                    @endphp
-
-                                    @foreach ($data as $index => $row)
-
-                                    <tr class="text-center">
-                                        <th scope="row">{{ $index + $data->firstItem() }}</th>
-                                        <td>{{ $row->kdpsn }}</td>
-                                        <td>{{ $row->namabarang }}</td>
-                                        <td>{{ $row->kategori }}</td>
-                                        <td>
-                                            @if ($row->status == 'Proses')
-                                            <span class="badge bg-warning">{{ $row->status }}</span>
-                                            @else
-                                            <span class="badge bg-success">{{ $row->status }}</span>
-                                            @endif
-                                        </td>
-                                        <td>
-                                            <button type="button" class="btn btn-info" data-bs-toggle="modal"
-                                                data-bs-target="#exampleModalDetail{{ $row->id }}">
-                                                <i class="bi bi-eye-fill"></i>
-                                            </button>
-
-                                            <button type="button" class="btn btn-warning" data-bs-toggle="modal"
-                                                data-bs-target="#exampleModalUbah{{ $row->id }}">
-                                                <i class="bi bi-pencil-square"></i>
-                                            </button>
-
-                                            <a href="{{ route('deletepesanan', $row->id) }}"
-                                                class="btn btn-danger delete" id="delete" data-id="{{ $row->id }}"
-                                                data-nama="{{ $row->namabarang }}"><i class="bi bi-trash3"></i></a>
-                                        </td>
-                                    </tr>
-
-                                </tbody>
-                                @endforeach
-                            </table>
-                            {{ $data->links() }}
-                        </div> --}}
 
                         <div class="row" id="table-striped">
                             <div class="col-12">
@@ -177,6 +121,7 @@
                                                     @endforeach
                                                 </tbody>
                                             </table>
+                                            {{ $data->links() }}
                                         </div>
                                     </div>
                                 </div>
@@ -216,36 +161,49 @@
                                                         <input type="text" name="kdpsn"
                                                             class="form-control @error('kdpsn') is-invalid @enderror"
                                                             id="exampleInputEmail1" aria-describedby="emailHelp">
-                                                        @error('kdpsn')
-                                                        <div class="alert alert-danger">{{ $message }}</div>
-                                                        @enderror
+                                                        <div class="invalid-feedback">
+                                                            Masukan kode pesanan dengan benar.
+                                                        </div>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6 col-12">
                                                     <div class="form-group">
                                                         <label for="exampleInputEmail1" class="form-label">Nama
                                                             Penerima</label>
-                                                        <input type="text" name="penerima" class="form-control"
-                                                            id="exampleInputEmail1" aria-describedby="emailHelp">
-                                                        @error('penerima')
-                                                        <div class="alert alert-danger">{{ $message }}</div>
-                                                        @enderror
+                                                        <input type="text" name="penerima" class="form-control @error('penerima') is-invalid
+                                                            @enderror" id="exampleInputEmail1"
+                                                            aria-describedby="emailHelp" value="{{ old('penerima') }}">
+                                                        <div class="invalid-feedback">
+                                                            @error('penerima')
+                                                            {{ $message }}
+                                                            @enderror
+
+                                                        </div>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6 col-12">
                                                     <div class="form-group">
                                                         <label for="exampleInputEmail1" class="form-label">No
                                                             Telepon</label>
-                                                        <input type="text" name="notelp" class="form-control"
-                                                            id="exampleInputEmail1" aria-describedby="emailHelp">
+                                                        <input type="text" name="notelp" class="form-control @error('notelp') is-invalid
+                                                            @enderror" id="exampleInputEmail1"
+                                                            aria-describedby="emailHelp" value="{{ old('notelp') }}">
+                                                        <div class="invalid-feedback">
+                                                            Masukan no telp dengan benar.
+                                                        </div>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6 col-12">
                                                     <div class="form-group">
                                                         <label for="exampleInputEmail1" class="form-label">Nama
                                                             Barang</label>
-                                                        <input type="text" name="namabarang" class="form-control"
-                                                            id="exampleInputEmail1" aria-describedby="emailHelp">
+                                                        <input type="text" name="namabarang" class="form-control @error('namabarang')
+                                                            is-invalid @enderror" id="exampleInputEmail1"
+                                                            aria-describedby="emailHelp"
+                                                            value="{{ old('namabarang') }}">
+                                                        <div class="invalid-feedback">
+                                                            Masukan nama barang dengan benar.
+                                                        </div>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6 col-12">
@@ -264,53 +222,73 @@
                                                     <div class="form-group">
                                                         <label for="exampleInputEmail1"
                                                             class="form-label">Provinsi</label>
-                                                        <input type="text" name="prov" class="form-control"
-                                                            id="exampleInputEmail1" aria-describedby="emailHelp">
+                                                        <input type="text" name="prov" class="form-control @error('prov') is-invalid
+                                                            @enderror" id="exampleInputEmail1"
+                                                            aria-describedby="emailHelp" value="{{ old('prov') }}">
+                                                        <div class="invalid-feedback">
+                                                            Masukan nama provinsi dengan benar.
+                                                        </div>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6 col-12">
                                                     <div class="form-group">
                                                         <label for="exampleInputEmail1"
                                                             class="form-label">Kota/Kabupaten</label>
-                                                        <input type="text" name="kota" class="form-control"
-                                                            id="exampleInputEmail1" aria-describedby="emailHelp">
+                                                        <input type="text" name="kota" class="form-control @error('kota') is-invalid
+                                                            @enderror" id="exampleInputEmail1"
+                                                            aria-describedby="emailHelp" value="{{ old('kota') }}" @>
+                                                        <div class="invalid-feedback">
+                                                            Masukan nama kota/kabupaten dengan benar.
+                                                        </div>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6 col-12">
                                                     <div class="form-group">
                                                         <label for="exampleInputEmail1"
                                                             class="form-label">Kecamatan</label>
-                                                        <input type="text" name="kec" class="form-control"
-                                                            id="exampleInputEmail1" aria-describedby="emailHelp">
+                                                        <input type="text" name="kec"
+                                                            class="form-control @error('kec') is-invalid @enderror"
+                                                            id="exampleInputEmail1" aria-describedby="emailHelp"
+                                                            value="{{ old('kec') }}">
+                                                        <div class="invalid-feedback">
+                                                            Masukan nama kecamatan dengan benar.
+                                                        </div>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6 col-12">
                                                     <div class="form-group">
                                                         <label for="exampleInputEmail1" class="form-label">Kode
                                                             Pos</label>
-                                                        <input type="text" name="kdpos" class="form-control"
-                                                            id="exampleInputEmail1" aria-describedby="emailHelp">
+                                                        <input type="text" name="kdpos" class="form-control @error('kdpos') is-invalid
+                                                            @enderror" id="exampleInputEmail1"
+                                                            aria-describedby="emailHelp" value="{{ old('kdpos') }}">
+                                                        <div class="invalid-feedback">
+                                                            Masukan kode pos dengan benar.
+                                                        </div>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6 col-12">
                                                     <div class="form-group">
                                                         <label for="exampleFormControlTextarea1"
                                                             class="form-label">Alamat Lengkap</label>
-                                                        <textarea class="form-control" name="alamat"
-                                                            id="exampleFormControlTextarea1" rows="3"></textarea>
-                                                        @error('alamat')
-                                                        <div class="alert alert-danger">{{ $message }}</div>
-                                                        @enderror
+                                                        <textarea class="form-control @error('alamat') is-invalid
+                                                            @enderror" name="alamat" id="exampleFormControlTextarea1"
+                                                            rows="3"></textarea>
+                                                        <div class="invalid-feedback">
+                                                            Masukan alamat dengan benar.
+                                                        </div>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6 col-12">
                                                     <div class="form-group">
-                                                        <label for="exampleInputEmail1" class="form-label">Tanggal
+                                                        <label for="exampleInputEmail1" class="form-label ">Tanggal
                                                             Pengiriman
                                                         </label>
-                                                        <input type="date" name="tgl_krm"
-                                                            class="form-control mb-3 flatpickr-no-config"
-                                                            placeholder="Pilih tanggal.." />
+                                                        <input type="date" name="tgl_krm" class="form-control mb-3 flatpickr-no-config @error('alamat') is-invalid
+                                                            @enderror" placeholder="Pilih tanggal.." />
+                                                        <div class="invalid-feedback">
+                                                            Masukan tanggal dengan benar.
+                                                        </div>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6 col-12">
@@ -326,16 +304,19 @@
                                                     <div class="form-group">
                                                         <label for="exampleInputEmail1"
                                                             class="form-label">Status</label>
-                                                        <select class="form-select" name="status"
+                                                        <input type="text" name="status" class="form-control"
+                                                            id="exampleInputEmail1" aria-describedby="emailHelp"
+                                                            value="proses" readonly>
+                                                        {{-- <select class="form-select" name="status"
                                                             aria-label="Default select example">
-                                                            <!-- <option option>Pilih Status</option> -->
                                                             <option value="Proses">Proses</option>
                                                             <option value="Selesai">Selesai</option>
-                                                        </select>
+                                                        </select> --}}
                                                     </div>
                                                 </div>
                                                 <div class="col-12 d-flex justify-content-end">
-                                                    <button type="submit" class="btn btn-primary me-1 mb-1">
+                                                    <button data-bs-toggle="modal" data-bs-target="#exampleModal2"
+                                                        type="submit" class="btn btn-primary me-1 mb-1">
                                                         Simpan
                                                     </button>
                                                     <a href="/tambahpesanan" data-bs-toggle="modal"
@@ -450,14 +431,16 @@
                         </div>
                         <div class="col-md-6 col-12">
                             <div class="form-group">
-                                <label for="exampleInputEmail1" class="form-label">Tanggal Pengiriman</label>
+                                <label for="exampleInputEmail1" class="form-label">Tanggal
+                                    Pengiriman</label>
                                 <input type="text" name="tgl_krm" class="form-control" id="exampleInputEmail1"
                                     aria-describedby="emailHelp" value="{{ $row->tgl_krm }}" readonly>
                             </div>
                         </div>
                         <div class="col-md-6 col-12">
                             <div class="form-group">
-                                <label for="exampleInputEmail1" class="form-label">Tanggal Diterima</label>
+                                <label for="exampleInputEmail1" class="form-label">Tanggal
+                                    Diterima</label>
                                 <input type="text" name="tgl_trm" class="form-control" id="exampleInputEmail1"
                                     aria-describedby="emailHelp" value="{{ $row->tgl_trm }}" readonly>
                             </div>

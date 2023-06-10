@@ -7,6 +7,48 @@
 @section('content')
 <div class="page-content">
 
+    <section class="section">
+        <div class="row" id="table-striped">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Daftar Akun</h3>
+                    </div>
+                    <div class="card-content">
+
+                        <!-- table striped -->
+                        <div class="table-responsive">
+                            <table class="table table-striped mb-0">
+                                <thead class="text-center">
+                                    <tr>
+                                        {{-- <th>No</th> --}}
+                                        <th>Nama</th>
+                                        <th>Email</th>
+                                        <th>Password</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @php
+                                    $no = 1;
+                                    @endphp
+
+                                    @foreach ($user as $index => $row)
+
+                                    <tr class="text-center">
+                                        {{-- <th scope="row">{{ $index + $user->firstItem() }}</th> --}}
+                                        <td>{{ $row->name }}</td>
+                                        <td>{{ $row->email }}</td>
+                                        <td>{{ $row->password }}</td>
+                                    </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <div class="card">
         <div class="card-content">
@@ -41,7 +83,8 @@
                                 <div class="form-group has-icon-left">
                                     <label for="password-id-icon">Password</label>
                                     <div class="position-relative">
-                                        <input type="password" name="password" class="form-control" id="password-id-icon" />
+                                        <input type="password" name="password" class="form-control"
+                                            id="password-id-icon" />
                                         <div class="form-control-icon">
                                             <i class="bi bi-lock"></i>
                                         </div>
