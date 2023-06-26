@@ -84,7 +84,7 @@
                         </li>
 
                         <li class="sidebar-item">
-                            <a href="index.html" class="sidebar-link">
+                            <a href="/datakurir" class="sidebar-link">
                                 <i class="bi bi-people-fill"></i>
                                 <span>Kurir</span>
                             </a>
@@ -189,7 +189,7 @@
                                     <div class="user-menu d-flex">
                                         <div class="user-name text-end me-3">
                                             <h6 class="mb-0 text-gray-600">
-                                                Hi, {{ Auth::user()->name }}!
+                                                {{-- Hi, {{ Auth::user()->name }}! --}}
                                             </h6>
                                             <p class="mb-0 text-sm text-gray-600">
                                                 Role
@@ -265,14 +265,12 @@
             <footer>
                 <div class="footer clearfix mb-0 text-muted">
                     <div class="float-start">
-                        <p>2023 &copy; Mazer</p>
+                        <p>2023 &copy; All Rights Reserved</p>
                     </div>
                     <div class="float-end">
                         <p>
-                            Crafted with
-                            <span class="text-danger"><i class="bi bi-heart-fill icon-mid"></i></span>
-                            by
-                            <a href="https://www.instagram.com/royantodeka_">Deka</a>
+                            Copyright
+                            <a href="https://www.instagram.com/firmos_cv/?hl=id">CV Firmos</a>
                         </p>
                     </div>
                 </div>

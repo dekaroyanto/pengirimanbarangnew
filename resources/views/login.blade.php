@@ -27,8 +27,8 @@
 
                         <div class="actual-form">
                             <div class="input-wrap">
-                                <input type="text" name="email" minlength="4" class="input-field" autocomplete="off" required />
-                                <label>Email</label>
+                                <input type="text" name="username" minlength="4" class="input-field" autocomplete="off" required />
+                                <label>Username</label>
                             </div>
 
                             <div class="input-wrap">

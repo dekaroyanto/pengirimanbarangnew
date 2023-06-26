@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Kurir;
 use PDF;
 use App\Models\Pesanan;
 use Illuminate\Http\Request;
@@ -17,7 +18,6 @@ class PesananController extends Controller
         if ($request->has('search')) {
             $data = Pesanan::where('kdpsn', 'LIKE', '%' . $request->search . '%')
                 ->orWhere('namabarang', 'LIKE', '%' . $request->search . '%')
-                ->orWhere('kategori', 'LIKE', '%' . $request->search . '%')
                 ->orWhere('alamat', 'LIKE', '%' . $request->search . '%')
                 ->orWhere('status', 'LIKE', '%' . $request->search . '%')
                 ->paginate(5);
@@ -26,12 +26,14 @@ class PesananController extends Controller
             $data = Pesanan::paginate(5);
             Session::put('halaman_url', request()->fullUrl());
         }
-        return view('datapesanan', compact('data'));
+        $datakurir = Kurir::all();
+        return view('datapesanan', compact('data', 'datakurir'));
     }
 
     public function tambahpesanan()
     {
-        return view('tambahpesanan');
+        $datakurir = Kurir::all();
+        return view('tambahpesanan', compact('datakurir'));
     }
 
     public function insertpesanan(Request $request)
@@ -39,13 +41,13 @@ class PesananController extends Controller
 
         $validated = $request->validate([
             'kdpsn' => 'required|unique:pesanans',
-            'penerima' => 'required|min:5',
-            'notelp' => 'required',
+            // 'penerima' => 'required|min:5',
+            // 'notelp' => 'required',
             'namabarang' => 'required',
-            'prov' => 'required',
-            'kota' => 'required',
-            'kec' => 'required',
-            'kdpos' => 'required',
+            // 'prov' => 'required',
+            // 'kota' => 'required',
+            // 'kec' => 'required',
+            // 'kdpos' => 'required',
             'alamat' => 'required',
         ]);
 

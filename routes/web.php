@@ -1,11 +1,13 @@
 <?php
 
-use App\Http\Controllers\HomedashController;
-use App\Http\Controllers\LoginController;
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\PesananController;
-use App\Models\Pesanan;
 use App\Models\User;
+use App\Models\Kurir;
+use App\Models\Pesanan;
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\KurirController;
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\PesananController;
+use App\Http\Controllers\HomedashController;
 
 /*
 |--------------------------------------------------------------------------
@@ -39,7 +41,7 @@ Route::post('/updatepesanan/{id}', [PesananController::class, 'updatepesanan'])-
 Route::get('/deletepesanan/{id}', [PesananController::class, 'deletepesanan'])->name('deletepesanan')->middleware('auth');
 
 // export PDF
-Route::get('/exportpdf', [PesananController::class, 'exportpdf'])->name('exportpdf')->middleware('auth');
+Route::get('/exportpdf', [PesananController::class, 'exportpdf'])->name('exportpdf');
 
 
 
@@ -55,5 +57,14 @@ Route::post('/registeruser', [LoginController::class, 'registeruser'])->name('re
 Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 
 //user
-Route::get('/register', [LoginController::class, 'index'])->name('user')->middleware('auth');
+Route::get('/register', [LoginController::class, 'index'])->name('user');
 // Route::get('/register', 'LoginController@index');
+
+//kurir
+Route::get('/datakurir', [KurirController::class, 'index'])->name('datakurir');
+Route::get('/tambahkurir', [KurirController::class, 'create'])->name('tambahkurir');
+
+Route::post('/insertdatakurir', [KurirController::class, 'store'])->name('insertdatakurir');
+
+// Route::get('/deletekurir/{id}', [KurirController::class, 'deletekurir'])->name('deletekurir');
+// Route::post('/updatekurir/{id}', [KurirController::class, 'updatekurir'])->name('updatekurir');

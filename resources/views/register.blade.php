@@ -70,6 +70,17 @@
                             </div>
                             <div class="col-12">
                                 <div class="form-group has-icon-left">
+                                    <label for="first-name-icon">Username</label>
+                                    <div class="position-relative">
+                                        <input type="text" name="username" class="form-control" id="first-name-icon" />
+                                        <div class="form-control-icon">
+                                            <i class="bi bi-person-vcard"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="form-group has-icon-left">
                                     <label for="email-id-icon">Email</label>
                                     <div class="position-relative">
                                         <input type="text" name="email" class="form-control" id="email-id-icon" />
@@ -83,8 +94,7 @@
                                 <div class="form-group has-icon-left">
                                     <label for="password-id-icon">Password</label>
                                     <div class="position-relative">
-                                        <input type="password" name="password" class="form-control"
-                                            id="password-id-icon" />
+                                        <input type="password" name="password" class="form-control" id="password-id-icon" />
                                         <div class="form-control-icon">
                                             <i class="bi bi-lock"></i>
                                         </div>
