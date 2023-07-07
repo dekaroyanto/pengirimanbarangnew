@@ -16,6 +16,7 @@ class CreateKurirsTable extends Migration
         Schema::create('kurirs', function (Blueprint $table) {
             $table->id();
             $table->string('nama');
+            $table->bigInteger('nik');
             $table->timestamps();
         });
     }

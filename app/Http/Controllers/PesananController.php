@@ -67,8 +67,8 @@ class PesananController extends Controller
     {
         $data = Pesanan::find($id);
         // dd($data);
-
-        return view('tampilpesanan', compact('data'));
+        $datakurir = Kurir::all();
+        return view('tampilpesanan', compact('data', 'datakurir'));
     }
 
 
@@ -79,7 +79,8 @@ class PesananController extends Controller
         if (session('halaman_url')) {
             return Redirect(session('halaman_url'))->with('success', 'Data Berhasil Di Ubah');
         }
-
+        // $datakurir = Kurir::all();
+        // return view('pesanan', compact('data', 'datakurir'))->with('success', 'Data Berhasil Di Ubah');
         return redirect()->route('pesanan')->with('success', 'Data Berhasil Di Ubah');
     }
 

@@ -62,9 +62,13 @@ Route::get('/register', [LoginController::class, 'index'])->name('user');
 
 //kurir
 Route::get('/datakurir', [KurirController::class, 'index'])->name('datakurir');
-Route::get('/tambahkurir', [KurirController::class, 'create'])->name('tambahkurir');
 
+Route::get('/tambahkurir', [KurirController::class, 'create'])->name('tambahkurir');
 Route::post('/insertdatakurir', [KurirController::class, 'store'])->name('insertdatakurir');
 
+Route::get('/deletekurir/{id}', [KurirController::class, 'deletekurir'])->name('deletekurir')->middleware('auth');
+
+Route::get('/tampilkankurir/{id}', [KurirController::class, 'tampilkankurir'])->name('tampilkankurir')->middleware('auth');
+Route::post('/updatekurir/{id}', [KurirController::class, 'updatekurir'])->name('updatekurir')->middleware('auth');
 // Route::get('/deletekurir/{id}', [KurirController::class, 'deletekurir'])->name('deletekurir');
 // Route::post('/updatekurir/{id}', [KurirController::class, 'updatekurir'])->name('updatekurir');

@@ -41,6 +41,22 @@ class KurirController extends Controller
         return Redirect()->route('datakurir')->with('success', 'Data Berhasil Di Tambahkan');
     }
 
+    public function tampilkankurir($id)
+    {
+        $datak = Kurir::find($id);
+        // dd($data);
+
+        return view('tampilkurir', compact('datak'));
+    }
+
+    public function updatekurir(Request $request, $id)
+    {
+        $datak = Kurir::find($id);
+        $datak->update($request->all());
+
+        return redirect()->route('datakurir')->with('success', 'Data Berhasil Di Ubah');
+    }
+
     /**
      * Display the specified resource.
      *
@@ -73,6 +89,14 @@ class KurirController extends Controller
     public function update(Request $request, Kurir $kurir)
     {
         //
+    }
+
+    public function deletekurir($id)
+    {
+        $datak = Kurir::find($id);
+        $datak->delete();
+
+        return redirect()->route('datakurir')->with('success', 'Data Berhasil Di Hapus');
     }
 
     /**

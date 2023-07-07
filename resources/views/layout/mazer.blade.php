@@ -83,7 +83,7 @@
                             </a>
                         </li>
 
-                        <li class="sidebar-item">
+                        <li class="{{ request()->is('datakurir') ? 'sidebar-item active' : '' }}">
                             <a href="/datakurir" class="sidebar-link">
                                 <i class="bi bi-people-fill"></i>
                                 <span>Kurir</span>
