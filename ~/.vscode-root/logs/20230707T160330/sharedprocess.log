@@ -1,0 +1,11 @@
+2023-07-07 16:03:33.403 [info] Deleted from disk katsute.code-background /Users/mac/.vscode/extensions/katsute.code-background-2.5.7
+2023-07-07 16:04:21.183 [info] Getting Manifest... katsute.code-background
+2023-07-07 16:04:21.188 [info] Installing extension: katsute.code-background
+2023-07-07 16:04:23.009 [info] Extension signature is verified: katsute.code-background
+2023-07-07 16:04:23.555 [info] Extracted extension to /Users/mac/.vscode/extensions/.343133c0-f25f-46b6-bc54-2a3bf62cdb01: katsute.code-background
+2023-07-07 16:04:23.583 [info] Renamed to /Users/mac/.vscode/extensions/katsute.code-background-2.5.7
+2023-07-07 16:04:23.585 [info] Extracting extension completed. katsute.code-background
+2023-07-07 16:04:23.616 [info] Extension installed successfully: katsute.code-background
+2023-07-07 16:04:49.815 [info] Uninstalling extension from the profile: katsute.code-background@2.5.7 vscode-userdata:/Users/mac/.vscode/extensions/extensions.json
+2023-07-07 16:04:49.906 [info] Marked extension as uninstalled katsute.code-background-2.5.7
+2023-07-07 16:04:50.281 [info] Successfully uninstalled extension from the profile katsute.code-background@2.5.7 vscode-userdata:/Users/mac/.vscode/extensions/extensions.json

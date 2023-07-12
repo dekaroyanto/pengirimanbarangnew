@@ -1,0 +1,6 @@
+2023-07-07 16:03:34.038 [info] Running tunnel CLI
+2023-07-07 16:03:34.055 [info] status Spawning: /private/var/folders/4q/djlgzy2x00sg29q5vt5y8ftm0000gn/T/AppTranslocation/BEC346F7-97B6-4EE0-9BBF-E6D90B4ACB2F/d/Visual Studio Code.app/Contents/Resources/app/bin/code-tunnel tunnel status
+2023-07-07 16:03:34.082 [info] no tunnel process is currently running
+
+2023-07-07 16:03:34.105 [info] status exit(5280): + 1 
+2023-07-07 16:03:34.126 [info] No other tunnel running

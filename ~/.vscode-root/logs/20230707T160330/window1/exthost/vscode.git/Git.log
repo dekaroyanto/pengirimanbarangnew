@@ -1,0 +1,34 @@
+2023-07-07 16:03:33.916 [info] Log level: Info
+2023-07-07 16:03:33.916 [info] Validating found git in: "/usr/local/bin/git"
+2023-07-07 16:03:33.977 [info] Using git "2.41.0" from "/usr/local/bin/git"
+2023-07-07 16:04:06.279 [info] Log level: Info
+2023-07-07 16:04:06.279 [info] Validating found git in: "/usr/local/bin/git"
+2023-07-07 16:04:06.425 [info] Using git "2.41.0" from "/usr/local/bin/git"
+2023-07-07 16:04:06.448 [info] > git rev-parse --show-toplevel [13ms]
+2023-07-07 16:04:06.464 [info] > git rev-parse --git-dir --git-common-dir [10ms]
+2023-07-07 16:04:06.472 [info] Open repository: /Applications/XAMPP/xamppfiles/htdocs/pengirimanbarangnew
+2023-07-07 16:04:06.644 [info] > git config --get commit.template [167ms]
+2023-07-07 16:04:06.648 [info] > git rev-parse --show-toplevel [173ms]
+2023-07-07 16:04:06.838 [info] > git for-each-ref --format=%(refname)%00%(upstream:short)%00%(objectname)%00%(upstream:track)%00%(upstream:remotename)%00%(upstream:remoteref) refs/heads/master refs/remotes/master [196ms]
+2023-07-07 16:04:06.875 [info] > git rev-parse --show-toplevel [225ms]
+2023-07-07 16:04:06.910 [info] > git rev-parse --show-toplevel [34ms]
+2023-07-07 16:04:07.147 [info] > git rev-parse --show-toplevel [236ms]
+2023-07-07 16:04:07.149 [info] > git check-ignore -v -z --stdin [166ms]
+2023-07-07 16:04:07.304 [info] > git rev-parse --show-toplevel [156ms]
+2023-07-07 16:04:07.504 [info] > git rev-parse --show-toplevel [199ms]
+2023-07-07 16:04:07.587 [info] > git rev-parse --show-toplevel [81ms]
+2023-07-07 16:04:07.641 [info] > git rev-parse --show-toplevel [52ms]
+2023-07-07 16:04:07.647 [info] > git status -z -uall [806ms]
+2023-07-07 16:04:07.721 [info] > git rev-parse --show-toplevel [79ms]
+2023-07-07 16:04:07.728 [info] > git config --get commit.template [8ms]
+2023-07-07 16:04:07.729 [info] > git rev-parse --show-toplevel [6ms]
+2023-07-07 16:04:07.734 [info] > git for-each-ref --format=%(refname)%00%(upstream:short)%00%(objectname)%00%(upstream:track)%00%(upstream:remotename)%00%(upstream:remoteref) refs/heads/master refs/remotes/master [7ms]
+2023-07-07 16:04:07.735 [info] > git rev-parse --show-toplevel [5ms]
+2023-07-07 16:04:08.307 [info] > git status -z -uall [572ms]
+2023-07-07 16:04:09.593 [info] > git check-ignore -v -z --stdin [8ms]
+2023-07-07 16:58:19.099 [info] > git config --get commit.template [24ms]
+2023-07-07 16:58:19.103 [info] > git for-each-ref --format=%(refname)%00%(upstream:short)%00%(objectname)%00%(upstream:track)%00%(upstream:remotename)%00%(upstream:remoteref) refs/heads/master refs/remotes/master [23ms]
+2023-07-07 16:58:19.318 [info] > git status -z -uall [214ms]
+2023-07-07 16:58:24.436 [info] > git config --get commit.template [7ms]
+2023-07-07 16:58:24.437 [info] > git for-each-ref --format=%(refname)%00%(upstream:short)%00%(objectname)%00%(upstream:track)%00%(upstream:remotename)%00%(upstream:remoteref) refs/heads/master refs/remotes/master [7ms]
+2023-07-07 16:58:24.611 [info] > git status -z -uall [172ms]

@@ -1,0 +1,130 @@
+2023-07-07 16:03:33.069 [info] Extension host with pid 5274 started
+2023-07-07 16:03:33.143 [info] ExtensionService#_doActivateExtension vscode.git-base, startup: true, activationEvent: '*', root cause: vscode.git
+2023-07-07 16:03:33.148 [info] ExtensionService#_doActivateExtension 2gua.rainbow-brackets, startup: true, activationEvent: '*'
+2023-07-07 16:03:33.149 [info] ExtensionService#_doActivateExtension austenc.laravel-blade-spacer, startup: true, activationEvent: '*'
+2023-07-07 16:03:33.151 [info] ExtensionService#_doActivateExtension EditorConfig.EditorConfig, startup: true, activationEvent: '*'
+2023-07-07 16:03:33.178 [info] ExtensionService#_doActivateExtension formulahendry.auto-close-tag, startup: true, activationEvent: '*'
+2023-07-07 16:03:33.187 [info] ExtensionService#_doActivateExtension formulahendry.auto-rename-tag, startup: true, activationEvent: '*'
+2023-07-07 16:03:33.222 [info] ExtensionService#_doActivateExtension IHunte.laravel-blade-wrapper, startup: true, activationEvent: '*'
+2023-07-07 16:03:33.225 [info] ExtensionService#_doActivateExtension oderwat.indent-rainbow, startup: true, activationEvent: '*'
+2023-07-07 16:03:33.226 [info] ExtensionService#_doActivateExtension Zignd.html-css-class-completion, startup: true, activationEvent: '*'
+2023-07-07 16:03:33.727 [info] ExtensionService#_doActivateExtension vscode.git, startup: true, activationEvent: '*'
+2023-07-07 16:03:33.804 [info] ExtensionService#_doActivateExtension vscode.github, startup: true, activationEvent: '*'
+2023-07-07 16:03:33.823 [info] ExtensionService#_doActivateExtension vscode.github-authentication, startup: false, activationEvent: 'onAuthenticationRequest:github'
+2023-07-07 16:03:33.984 [info] Eager extensions activated
+2023-07-07 16:03:34.023 [info] ExtensionService#_doActivateExtension vscode.debug-auto-launch, startup: false, activationEvent: 'onStartupFinished'
+2023-07-07 16:03:34.035 [info] ExtensionService#_doActivateExtension vscode.merge-conflict, startup: false, activationEvent: 'onStartupFinished'
+2023-07-07 16:03:34.081 [info] ExtensionService#_doActivateExtension esbenp.prettier-vscode, startup: false, activationEvent: 'onStartupFinished'
+2023-07-07 16:03:34.161 [info] ExtensionService#_doActivateExtension formulahendry.code-runner, startup: false, activationEvent: 'onStartupFinished'
+2023-07-07 16:03:34.209 [info] ExtensionService#_doActivateExtension PKief.material-icon-theme, startup: false, activationEvent: 'onStartupFinished'
+2023-07-07 16:03:34.323 [info] ExtensionService#_doActivateExtension vscode.microsoft-authentication, startup: false, activationEvent: 'onAuthenticationRequest:microsoft'
+2023-07-07 16:03:34.820 [error] Error: command 'wrap.with.if' already exists
+    at e.ExtHostCommands.registerCommand (/private/var/folders/4q/djlgzy2x00sg29q5vt5y8ftm0000gn/T/AppTranslocation/BEC346F7-97B6-4EE0-9BBF-E6D90B4ACB2F/d/Visual Studio Code.app/Contents/Resources/app/out/vs/workbench/api/node/extensionHostProcess.js:99:129137)
+    at Object.registerCommand (/private/var/folders/4q/djlgzy2x00sg29q5vt5y8ftm0000gn/T/AppTranslocation/BEC346F7-97B6-4EE0-9BBF-E6D90B4ACB2F/d/Visual Studio Code.app/Contents/Resources/app/out/vs/workbench/api/node/extensionHostProcess.js:117:23413)
+    at /Users/mac/.vscode/extensions/ihunte.laravel-blade-wrapper-1.0.1/out/wrapper.js:55:62
+    at Array.forEach (<anonymous>)
+    at /Users/mac/.vscode/extensions/ihunte.laravel-blade-wrapper-1.0.1/out/wrapper.js:52:36
+2023-07-07 16:04:01.598 [info] Extension host terminating: renderer closed the MessagePort
+2023-07-07 16:04:01.642 [info] Extension host with pid 5274 exiting with code 0
+2023-07-07 16:04:02.489 [info] Extension host with pid 5296 started
+2023-07-07 16:04:02.489 [info] Skipping acquiring lock for /Applications/XAMPP/xamppfiles/htdocs/pengirimanbarangnew/~/.vscode-root/User/workspaceStorage/5d83bb21ce21d1c19b27190be5823ab0.
+2023-07-07 16:04:02.531 [info] ExtensionService#_doActivateExtension vscode.git-base, startup: true, activationEvent: '*'
+2023-07-07 16:04:02.535 [info] ExtensionService#_doActivateExtension formulahendry.auto-close-tag, startup: true, activationEvent: '*'
+2023-07-07 16:04:02.536 [info] ExtensionService#_doActivateExtension formulahendry.auto-rename-tag, startup: true, activationEvent: '*'
+2023-07-07 16:04:02.545 [info] ExtensionService#_doActivateExtension vscode.npm, startup: true, activationEvent: 'workspaceContains:package.json'
+2023-07-07 16:04:02.609 [info] ExtensionService#_doActivateExtension vscode.github-authentication, startup: false, activationEvent: 'onAuthenticationRequest:github'
+2023-07-07 16:04:02.620 [info] ExtensionService#_doActivateExtension vscode.github, startup: true, activationEvent: '*'
+2023-07-07 16:04:02.635 [info] ExtensionService#_doActivateExtension zobo.php-intellisense, startup: true, activationEvent: 'workspaceContains:**/*.php'
+2023-07-07 16:04:02.853 [info] ExtensionService#_doActivateExtension vscode.microsoft-authentication, startup: false, activationEvent: 'onAuthenticationRequest:microsoft'
+2023-07-07 16:04:02.880 [info] Eager extensions activated
+2023-07-07 16:04:02.906 [info] ExtensionService#_doActivateExtension vscode.debug-auto-launch, startup: false, activationEvent: 'onStartupFinished'
+2023-07-07 16:04:02.907 [info] ExtensionService#_doActivateExtension vscode.merge-conflict, startup: false, activationEvent: 'onStartupFinished'
+2023-07-07 16:04:02.914 [info] ExtensionService#_doActivateExtension esbenp.prettier-vscode, startup: false, activationEvent: 'onStartupFinished'
+2023-07-07 16:04:02.948 [info] ExtensionService#_doActivateExtension PKief.material-icon-theme, startup: false, activationEvent: 'onStartupFinished'
+2023-07-07 16:04:06.136 [info] ExtensionService#_doActivateExtension vscode.git, startup: false, activationEvent: 'api', root cause: vscode.github
+2023-07-07 16:04:06.170 [info] ExtensionService#_doActivateExtension 2gua.rainbow-brackets, startup: false, activationEvent: '*'
+2023-07-07 16:04:06.172 [info] ExtensionService#_doActivateExtension austenc.laravel-blade-spacer, startup: false, activationEvent: '*'
+2023-07-07 16:04:06.173 [info] ExtensionService#_doActivateExtension EditorConfig.EditorConfig, startup: false, activationEvent: '*'
+2023-07-07 16:04:06.186 [info] ExtensionService#_doActivateExtension formulahendry.code-runner, startup: false, activationEvent: 'onStartupFinished'
+2023-07-07 16:04:06.206 [info] ExtensionService#_doActivateExtension IHunte.laravel-blade-wrapper, startup: false, activationEvent: '*'
+2023-07-07 16:04:06.207 [info] ExtensionService#_doActivateExtension oderwat.indent-rainbow, startup: false, activationEvent: '*'
+2023-07-07 16:04:06.208 [info] ExtensionService#_doActivateExtension Zignd.html-css-class-completion, startup: false, activationEvent: '*'
+2023-07-07 16:04:06.280 [info] ExtensionService#_doActivateExtension ryannaddy.laravel-artisan, startup: false, activationEvent: 'workspaceContains:**/artisan'
+2023-07-07 16:04:07.706 [warning] [Decorations] CAPPING events from decorations provider vscode.git 6552
+2023-07-07 16:04:08.359 [warning] [Decorations] CAPPING events from decorations provider vscode.git 6552
+2023-07-07 16:04:09.085 [info] ExtensionService#_doActivateExtension vscode.emmet, startup: false, activationEvent: 'onLanguage'
+2023-07-07 16:04:23.783 [info] ExtensionService#_doActivateExtension Katsute.code-background, startup: false, activationEvent: 'onStartupFinished'
+2023-07-07 16:58:19.414 [warning] [Decorations] CAPPING events from decorations provider vscode.git 7079
+2023-07-07 16:58:24.663 [warning] [Decorations] CAPPING events from decorations provider vscode.git 7078
+2023-07-07 16:58:25.751 [info] Extension host terminating: renderer closed the MessagePort
+2023-07-07 16:58:25.774 [error] Canceled: Canceled
+    at new l (/private/var/folders/4q/djlgzy2x00sg29q5vt5y8ftm0000gn/T/AppTranslocation/BEC346F7-97B6-4EE0-9BBF-E6D90B4ACB2F/d/Visual Studio Code.app/Contents/Resources/app/out/vs/workbench/api/node/extensionHostProcess.js:99:105905)
+    at s.O (/private/var/folders/4q/djlgzy2x00sg29q5vt5y8ftm0000gn/T/AppTranslocation/BEC346F7-97B6-4EE0-9BBF-E6D90B4ACB2F/d/Visual Studio Code.app/Contents/Resources/app/out/vs/workbench/api/node/extensionHostProcess.js:111:11754)
+    at Proxy.$.<computed>.j.charCodeAt.$.<computed> (/private/var/folders/4q/djlgzy2x00sg29q5vt5y8ftm0000gn/T/AppTranslocation/BEC346F7-97B6-4EE0-9BBF-E6D90B4ACB2F/d/Visual Studio Code.app/Contents/Resources/app/out/vs/workbench/api/node/extensionHostProcess.js:111:9029)
+    at e.ExtHostCommands.g (/private/var/folders/4q/djlgzy2x00sg29q5vt5y8ftm0000gn/T/AppTranslocation/BEC346F7-97B6-4EE0-9BBF-E6D90B4ACB2F/d/Visual Studio Code.app/Contents/Resources/app/out/vs/workbench/api/node/extensionHostProcess.js:99:130078)
+    at e.ExtHostCommands.executeCommand (/private/var/folders/4q/djlgzy2x00sg29q5vt5y8ftm0000gn/T/AppTranslocation/BEC346F7-97B6-4EE0-9BBF-E6D90B4ACB2F/d/Visual Studio Code.app/Contents/Resources/app/out/vs/workbench/api/node/extensionHostProcess.js:99:129454)
+    at k.registerCommand.description (/private/var/folders/4q/djlgzy2x00sg29q5vt5y8ftm0000gn/T/AppTranslocation/BEC346F7-97B6-4EE0-9BBF-E6D90B4ACB2F/d/Visual Studio Code.app/Contents/Resources/app/out/vs/workbench/api/node/extensionHostProcess.js:99:128747)
+    at e.ExtHostCommands.h (/private/var/folders/4q/djlgzy2x00sg29q5vt5y8ftm0000gn/T/AppTranslocation/BEC346F7-97B6-4EE0-9BBF-E6D90B4ACB2F/d/Visual Studio Code.app/Contents/Resources/app/out/vs/workbench/api/node/extensionHostProcess.js:99:130664)
+    at e.ExtHostCommands.g (/private/var/folders/4q/djlgzy2x00sg29q5vt5y8ftm0000gn/T/AppTranslocation/BEC346F7-97B6-4EE0-9BBF-E6D90B4ACB2F/d/Visual Studio Code.app/Contents/Resources/app/out/vs/workbench/api/node/extensionHostProcess.js:99:129554)
+    at e.ExtHostCommands.executeCommand (/private/var/folders/4q/djlgzy2x00sg29q5vt5y8ftm0000gn/T/AppTranslocation/BEC346F7-97B6-4EE0-9BBF-E6D90B4ACB2F/d/Visual Studio Code.app/Contents/Resources/app/out/vs/workbench/api/node/extensionHostProcess.js:99:129454)
+    at Object.executeCommand (/private/var/folders/4q/djlgzy2x00sg29q5vt5y8ftm0000gn/T/AppTranslocation/BEC346F7-97B6-4EE0-9BBF-E6D90B4ACB2F/d/Visual Studio Code.app/Contents/Resources/app/out/vs/workbench/api/node/extensionHostProcess.js:117:24230)
+    at D (/private/var/folders/4q/djlgzy2x00sg29q5vt5y8ftm0000gn/T/AppTranslocation/BEC346F7-97B6-4EE0-9BBF-E6D90B4ACB2F/d/Visual Studio Code.app/Contents/Resources/app/extensions/git/dist/main.js:2:1261288)
+    at b.invoke (/private/var/folders/4q/djlgzy2x00sg29q5vt5y8ftm0000gn/T/AppTranslocation/BEC346F7-97B6-4EE0-9BBF-E6D90B4ACB2F/d/Visual Studio Code.app/Contents/Resources/app/out/vs/workbench/api/node/extensionHostProcess.js:63:145)
+    at deliver (/private/var/folders/4q/djlgzy2x00sg29q5vt5y8ftm0000gn/T/AppTranslocation/BEC346F7-97B6-4EE0-9BBF-E6D90B4ACB2F/d/Visual Studio Code.app/Contents/Resources/app/out/vs/workbench/api/node/extensionHostProcess.js:63:2121)
+    at n.fire (/private/var/folders/4q/djlgzy2x00sg29q5vt5y8ftm0000gn/T/AppTranslocation/BEC346F7-97B6-4EE0-9BBF-E6D90B4ACB2F/d/Visual Studio Code.app/Contents/Resources/app/out/vs/workbench/api/node/extensionHostProcess.js:63:1729)
+    at Object.m [as dispose] (/private/var/folders/4q/djlgzy2x00sg29q5vt5y8ftm0000gn/T/AppTranslocation/BEC346F7-97B6-4EE0-9BBF-E6D90B4ACB2F/d/Visual Studio Code.app/Contents/Resources/app/extensions/git/dist/main.js:2:1276121)
+    at /private/var/folders/4q/djlgzy2x00sg29q5vt5y8ftm0000gn/T/AppTranslocation/BEC346F7-97B6-4EE0-9BBF-E6D90B4ACB2F/d/Visual Studio Code.app/Contents/Resources/app/extensions/git/dist/main.js:2:1280622
+    at Array.forEach (<anonymous>)
+    at g.dispose (/private/var/folders/4q/djlgzy2x00sg29q5vt5y8ftm0000gn/T/AppTranslocation/BEC346F7-97B6-4EE0-9BBF-E6D90B4ACB2F/d/Visual Studio Code.app/Contents/Resources/app/extensions/git/dist/main.js:2:1280608)
+    at r.<anonymous> (/private/var/folders/4q/djlgzy2x00sg29q5vt5y8ftm0000gn/T/AppTranslocation/BEC346F7-97B6-4EE0-9BBF-E6D90B4ACB2F/d/Visual Studio Code.app/Contents/Resources/app/out/vs/workbench/api/node/extensionHostProcess.js:97:12552)
+    at r.dispose (/private/var/folders/4q/djlgzy2x00sg29q5vt5y8ftm0000gn/T/AppTranslocation/BEC346F7-97B6-4EE0-9BBF-E6D90B4ACB2F/d/Visual Studio Code.app/Contents/Resources/app/out/vs/workbench/api/node/extensionHostProcess.js:97:12687)
+    at r.<anonymous> (/private/var/folders/4q/djlgzy2x00sg29q5vt5y8ftm0000gn/T/AppTranslocation/BEC346F7-97B6-4EE0-9BBF-E6D90B4ACB2F/d/Visual Studio Code.app/Contents/Resources/app/extensions/git/dist/main.js:2:1263418)
+    at r.dispose (/private/var/folders/4q/djlgzy2x00sg29q5vt5y8ftm0000gn/T/AppTranslocation/BEC346F7-97B6-4EE0-9BBF-E6D90B4ACB2F/d/Visual Studio Code.app/Contents/Resources/app/out/vs/workbench/api/node/extensionHostProcess.js:97:12687)
+    at I (/private/var/folders/4q/djlgzy2x00sg29q5vt5y8ftm0000gn/T/AppTranslocation/BEC346F7-97B6-4EE0-9BBF-E6D90B4ACB2F/d/Visual Studio Code.app/Contents/Resources/app/out/vs/workbench/api/node/extensionHostProcess.js:10:12083)
+    at n.Z (/private/var/folders/4q/djlgzy2x00sg29q5vt5y8ftm0000gn/T/AppTranslocation/BEC346F7-97B6-4EE0-9BBF-E6D90B4ACB2F/d/Visual Studio Code.app/Contents/Resources/app/out/vs/workbench/api/node/extensionHostProcess.js:113:11285)
+    at /private/var/folders/4q/djlgzy2x00sg29q5vt5y8ftm0000gn/T/AppTranslocation/BEC346F7-97B6-4EE0-9BBF-E6D90B4ACB2F/d/Visual Studio Code.app/Contents/Resources/app/out/vs/workbench/api/node/extensionHostProcess.js:113:9187
+    at Array.map (<anonymous>)
+    at n.S (/private/var/folders/4q/djlgzy2x00sg29q5vt5y8ftm0000gn/T/AppTranslocation/BEC346F7-97B6-4EE0-9BBF-E6D90B4ACB2F/d/Visual Studio Code.app/Contents/Resources/app/out/vs/workbench/api/node/extensionHostProcess.js:113:9175)
+    at n.terminate (/private/var/folders/4q/djlgzy2x00sg29q5vt5y8ftm0000gn/T/AppTranslocation/BEC346F7-97B6-4EE0-9BBF-E6D90B4ACB2F/d/Visual Studio Code.app/Contents/Resources/app/out/vs/workbench/api/node/extensionHostProcess.js:113:9445)
+    at h.terminate (/private/var/folders/4q/djlgzy2x00sg29q5vt5y8ftm0000gn/T/AppTranslocation/BEC346F7-97B6-4EE0-9BBF-E6D90B4ACB2F/d/Visual Studio Code.app/Contents/Resources/app/out/vs/workbench/api/node/extensionHostProcess.js:117:1544)
+    at p (/private/var/folders/4q/djlgzy2x00sg29q5vt5y8ftm0000gn/T/AppTranslocation/BEC346F7-97B6-4EE0-9BBF-E6D90B4ACB2F/d/Visual Studio Code.app/Contents/Resources/app/out/vs/workbench/api/node/extensionHostProcess.js:127:34497)
+    at MessagePortMain.<anonymous> (/private/var/folders/4q/djlgzy2x00sg29q5vt5y8ftm0000gn/T/AppTranslocation/BEC346F7-97B6-4EE0-9BBF-E6D90B4ACB2F/d/Visual Studio Code.app/Contents/Resources/app/out/vs/workbench/api/node/extensionHostProcess.js:127:30636)
+    at MessagePortMain.emit (node:events:513:28)
+    at Object.MessagePortMain._internalPort.emit (node:electron/js2c/utility_init:2:367) setContext undefined
+2023-07-07 16:58:25.777 [error] Canceled: Canceled
+    at new l (/private/var/folders/4q/djlgzy2x00sg29q5vt5y8ftm0000gn/T/AppTranslocation/BEC346F7-97B6-4EE0-9BBF-E6D90B4ACB2F/d/Visual Studio Code.app/Contents/Resources/app/out/vs/workbench/api/node/extensionHostProcess.js:99:105905)
+    at s.O (/private/var/folders/4q/djlgzy2x00sg29q5vt5y8ftm0000gn/T/AppTranslocation/BEC346F7-97B6-4EE0-9BBF-E6D90B4ACB2F/d/Visual Studio Code.app/Contents/Resources/app/out/vs/workbench/api/node/extensionHostProcess.js:111:11754)
+    at Proxy.$.<computed>.j.charCodeAt.$.<computed> (/private/var/folders/4q/djlgzy2x00sg29q5vt5y8ftm0000gn/T/AppTranslocation/BEC346F7-97B6-4EE0-9BBF-E6D90B4ACB2F/d/Visual Studio Code.app/Contents/Resources/app/out/vs/workbench/api/node/extensionHostProcess.js:111:9029)
+    at e.ExtHostCommands.g (/private/var/folders/4q/djlgzy2x00sg29q5vt5y8ftm0000gn/T/AppTranslocation/BEC346F7-97B6-4EE0-9BBF-E6D90B4ACB2F/d/Visual Studio Code.app/Contents/Resources/app/out/vs/workbench/api/node/extensionHostProcess.js:99:130078)
+    at e.ExtHostCommands.executeCommand (/private/var/folders/4q/djlgzy2x00sg29q5vt5y8ftm0000gn/T/AppTranslocation/BEC346F7-97B6-4EE0-9BBF-E6D90B4ACB2F/d/Visual Studio Code.app/Contents/Resources/app/out/vs/workbench/api/node/extensionHostProcess.js:99:129454)
+    at k.registerCommand.description (/private/var/folders/4q/djlgzy2x00sg29q5vt5y8ftm0000gn/T/AppTranslocation/BEC346F7-97B6-4EE0-9BBF-E6D90B4ACB2F/d/Visual Studio Code.app/Contents/Resources/app/out/vs/workbench/api/node/extensionHostProcess.js:99:128747)
+    at e.ExtHostCommands.h (/private/var/folders/4q/djlgzy2x00sg29q5vt5y8ftm0000gn/T/AppTranslocation/BEC346F7-97B6-4EE0-9BBF-E6D90B4ACB2F/d/Visual Studio Code.app/Contents/Resources/app/out/vs/workbench/api/node/extensionHostProcess.js:99:130664)
+    at e.ExtHostCommands.g (/private/var/folders/4q/djlgzy2x00sg29q5vt5y8ftm0000gn/T/AppTranslocation/BEC346F7-97B6-4EE0-9BBF-E6D90B4ACB2F/d/Visual Studio Code.app/Contents/Resources/app/out/vs/workbench/api/node/extensionHostProcess.js:99:129554)
+    at e.ExtHostCommands.executeCommand (/private/var/folders/4q/djlgzy2x00sg29q5vt5y8ftm0000gn/T/AppTranslocation/BEC346F7-97B6-4EE0-9BBF-E6D90B4ACB2F/d/Visual Studio Code.app/Contents/Resources/app/out/vs/workbench/api/node/extensionHostProcess.js:99:129454)
+    at Object.executeCommand (/private/var/folders/4q/djlgzy2x00sg29q5vt5y8ftm0000gn/T/AppTranslocation/BEC346F7-97B6-4EE0-9BBF-E6D90B4ACB2F/d/Visual Studio Code.app/Contents/Resources/app/out/vs/workbench/api/node/extensionHostProcess.js:117:24230)
+    at p.VscodeDevShareProvider.set b [as b] (/private/var/folders/4q/djlgzy2x00sg29q5vt5y8ftm0000gn/T/AppTranslocation/BEC346F7-97B6-4EE0-9BBF-E6D90B4ACB2F/d/Visual Studio Code.app/Contents/Resources/app/extensions/github/dist/extension.js:2:152873)
+    at /private/var/folders/4q/djlgzy2x00sg29q5vt5y8ftm0000gn/T/AppTranslocation/BEC346F7-97B6-4EE0-9BBF-E6D90B4ACB2F/d/Visual Studio Code.app/Contents/Resources/app/extensions/github/dist/extension.js:2:153583
+    at /private/var/folders/4q/djlgzy2x00sg29q5vt5y8ftm0000gn/T/AppTranslocation/BEC346F7-97B6-4EE0-9BBF-E6D90B4ACB2F/d/Visual Studio Code.app/Contents/Resources/app/extensions/git/dist/main.js:2:1348881
+    at b.invoke (/private/var/folders/4q/djlgzy2x00sg29q5vt5y8ftm0000gn/T/AppTranslocation/BEC346F7-97B6-4EE0-9BBF-E6D90B4ACB2F/d/Visual Studio Code.app/Contents/Resources/app/out/vs/workbench/api/node/extensionHostProcess.js:63:145)
+    at deliver (/private/var/folders/4q/djlgzy2x00sg29q5vt5y8ftm0000gn/T/AppTranslocation/BEC346F7-97B6-4EE0-9BBF-E6D90B4ACB2F/d/Visual Studio Code.app/Contents/Resources/app/out/vs/workbench/api/node/extensionHostProcess.js:63:2121)
+    at n.fire (/private/var/folders/4q/djlgzy2x00sg29q5vt5y8ftm0000gn/T/AppTranslocation/BEC346F7-97B6-4EE0-9BBF-E6D90B4ACB2F/d/Visual Studio Code.app/Contents/Resources/app/out/vs/workbench/api/node/extensionHostProcess.js:63:1729)
+    at Object.m [as dispose] (/private/var/folders/4q/djlgzy2x00sg29q5vt5y8ftm0000gn/T/AppTranslocation/BEC346F7-97B6-4EE0-9BBF-E6D90B4ACB2F/d/Visual Studio Code.app/Contents/Resources/app/extensions/git/dist/main.js:2:1276121)
+    at /private/var/folders/4q/djlgzy2x00sg29q5vt5y8ftm0000gn/T/AppTranslocation/BEC346F7-97B6-4EE0-9BBF-E6D90B4ACB2F/d/Visual Studio Code.app/Contents/Resources/app/extensions/git/dist/main.js:2:1280622
+    at Array.forEach (<anonymous>)
+    at g.dispose (/private/var/folders/4q/djlgzy2x00sg29q5vt5y8ftm0000gn/T/AppTranslocation/BEC346F7-97B6-4EE0-9BBF-E6D90B4ACB2F/d/Visual Studio Code.app/Contents/Resources/app/extensions/git/dist/main.js:2:1280608)
+    at r.<anonymous> (/private/var/folders/4q/djlgzy2x00sg29q5vt5y8ftm0000gn/T/AppTranslocation/BEC346F7-97B6-4EE0-9BBF-E6D90B4ACB2F/d/Visual Studio Code.app/Contents/Resources/app/out/vs/workbench/api/node/extensionHostProcess.js:97:12552)
+    at r.dispose (/private/var/folders/4q/djlgzy2x00sg29q5vt5y8ftm0000gn/T/AppTranslocation/BEC346F7-97B6-4EE0-9BBF-E6D90B4ACB2F/d/Visual Studio Code.app/Contents/Resources/app/out/vs/workbench/api/node/extensionHostProcess.js:97:12687)
+    at r.<anonymous> (/private/var/folders/4q/djlgzy2x00sg29q5vt5y8ftm0000gn/T/AppTranslocation/BEC346F7-97B6-4EE0-9BBF-E6D90B4ACB2F/d/Visual Studio Code.app/Contents/Resources/app/extensions/git/dist/main.js:2:1263418)
+    at r.dispose (/private/var/folders/4q/djlgzy2x00sg29q5vt5y8ftm0000gn/T/AppTranslocation/BEC346F7-97B6-4EE0-9BBF-E6D90B4ACB2F/d/Visual Studio Code.app/Contents/Resources/app/out/vs/workbench/api/node/extensionHostProcess.js:97:12687)
+    at I (/private/var/folders/4q/djlgzy2x00sg29q5vt5y8ftm0000gn/T/AppTranslocation/BEC346F7-97B6-4EE0-9BBF-E6D90B4ACB2F/d/Visual Studio Code.app/Contents/Resources/app/out/vs/workbench/api/node/extensionHostProcess.js:10:12083)
+    at n.Z (/private/var/folders/4q/djlgzy2x00sg29q5vt5y8ftm0000gn/T/AppTranslocation/BEC346F7-97B6-4EE0-9BBF-E6D90B4ACB2F/d/Visual Studio Code.app/Contents/Resources/app/out/vs/workbench/api/node/extensionHostProcess.js:113:11285)
+    at /private/var/folders/4q/djlgzy2x00sg29q5vt5y8ftm0000gn/T/AppTranslocation/BEC346F7-97B6-4EE0-9BBF-E6D90B4ACB2F/d/Visual Studio Code.app/Contents/Resources/app/out/vs/workbench/api/node/extensionHostProcess.js:113:9187
+    at Array.map (<anonymous>)
+    at n.S (/private/var/folders/4q/djlgzy2x00sg29q5vt5y8ftm0000gn/T/AppTranslocation/BEC346F7-97B6-4EE0-9BBF-E6D90B4ACB2F/d/Visual Studio Code.app/Contents/Resources/app/out/vs/workbench/api/node/extensionHostProcess.js:113:9175)
+    at n.terminate (/private/var/folders/4q/djlgzy2x00sg29q5vt5y8ftm0000gn/T/AppTranslocation/BEC346F7-97B6-4EE0-9BBF-E6D90B4ACB2F/d/Visual Studio Code.app/Contents/Resources/app/out/vs/workbench/api/node/extensionHostProcess.js:113:9445)
+    at h.terminate (/private/var/folders/4q/djlgzy2x00sg29q5vt5y8ftm0000gn/T/AppTranslocation/BEC346F7-97B6-4EE0-9BBF-E6D90B4ACB2F/d/Visual Studio Code.app/Contents/Resources/app/out/vs/workbench/api/node/extensionHostProcess.js:117:1544)
+    at p (/private/var/folders/4q/djlgzy2x00sg29q5vt5y8ftm0000gn/T/AppTranslocation/BEC346F7-97B6-4EE0-9BBF-E6D90B4ACB2F/d/Visual Studio Code.app/Contents/Resources/app/out/vs/workbench/api/node/extensionHostProcess.js:127:34497)
+    at MessagePortMain.<anonymous> (/private/var/folders/4q/djlgzy2x00sg29q5vt5y8ftm0000gn/T/AppTranslocation/BEC346F7-97B6-4EE0-9BBF-E6D90B4ACB2F/d/Visual Studio Code.app/Contents/Resources/app/out/vs/workbench/api/node/extensionHostProcess.js:127:30636)
+    at MessagePortMain.emit (node:events:513:28)
+    at Object.MessagePortMain._internalPort.emit (node:electron/js2c/utility_init:2:367) setContext undefined
+2023-07-07 16:58:25.777 [info] Extension host with pid 5296 exiting with code 0

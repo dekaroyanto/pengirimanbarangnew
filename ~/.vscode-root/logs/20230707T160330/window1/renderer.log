@@ -1,0 +1,25 @@
+2023-07-07 16:03:32.831 [warning] [twxs.cmake]: Cannot register 'cmake.cmakePath'. This property is already registered.
+2023-07-07 16:03:32.867 [info] [MehediDracula.php-namespace-resolver]: Menu item references the same command as default and alt-command
+2023-07-07 16:03:32.867 [info] [MehediDracula.php-namespace-resolver]: Menu item references the same command as default and alt-command
+2023-07-07 16:03:32.868 [info] [MehediDracula.php-namespace-resolver]: Menu item references the same command as default and alt-command
+2023-07-07 16:03:32.868 [info] [MehediDracula.php-namespace-resolver]: Menu item references the same command as default and alt-command
+2023-07-07 16:03:32.868 [info] [MehediDracula.php-namespace-resolver]: Menu item references the same command as default and alt-command
+2023-07-07 16:03:32.868 [info] [MehediDracula.php-namespace-resolver]: Menu item references the same command as default and alt-command
+2023-07-07 16:03:32.869 [info] [MehediDracula.php-namespace-resolver]: Menu item references the same command as default and alt-command
+2023-07-07 16:03:34.030 [error] SyntaxError: Unexpected token '`', "`{�Ǳe�4~e�"... is not valid JSON
+    at JSON.parse (<anonymous>)
+    at e.MainThreadSecretState.$getPassword (vscode-file://vscode-app/private/var/folders/4q/djlgzy2x00sg29q5vt5y8ftm0000gn/T/AppTranslocation/BEC346F7-97B6-4EE0-9BBF-E6D90B4ACB2F/d/Visual%20Studio%20Code.app/Contents/Resources/app/out/vs/workbench/workbench.desktop.main.js:1528:29926)
+2023-07-07 16:03:35.394 [info] [perf] Render performance baseline is 29ms
+2023-07-07 16:04:02.546 [error] [onecentlin.laravel5-snippets]: Unknown language in `contributes.laravel5-snippets.language`. Provided value: blade
+2023-07-07 16:04:02.640 [error] SyntaxError: Unexpected token '`', "`{�Ǳe�4~e�"... is not valid JSON
+    at JSON.parse (<anonymous>)
+    at e.MainThreadSecretState.$getPassword (vscode-file://vscode-app/private/var/folders/4q/djlgzy2x00sg29q5vt5y8ftm0000gn/T/AppTranslocation/BEC346F7-97B6-4EE0-9BBF-E6D90B4ACB2F/d/Visual%20Studio%20Code.app/Contents/Resources/app/out/vs/workbench/workbench.desktop.main.js:1528:29926)
+2023-07-07 16:04:04.811 [info] [perf] Render performance baseline is 29ms
+2023-07-07 16:04:06.015 [warning] [twxs.cmake]: Cannot register 'cmake.cmakePath'. This property is already registered.
+2023-07-07 16:04:06.039 [info] [MehediDracula.php-namespace-resolver]: Menu item references the same command as default and alt-command
+2023-07-07 16:04:06.039 [info] [MehediDracula.php-namespace-resolver]: Menu item references the same command as default and alt-command
+2023-07-07 16:04:06.039 [info] [MehediDracula.php-namespace-resolver]: Menu item references the same command as default and alt-command
+2023-07-07 16:04:06.039 [info] [MehediDracula.php-namespace-resolver]: Menu item references the same command as default and alt-command
+2023-07-07 16:04:06.040 [info] [MehediDracula.php-namespace-resolver]: Menu item references the same command as default and alt-command
+2023-07-07 16:04:06.040 [info] [MehediDracula.php-namespace-resolver]: Menu item references the same command as default and alt-command
+2023-07-07 16:04:06.040 [info] [MehediDracula.php-namespace-resolver]: Menu item references the same command as default and alt-command
