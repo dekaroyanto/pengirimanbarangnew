@@ -2,7 +2,7 @@
 
 @section('judulhal')
     <h3>Halaman Utama</h3>
-    <h1>INI SUDAH DI BACKUP y</h1>
+    <h1>INI SUDAH DI BACKUP</h1>
 @endsection
 
 @section('content')
