@@ -20,15 +20,16 @@ class CreatePesanansTable extends Migration
             // $table->string('penerima');
             // $table->string('notelp');
             $table->string('namabarang');
+            $table->string('jumlah');
             // $table->enum('kategori', ['Advertising', 'Printing']);
             // $table->string('prov');
             // $table->string('kota');
             // $table->string('kec');
             // $table->string('kdpos');
-            $table->string('alamat');
+            // $table->string('alamat');
             $table->string('tgl_krm')->nullable();
             $table->string('tgl_trm')->nullable();
-            $table->enum('status', ['Selesai', 'Proses', 'Dikirim']);
+            $table->enum('status', ['Selesai', 'Proses', 'Dikirim'])->nullable();
             $table->timestamps();
         });
     }

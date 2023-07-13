@@ -18,4 +18,9 @@ class Pesanan extends Model
     {
         return $this->belongsTo(Kurir::class, 'id_kurirs', 'id');
     }
+
+    public function pelanggans()
+    {
+        return $this->belongsTo(Pelanggan::class, 'id_pelanggans', 'id');
+    }
 }

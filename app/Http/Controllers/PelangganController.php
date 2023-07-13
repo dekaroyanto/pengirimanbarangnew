@@ -2,13 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Kurir;
-use App\Models\Pelanggan;
 use App\Models\Pesanan;
+use App\Models\Pelanggan;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Redirect;
 
-class KurirController extends Controller
+class PelangganController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,10 +15,10 @@ class KurirController extends Controller
      */
     public function index()
     {
-        $datak = Kurir::paginate('5');
+        $datap = Pelanggan::paginate('5');
         $infopesanan = Pesanan::latest()->paginate(1);
         $infopelanggan = Pelanggan::latest()->paginate(1);
-        return view('datakurir', compact('datak', 'infopesanan', 'infopelanggan'));
+        return view('datapelanggan', compact('datap', 'infopesanan', 'infopelanggan'));
     }
 
     /**
@@ -30,7 +28,7 @@ class KurirController extends Controller
      */
     public function create()
     {
-        return view('tambahkurir');
+        return view('tambahpelanggan');
     }
 
     /**
@@ -41,33 +39,33 @@ class KurirController extends Controller
      */
     public function store(Request $request)
     {
-        $datak = Kurir::create($request->all());
-        return Redirect()->route('datakurir')->with('success', 'Data Berhasil Di Tambahkan');
+        $datap = Pelanggan::create($request->all());
+        return Redirect()->route('datapelanggan')->with('success', 'Data Berhasil Di Tambahkan');
     }
 
-    public function tampilkankurir($id)
+    public function tampilkanpelanggan($id)
     {
-        $datak = Kurir::find($id);
+        $datap = Pelanggan::find($id);
         // dd($data);
 
-        return view('tampilkurir', compact('datak'));
+        return view('tampilpelanggan', compact('datap'));
     }
 
-    public function updatekurir(Request $request, $id)
+    public function updatepelanggan(Request $request, $id)
     {
-        $datak = Kurir::find($id);
-        $datak->update($request->all());
+        $datap = Pelanggan::find($id);
+        $datap->update($request->all());
 
-        return redirect()->route('datakurir')->with('success', 'Data Berhasil Di Ubah');
+        return redirect()->route('datapelanggan')->with('success', 'Data Berhasil Di Ubah');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Kurir  $kurir
+     * @param  \App\Models\Pelanggan  $pelanggan
      * @return \Illuminate\Http\Response
      */
-    public function show(Kurir $kurir)
+    public function show(Pelanggan $pelanggan)
     {
         //
     }
@@ -75,10 +73,10 @@ class KurirController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Kurir  $kurir
+     * @param  \App\Models\Pelanggan  $pelanggan
      * @return \Illuminate\Http\Response
      */
-    public function edit(Kurir $kurir)
+    public function edit(Pelanggan $pelanggan)
     {
         //
     }
@@ -87,29 +85,29 @@ class KurirController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Kurir  $kurir
+     * @param  \App\Models\Pelanggan  $pelanggan
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Kurir $kurir)
+    public function update(Request $request, Pelanggan $pelanggan)
     {
         //
     }
 
-    public function deletekurir($id)
+    public function deletepelanggan($id)
     {
-        $datak = Kurir::find($id);
-        $datak->delete();
+        $datap = Pelanggan::find($id);
+        $datap->delete();
 
-        return redirect()->route('datakurir')->with('success', 'Data Berhasil Di Hapus');
+        return redirect()->route('datapelanggan')->with('success', 'Data Berhasil Di Hapus');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Kurir  $kurir
+     * @param  \App\Models\Pelanggan  $pelanggan
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Kurir $kurir)
+    public function destroy(Pelanggan $pelanggan)
     {
         //
     }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Kurir;
+use App\Models\Pelanggan;
 use PDF;
 use App\Models\Pesanan;
 use Illuminate\Http\Request;
@@ -27,7 +28,10 @@ class PesananController extends Controller
             Session::put('halaman_url', request()->fullUrl());
         }
         $datakurir = Kurir::all();
-        return view('datapesanan', compact('data', 'datakurir'));
+        $datapelanggan = Pelanggan::all();
+        $infopesanan = Pesanan::latest()->paginate(1);
+        $infopelanggan = Pelanggan::latest()->paginate(1);
+        return view('datapesanan', compact('data', 'infopesanan', 'infopelanggan', 'datapelanggan', 'datakurir'));
     }
 
     public function tambahpesanan()
@@ -48,7 +52,7 @@ class PesananController extends Controller
             // 'kota' => 'required',
             // 'kec' => 'required',
             // 'kdpos' => 'required',
-            'alamat' => 'required',
+            // 'alamat' => 'required',
         ]);
 
 
@@ -75,13 +79,14 @@ class PesananController extends Controller
     public function updatepesanan(Request $request, $id)
     {
         $data = Pesanan::find($id);
+        // $datap = Pelanggan::where('id_pelanggans', $id)->get();
         $data->update($request->all());
         if (session('halaman_url')) {
             return Redirect(session('halaman_url'))->with('success', 'Data Berhasil Di Ubah');
         }
         // $datakurir = Kurir::all();
-        // return view('pesanan', compact('data', 'datakurir'))->with('success', 'Data Berhasil Di Ubah');
-        return redirect()->route('pesanan')->with('success', 'Data Berhasil Di Ubah');
+        return view('pesanan', compact('data', 'datap'))->with('success', 'Data Berhasil Di Ubah');
+        // return redirect()->route('pesanan', compact('datap'))->with('success', 'Data Berhasil Di Ubah');
     }
 
     public function deletepesanan($id)

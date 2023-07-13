@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Pelanggan;
 use App\Models\User;
+use App\Models\Pesanan;
+
 use Illuminate\Support\Str;
-
 use Illuminate\Http\Request;
-use Illuminate\Routing\Controller;
 
+use Illuminate\Routing\Controller;
 use function GuzzleHttp\Promise\all;
 use Illuminate\Support\Facades\Auth;
 
@@ -16,7 +18,9 @@ class LoginController extends Controller
     public function index()
     {
         $user   = User::all();
-        return view('register')->with('user', $user);
+        $infopesanan = Pesanan::latest()->paginate(1);
+        $infopelanggan = Pelanggan::latest()->paginate(1);
+        return view('register', compact('infopesanan', 'infopelanggan'))->with('user', $user);
         // return view('register', compact('user'));
     }
 

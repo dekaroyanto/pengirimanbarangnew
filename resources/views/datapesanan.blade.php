@@ -171,6 +171,25 @@
                                                     <div class="col-md-6 col-12">
                                                         <div class="form-group">
                                                             <label for="exampleInputEmail1" class="form-label">Nama
+                                                                Pelanggan</label>
+                                                            <select class="form-select" name="id_pelanggans"
+                                                                aria-label="Default select example">
+
+
+                                                                @foreach ($datapelanggan as $datap)
+                                                                    <option value="{{ $datap->id }}">
+                                                                        {{ $datap->namapelanggan }}
+                                                                    </option>
+                                                                @endforeach
+
+
+
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4 col-12">
+                                                        <div id="" class="form-group">
+                                                            <label for="exampleInputEmail1" class="form-label">Nama
                                                                 Barang</label>
                                                             <input type="text" name="namabarang"
                                                                 class="form-control @error('namabarang')
@@ -182,7 +201,34 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class="col-md-6 col-12">
+                                                    <div class="col-md-1 col-12 text-center">
+                                                        <div id="" class="form-group">
+                                                            <label for="exampleInputEmail1"
+                                                                class="form-label">Jumlah</label>
+                                                            <input type="text" name="jumlah"
+                                                                class="form-control @error('jumlah')
+                                                            is-invalid @enderror"
+                                                                id="exampleInputEmail1" aria-describedby="emailHelp"
+                                                                value="{{ old('jumlah') }}">
+                                                            <div class="invalid-feedback">
+                                                                Masukan nama barang dengan benar.
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-1 mt-1 col-12">
+                                                        <div id="" class="form-group ">
+                                                            {{-- <label for="exampleInputEmail1"
+                                                                class="form-label">Tambah</label> --}}
+                                                            <button type="text" name="namabarang" class="btn mt-3"
+                                                                id="exampleInputEmail1" aria-describedby="emailHelp"><i
+                                                                    class="bi bi-plus-square-fill fs-2 align-center"></i>
+                                                                <div class="invalid-feedback">
+                                                                    Masukan nama barang dengan benar.
+                                                                </div>
+                                                        </div>
+                                                    </div>
+
+                                                    {{-- <div class="col-md-6 col-12">
                                                         <div class="form-group">
                                                             <label for="exampleFormControlTextarea1"
                                                                 class="form-label">Alamat Lengkap</label>
@@ -194,7 +240,7 @@
                                                                 Masukan alamat dengan benar.
                                                             </div>
                                                         </div>
-                                                    </div>
+                                                    </div> --}}
                                                     <div class="col-md-6 col-12">
                                                         <div class="form-group">
                                                             <label for="exampleInputEmail1" class="form-label ">Tanggal
@@ -300,20 +346,74 @@
                                 </div>
                                 <div class="col-md-6 col-12">
                                     <div class="form-group">
+                                        <label for="exampleInputEmail1" class="form-label">Nama Pelanggan</label>
+                                        <input type="text" name="id_pelanggans" class="form-control"
+                                            id="exampleInputEmail1" aria-describedby="emailHelp"
+                                            value="{{ $row->pelanggans->namapelanggan }}" readonly>
+                                    </div>
+                                </div>
+                                {{-- <div class="col-md-6 col-12">
+                                    <div class="form-group">
                                         <label for="exampleInputEmail1" class="form-label">Nama
                                             Barang</label>
                                         <input type="text" name="namabarang" class="form-control"
                                             id="exampleInputEmail1" aria-describedby="emailHelp"
                                             value="{{ $row->namabarang }}" readonly>
                                     </div>
+                                </div> --}}
+                                <div class="col-md-4 col-12">
+                                    <div id="" class="form-group">
+                                        <label for="exampleInputEmail1" class="form-label">Nama
+                                            Barang</label>
+                                        <input type="text" name="namabarang"
+                                            class="form-control @error('namabarang')
+                                        is-invalid @enderror"
+                                            id="exampleInputEmail1" aria-describedby="emailHelp"
+                                            value="{{ $row->namabarang }}" readonly>
+                                        <div class="invalid-feedback">
+                                            Masukan nama barang dengan benar.
+                                        </div>
+                                    </div>
                                 </div>
-
+                                <div class="col-md-1 col-12 text-center">
+                                    <div id="" class="form-group">
+                                        <label for="exampleInputEmail1" class="form-label">Jumlah</label>
+                                        <input type="text" name="jumlah"
+                                            class="form-control @error('jumlah')
+                                        is-invalid @enderror"
+                                            id="exampleInputEmail1" aria-describedby="emailHelp"
+                                            value="{{ $row->jumlah }}" readonly>
+                                        <div class="invalid-feedback">
+                                            Masukan nama barang dengan benar.
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-1 mt-1 col-12">
+                                    <div id="" class="form-group ">
+                                        {{-- <label for="exampleInputEmail1"
+                                            class="form-label">Tambah</label> --}}
+                                        <button type="text" name="namabarang" class="btn mt-3"
+                                            id="exampleInputEmail1" aria-describedby="emailHelp"><i
+                                                class="bi bi-plus-square-fill fs-2 align-center"></i>
+                                            <div class="invalid-feedback">
+                                                Masukan nama barang dengan benar.
+                                            </div>
+                                    </div>
+                                </div>
                                 <div class="col-md-6 col-12">
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1" class="form-label">Alamat Lengkap</label>
+                                        <input type="text" name="id_pelanggans" class="form-control"
+                                            id="exampleInputEmail1" aria-describedby="emailHelp"
+                                            value="{{ $row->pelanggans->alamatpelanggan }}" readonly>
+                                    </div>
+                                </div>
+                                {{-- <div class="col-md-6 col-12">
                                     <div class="form-group">
                                         <label for="exampleFormControlTextarea1" class="form-label">Alamat Lengkap</label>
                                         <textarea class="form-control" name="alamat" id="exampleFormControlTextarea1" rows="3" readonly>{{ $row->alamat }}</textarea>
                                     </div>
-                                </div>
+                                </div> --}}
                                 <div class="col-md-6 col-12">
                                     <div class="form-group">
                                         <label for="exampleInputEmail1" class="form-label">Tanggal
@@ -395,10 +495,37 @@
                                 </div>
                                 <div class="col-md-6 col-12">
                                     <div class="form-group">
-                                        <label for="exampleFormControlTextarea1" class="form-label">Alamat Lengkap</label>
-                                        <textarea class="form-control" name="alamat" id="exampleFormControlTextarea1" rows="3">{{ $row->alamat }}</textarea>
+                                        <label for="exampleInputEmail1" class="form-label">Nama Pelanggan</label>
+                                        <select class="form-select" name="id_pelanggans"
+                                            aria-label="Default select example">
+
+                                            {{-- <option selected>{{ $row->id_kurirs }}</option> --}}
+                                            @foreach ($datapelanggan as $datap)
+                                                <option value="{{ $datap->id }}"
+                                                    {{ $datap->id == $row->id_pelanggans ? 'selected' : '' }}>
+                                                    {{ $datap->namapelanggan }}
+                                                </option>
+                                            @endforeach
+
+
+
+                                        </select>
                                     </div>
                                 </div>
+                                <div class="col-md-6 col-12">
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1" class="form-label">Alamat Lengkap</label>
+                                        <input type="text" name="alamatpelanggan" class="form-control"
+                                            id="exampleInputEmail1" aria-describedby="emailHelp"
+                                            value="{{ $row->pelanggans->alamatpelanggan }}">
+                                    </div>
+                                </div>
+                                {{-- <div class="col-md-6 col-12">
+                                    <div class="form-group">
+                                        <label for="exampleFormControlTextarea1" class="form-label">Alamat Lengkap</label>
+                                        <textarea class="form-control" name="alamatpelanggan" id="exampleFormControlTextarea1" rows="3">{{ $row->alamatpelanggan }}</textarea>
+                                    </div>
+                                </div> --}}
                                 <div class="col-md-6 col-12">
                                     <div class="form-group">
                                         <label for="exampleInputEmail1" class="form-label">Tanggal
