@@ -1,16 +1,6 @@
 @extends('layout.mazer')
 
-@section('css2')
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
-    <link rel="stylesheet" type="text/css" href="https://npmcdn.com/flatpickr/dist/themes/dark.css">
-@endsection
-
 @section('inijs')
-    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-    <script>
-        flatpickr("#start_date");
-        flatpickr("#end_date");
-    </script>
     <script>
         function addItem() {
             var orderContainer = document.getElementById("orderContainer");
@@ -74,7 +64,7 @@
 
 @section('content')
     <div class="page-content">
-        {{-- <div class="section">
+        <div class="section">
             @if ($errors->any())
                 <div class="alert alert-danger">
                     <ul>
@@ -84,7 +74,7 @@
                     </ul>
                 </div>
             @endif
-        </div> --}}
+        </div>
 
         <section class="section">
             <div class="row" id="table-head">
@@ -94,26 +84,11 @@
 
                             <h1>Data Pesanan</h1>
 
-
                         </div>
-                        <div class="card-body mt-2">
-                            <div class="row mt-2 ms-2">
-                                <div class="col-md-auto">
-                                    <div class="input-group mb-3">
-                                        <a href="/tambahpesanan" class="btn btn-outline-secondary">Tambah Data</a>
-                                    </div>
-                                </div>
-                                <div class="col-md-auto">
-                                    <div class="input-group mb-3">
-                                        <a href="/tambahpesanan" class="btn icon icon-left btn-outline-secondary"
-                                            data-bs-toggle="modal" data-bs-target="#exampleModal2"><i
-                                                data-feather="file"></i> Download</a>
-                                    </div>
-                                </div>
-                            </div>
-                            {{-- {{ Session::get('halaman_url') }} --}}
+                        <div class="card-content mt-2">
+                            {{ Session::get('halaman_url') }}
                             <div class="row">
-                                <div class="col-sm-6 mt-4 pb-4">
+                                <div class="col-md-4 mb-1">
                                     <form action="/pesanan" method="GET">
                                         <div class="input-group mb-3 ms-3">
 
@@ -128,47 +103,20 @@
                                         </div>
                                     </form>
                                 </div>
-                                <div class="col-sm">
-                                    <form action="/filter" method="GET">
-                                        <div class="row">
-                                            <div class="col-md-4 col-12">
-                                                <div class="form-group">
-                                                    <label for="first-name-column">Tanggal Awal</label>
-                                                    <input type="date" name="start_date" id="start_date"
-                                                        class="flatpickr flatpickr-input active form-control @error('start_date') is-invalid @enderror"
-                                                        placeholder="Masukan Tanggal" aria-label="Recipient's username"
-                                                        aria-describedby="button-addon2"
-                                                        value="{{ request('start_date') }}" />
-                                                    @error('start_date')
-                                                        <div class="invalid-feedback">
-                                                            {{ $message }}
-                                                        </div>
-                                                    @enderror
-                                                </div>
-                                            </div>
-                                            <div class="col-md-4 col-12">
-                                                <div class="form-group">
-                                                    <label for="first-name-column">Tanggal Akhir</label>
-                                                    <input type="date" name="end_date" id="end_date"
-                                                        class="form-control @error('start_date') is-invalid @enderror"
-                                                        placeholder="Masukan Tanggal" aria-label="Recipient's username"
-                                                        aria-describedby="button-addon2"
-                                                        value="{{ request('end_date') }}" />
-                                                    @error('end_date')
-                                                        <div class="invalid-feedback">
-                                                            {{ $message }}
-                                                        </div>
-                                                    @enderror
-                                                </div>
-                                            </div>
-                                            <div class="col-md-1 mt-4 pe-2">
-                                                <button class="btn btn-primary" type="submit" id="button-addon2">
-                                                    Filter
-                                                </button>
-                                            </div>
-
-                                    </form>
+                                <div class="col-md-auto">
+                                    <div class="input-group mb-3">
+                                        <a href="/tambahpesanan" class="btn btn-outline-secondary" data-bs-toggle="modal"
+                                            data-bs-target="#exampleModal2">Tambah Data</a>
+                                    </div>
                                 </div>
+                                <div class="col-md-auto">
+                                    <div class="input-group mb-3">
+                                        <a href="/tambahpesanan" class="btn icon icon-left btn-outline-secondary"
+                                            data-bs-toggle="modal" data-bs-target="#exampleModal2"><i
+                                                data-feather="file"></i> Download</a>
+                                    </div>
+                                </div>
+
 
                             </div>
 
@@ -179,7 +127,7 @@
 
                                             <!-- table striped -->
                                             <div class="table-responsive">
-                                                <table class="table table-striped">
+                                                <table class="table table-striped mb-0">
                                                     <thead class="text-center">
                                                         <tr>
                                                             <th>No</th>
@@ -241,14 +189,292 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="form-group">
+                                <select class="choices form-select">
+                                    <option value="1">Square</option>
+                                    <option value="2">Rectangle</option>
+                                    <option value="3">Rombo</option>
+                                    <option value="4">Romboid</option>
+                                    <option value="5">Trapeze</option>
+                                    <option value="6">Triangle</option>
+                                    <option value="7">Polygon</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6 col-12">
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1" class="form-label">Nama
+                                        Pelanggan</label>
+                                    <select class="choices form-select" name="id_pelanggans"
+                                        aria-label="Default select example">
+
+
+                                        @foreach ($datapelanggan as $datap)
+                                            <option value="{{ $datap->id }}">
+                                                {{ $datap->namapelanggan }}
+                                            </option>
+                                        @endforeach
+
+
+
+                                    </select>
+
+                                    {{-- <select class="choices form-select" name="nama_pelanggan"
+                                        aria-label="Default select example">
+
+
+                                        @foreach ($datapelanggan as $datap)
+                                            <option value="{{ $datap->id }}">
+                                {{ $datap->namapelanggan }}
+                                </option>
+                                @endforeach
+
+
+
+                                </select> --}}
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
+        </section>
     </div>
+
+    <!-- Modal Tambah -->
+    <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title" id="exampleModalLabel">Data Pesanan</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <!-- // Basic multiple Column Form section start -->
+                    <section id="multiple-column-form">
+                        <div class="row match-height">
+                            <div class="col-12">
+                                <div class="card">
+                                    <div class="card-content">
+                                        <div class="card-body">
+                                            <form class="form" action="/insertpesanan" method="POST"
+                                                enctype="multipart/form-data">
+                                                @csrf
+                                                <div class="row">
+                                                    <div class="col-md-6 col-12">
+                                                        <div class="form-group">
+                                                            <label for="exampleInputEmail1" class="form-label">Kode
+                                                                Pesanan</label>
+                                                            <input type="text" name="kdpsn"
+                                                                class="form-control @error('kdpsn') is-invalid @enderror"
+                                                                id="exampleInputEmail1" aria-describedby="emailHelp">
+                                                            <div class="invalid-feedback">
+                                                                Masukan kode pesanan dengan benar.
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6 col-12">
+                                                        <div class="form-group">
+                                                            <label for="exampleInputEmail1"
+                                                                class="form-label">Kurir</label>
+                                                            <select class="choices form-select" name="id_kurirs"
+                                                                aria-label="Default select example">
+
+
+                                                                @foreach ($datakurir as $datak)
+                                                                    <option value="{{ $datak->id }}">
+                                                                        {{ $datak->nama }}
+                                                                    </option>
+                                                                @endforeach
+
+
+
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6 col-12">
+                                                        <div class="form-group">
+                                                            <label for="exampleInputEmail1" class="form-label">Nama
+                                                                Pelanggan</label>
+                                                            <select class="choices form-select" name="id_pelanggans"
+                                                                aria-label="Default select example">
+
+
+                                                                @foreach ($datapelanggan as $datap)
+                                                                    <option value="{{ $datap->id }}">
+                                                                        {{ $datap->namapelanggan }}
+                                                                    </option>
+                                                                @endforeach
+
+
+
+                                                            </select>
+
+                                                            {{-- <select class="choices form-select" name="nama_pelanggan"
+                                                                aria-label="Default select example">
+
+
+                                                                @foreach ($datapelanggan as $datap)
+                                                                    <option value="{{ $datap->id }}">
+                                                        {{ $datap->namapelanggan }}
+                                                        </option>
+                                                        @endforeach
+
+
+
+                                                        </select> --}}
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6 col-12">
+                                                        <div class="form-group">
+                                                            <label for="exampleInputEmail1" class="form-label ">Tanggal
+                                                                Pengiriman
+                                                            </label>
+                                                            <input type="text" name="tgl_krm"
+                                                                class="form-control mb-3" value="Masih Proses" readonly />
+                                                            <div class="invalid-feedback">
+                                                                Masukan tanggal dengan benar.
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-6">
+                                                        <div id="orderContainer">
+                                                            <div class="order-item">
+                                                                <label>Nama Barang</label>
+                                                                <div class="row g-3 mb-3">
+                                                                    <div class="col-md-6">
+                                                                        <div class="form-floating">
+                                                                            <input type="text" class="form-control "
+                                                                                name="item[]" id="namabarang"
+                                                                                placeholder="Pesanan" required>
+                                                                            <label for="namabarang">Pesanan</label>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-5">
+                                                                        <div class="form-floating">
+                                                                            <input type="number" class="form-control"
+                                                                                name="quantity[]" id="jumlah"
+                                                                                placeholder="Jumlah" required>
+                                                                            <label for="jumlah">Jumlah</label>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div
+                                                                        class="col-md-1 d-flex align-items-center justify-content-center">
+                                                                        <button class="btn btn-primary btn-sm"
+                                                                            onclick="addItem()" type="button"><i
+                                                                                class="bi bi-plus"></i></button>
+                                                                    </div>
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <input id="hasilbarang" name="hasilbarang" class="form-control"
+                                                        type="hidden">
+                                                    <input id="hasiljumlah" name="hasiljumlah" class="form-control"
+                                                        type="hidden">
+
+
+                                                    {{-- AWAL PESANAN --}}
+                                                    {{-- <div class="col-md-4 col-12">
+                                                        <div class="form-group">
+                                                            <label for="exampleInputEmail1" class="form-label">Nama
+                                                                Barang</label>
+                                                            <input type="text" name="namabarang"
+                                                                class="form-control @error('namabarang')
+                                                            is-invalid @enderror"
+                                                                id="exampleInputEmail1" aria-describedby="emailHelp"
+                                                                value="{{ old('namabarang') }}">
+                                                <div class="invalid-feedback">
+                                                    Masukan nama barang dengan benar.
+                                                </div>
+                                            </div>
+                                    </div>
+                                    <div class="col-md-1 col-12 text-center">
+                                        <div id="" class="form-group">
+                                            <label for="exampleInputEmail1" class="form-label">Jumlah</label>
+                                            <input type="text" name="jumlah" class="form-control @error('jumlah')
+                                                            is-invalid @enderror" id="exampleInputEmail1" aria-describedby="emailHelp" value="{{ old('jumlah') }}">
+                                            <div class="invalid-feedback">
+                                                Masukan nama barang dengan benar.
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-1 mt-1 col-12">
+                                        <div id="" class="form-group ">
+                                            <label for="exampleInputEmail1" class="form-label">Tambah</label>
+                                            <button type="text" name="namabarang" class="btn mt-3" id="exampleInputEmail1" aria-describedby="emailHelp"><i class="bi bi-plus-square-fill fs-2 align-center"></i>
+                                                <div class="invalid-feedback">
+                                                    Masukan nama barang dengan benar.
+                                                </div>
+                                        </div>
+                                    </div> --}}
+                                                    {{-- AKHIR PESANAN --}}
+
+                                                    {{-- <div class="col-md-6 col-12">
+                                                        <div class="form-group">
+                                                            <label for="exampleFormControlTextarea1"
+                                                                class="form-label">Alamat Lengkap</label>
+                                                            <textarea
+                                                                class="form-control @error('alamat') is-invalid
+                                                            @enderror"
+                                                                name="alamat" id="exampleFormControlTextarea1" rows="3"></textarea>
+                                                            <div class="invalid-feedback">
+                                                                Masukan alamat dengan benar.
+                                                            </div>
+                                                        </div>
+                                                    </div> --}}
+
+
+                                                    <div class="col-md-6 col-12">
+                                                        <div class="form-group">
+                                                            <label for="exampleInputEmail1" class="form-label">Tanggal
+                                                                Diterima</label>
+                                                            <input type="text" name="tgl_trm" class="form-control"
+                                                                id="exampleInputEmail1" aria-describedby="emailHelp"
+                                                                value="Belum Diterima" readonly>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6 col-12">
+                                                        <div class="form-group">
+                                                            <label for="exampleInputEmail1"
+                                                                class="form-label">Status</label>
+                                                            <input type="text" name="status" class="form-control"
+                                                                id="exampleInputEmail1" aria-describedby="emailHelp"
+                                                                value="proses" readonly>
+                                                            {{-- <select class="form-select" name="status"
+                                                            aria-label="Default select example">
+                                                            <option value="Proses">Proses</option>
+                                                            <option value="Selesai">Selesai</option>
+                                                        </select> --}}
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12 d-flex justify-content-end">
+                                                        <button data-bs-toggle="modal" data-bs-target="#exampleModal2"
+                                                            type="submit" class="btn btn-primary me-1 mb-1"
+                                                            onclick="captureData()">
+                                                            Simpan
+                                                        </button>
+                                                        <a href="/tambahpesanan" data-bs-toggle="modal"
+                                                            data-bs-target="#exampleModal2"
+                                                            class="btn btn-light-secondary me-1 mb-1"
+                                                            role="button">Batal</a>
+                                                    </div>
+
+                                                </div>
+                                            </form>
+                                            {{-- <button onclick="captureData()" class="btn btn-primary"></button> --}}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    <!-- // Basic multiple Column Form section end -->
+                </div>
+            </div>
+        </div>
     </div>
-    </section>
-    </div>
+    <!-- End Modal Tambah -->
 
     <!-- Modal Detail -->
     @foreach ($data as $index => $row)
@@ -288,8 +514,8 @@
                                         <input type="text" name="namabarang" class="form-control"
                                             id="exampleInputEmail1" aria-describedby="emailHelp"
                                             value="{{ $row->namabarang }}" readonly>
-                                    </div>
-                                </div> --}}
+                    </div>
+            </div> --}}
                                 <div class="col-md-4 col-12">
                                     <div id="" class="form-group">
                                         <label for="exampleInputEmail1" class="form-label">Nama
@@ -332,7 +558,7 @@
                                 <div class="col-md-6 col-12">
                                     <div class="form-group">
                                         <label for="exampleInputEmail1" class="form-label">Alamat Lengkap</label>
-                                        <input type="text" name="id_pelanggans" class="form-control"
+                                        <input type="text" name="nama_pelanggan" class="form-control"
                                             id="exampleInputEmail1" aria-describedby="emailHelp"
                                             value="{{ $row->pelanggans->alamatpelanggan }}" readonly>
                                     </div>
@@ -341,8 +567,8 @@
                                     <div class="form-group">
                                         <label for="exampleFormControlTextarea1" class="form-label">Alamat Lengkap</label>
                                         <textarea class="form-control" name="alamat" id="exampleFormControlTextarea1" rows="3" readonly>{{ $row->alamat }}</textarea>
-                                    </div>
-                                </div> --}}
+        </div>
+    </div> --}}
                                 <div class="col-md-6 col-12">
                                     <div class="form-group">
                                         <label for="exampleInputEmail1" class="form-label">Tanggal
@@ -444,13 +670,13 @@
                                 <div class="col-md-6 col-12">
                                     <div class="form-group">
                                         <label for="exampleInputEmail1" class="form-label">Alamat Lengkap</label>
-                                        <select class="form-select" name="id_pelanggans"
+                                        <select class="form-select" name="nama_pelanggan"
                                             aria-label="Default select example">
 
                                             {{-- <option selected>{{ $row->id_kurirs }}</option> --}}
                                             @foreach ($datapelanggan as $datap)
                                                 <option value="{{ $datap->id }}"
-                                                    {{ $datap->id == $row->id_pelanggans ? 'selected' : '' }}>
+                                                    {{ $datap->id == $row->nama_pelanggan ? 'selected' : '' }}>
                                                     {{ $datap->alamatpelanggan }}
                                                 </option>
                                             @endforeach
@@ -467,8 +693,8 @@
                                     <div class="form-group">
                                         <label for="exampleFormControlTextarea1" class="form-label">Alamat Lengkap</label>
                                         <textarea class="form-control" name="alamatpelanggan" id="exampleFormControlTextarea1" rows="3">{{ $row->alamatpelanggan }}</textarea>
-                                    </div>
-                                </div> --}}
+                    </div>
+            </div> --}}
                                 <div class="col-md-6 col-12">
                                     <div class="form-group">
                                         <label for="exampleInputEmail1" class="form-label">Tanggal
@@ -500,7 +726,7 @@
                                     <div class="form-group">
                                         <label for="exampleInputEmail1" class="form-label">Tanggal
                                             Diterima</label>
-                                        <input type="date" name="tgl_trm"
+                                        <input type="text" name="tgl_trm"
                                             class="form-control mb-3 flatpickr-no-config" value="{{ $row->tgl_trm }}" />
                                     </div>
                                 </div>

@@ -26,8 +26,6 @@ class DatabaseSeeder extends Seeder
             'id_pelanggans' => '1',
             'status' => 'proses',
             'id_kurirs' => '1',
-            'tgl_krm' => 'Masih Proses',
-            'tgl_trm' => 'Belum Diterima'
         ]);
 
         DB::table('users')->insert([
@@ -46,6 +44,7 @@ class DatabaseSeeder extends Seeder
         DB::table('kurirs')->insert([
             'nama' => 'kurir1',
             'nik' => '1234',
+            'kelamin' => 'Perempuan',
         ]);
     }
 }

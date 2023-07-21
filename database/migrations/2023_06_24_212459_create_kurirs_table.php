@@ -17,6 +17,7 @@ class CreateKurirsTable extends Migration
             $table->id();
             $table->string('nama');
             $table->bigInteger('nik');
+            $table->enum('kelamin', ['Laki-Laki', 'Perempuan']);
             $table->timestamps();
         });
     }

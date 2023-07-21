@@ -27,8 +27,8 @@ class CreatePesanansTable extends Migration
             // $table->string('kec');
             // $table->string('kdpos');
             // $table->string('alamat');
-            $table->string('tgl_krm')->nullable();
-            $table->string('tgl_trm')->nullable();
+            $table->date('tgl_krm')->nullable();
+            $table->date('tgl_trm')->nullable();
             $table->enum('status', ['Selesai', 'Proses', 'Dikirim'])->nullable();
             $table->timestamps();
         });

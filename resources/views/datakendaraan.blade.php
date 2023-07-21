@@ -22,14 +22,14 @@
                     <div class="card">
                         <div class="card-header">
 
-                            <h1>Data Kurir</h1>
+                            <h1>Data Kendaraan</h1>
 
                         </div>
                         <div class="card-content mt-2">
                             {{ Session::get('halaman_url') }}
                             <div class="row">
                                 <div class="col-md-4 mb-1">
-                                    <form action="/kurir" method="GET">
+                                    <form action="/kendaraan" method="GET">
                                         <div class="input-group mb-3 ms-3">
 
                                             <span class="input-group-text" id="basic-addon1"><i
@@ -45,13 +45,13 @@
                                 </div>
                                 <div class="col-md-auto">
                                     <div class="input-group mb-3">
-                                        <a href="/tambahkurir" class="btn btn-outline-secondary" data-bs-toggle="modal"
+                                        <a href="/tambahkendaraan" class="btn btn-outline-secondary" data-bs-toggle="modal"
                                             data-bs-target="#exampleModal2">Tambah Data</a>
                                     </div>
                                 </div>
                                 <div class="col-md-auto">
                                     <div class="input-group mb-3">
-                                        <a href="/tambahkurir" class="btn icon icon-left btn-outline-secondary"
+                                        <a href="/tambahkendaraan" class="btn icon icon-left btn-outline-secondary"
                                             data-bs-toggle="modal" data-bs-target="#exampleModal2"><i
                                                 data-feather="file"></i> Download</a>
                                     </div>
@@ -71,8 +71,10 @@
                                                     <thead class="text-center">
                                                         <tr>
                                                             <th>No</th>
-                                                            <th>Nama Kurir</th>
-                                                            <th>NIK</th>
+                                                            <th>Plat Nomor</th>
+                                                            <th>Jenis</th>
+                                                            <th>Merk</th>
+                                                            <th>Model</th>
                                                             <th>Aksi</th>
                                                         </tr>
                                                     </thead>
@@ -81,12 +83,14 @@
                                                             $no = 1;
                                                         @endphp
 
-                                                        @foreach ($datak as $index => $row)
+                                                        @foreach ($dataken as $index => $row)
                                                             <tr class="text-center">
-                                                                <th scope="row">{{ $index + $datak->firstItem() }}</th>
+                                                                <th scope="row">{{ $index + $dataken->firstItem() }}</th>
 
-                                                                <td>{{ $row->nama }}</td>
-                                                                <td>{{ $row->nik }}</td>
+                                                                <td>{{ $row->platno }}</td>
+                                                                <td>{{ $row->jenis }}</td>
+                                                                <td>{{ $row->merk }}</td>
+                                                                <td>{{ $row->model }}</td>
                                                                 <td>
                                                                     <button type="button" class="btn btn-info"
                                                                         data-bs-toggle="modal"
@@ -100,7 +104,7 @@
                                                                         <i class="bi bi-pencil-square"></i>
                                                                     </button>
 
-                                                                    <a href="{{ route('deletekurir', $row->id) }}"
+                                                                    <a href="{{ route('deletekendaraan', $row->id) }}"
                                                                         class="btn btn-danger delete" id="delete"
                                                                         data-id="{{ $row->id }}"
                                                                         data-nama="{{ $row->nama }}"><i
@@ -110,7 +114,7 @@
                                                         @endforeach
                                                     </tbody>
                                                 </table>
-                                                {{ $datak->links() }}
+                                                {{ $dataken->links() }}
                                             </div>
                                         </div>
                                     </div>
@@ -125,10 +129,10 @@
 
     <!-- Modal Tambah -->
     <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-xl">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title" id="exampleModalLabel">Data Kurir</h1>
+                    <h1 class="modal-title" id="exampleModalLabel">Data Kendaraan</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -139,17 +143,39 @@
                                 <div class="card">
                                     <div class="card-content">
                                         <div class="card-body">
-                                            <form class="form form-vertical" action="/insertdatakurir" method="POST"
+                                            <form class="form form-vertical" action="/insertdatakendaraan" method="POST"
                                                 enctype="multipart/form-data">
                                                 @csrf
                                                 <div class="form-body">
                                                     <div class="row">
                                                         <div class="col-12">
-                                                            <div class="form-group has-icon-left">
-                                                                <label for="first-name-icon">Nama Lengkap</label>
+                                                            <div>
+                                                                <label>Plat Nomor</label>
                                                                 <div class="position-relative">
-                                                                    <input type="text" name="nama"
-                                                                        class="form-control" placeholder="Masukan Nama"
+                                                                    <input type="text" name="platno"
+                                                                        class="form-control"
+                                                                        placeholder="Masukan Plat Nomor" />
+                                                                    <div class="form-control-icon">
+                                                                        <i class="bi bi-person"></i>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-12">
+                                                            <div class="form-group has-icon-left">
+                                                                <label for="first-name-icon">Jenis Kendaraan</label>
+                                                                <select name="jenis" class="form-select">
+                                                                    <option value="motor">Motor</option>
+                                                                    <option value="mobil">Mobil</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-12">
+                                                            <div class="form-group has-icon-left">
+                                                                <label for="first-name-icon">Merk</label>
+                                                                <div class="position-relative">
+                                                                    <input type="text" name="merk"
+                                                                        class="form-control" placeholder="Masukan Merk"
                                                                         id="first-name-icon" />
                                                                     <div class="form-control-icon">
                                                                         <i class="bi bi-person"></i>
@@ -159,25 +185,14 @@
                                                         </div>
                                                         <div class="col-12">
                                                             <div class="form-group has-icon-left">
-                                                                <label for="first-name-icon">NIK</label>
+                                                                <label for="first-name-icon">Model</label>
                                                                 <div class="position-relative">
-                                                                    <input type="number" name="nik"
-                                                                        class="form-control" placeholder="Masukan NIK"
+                                                                    <input type="text" name="model"
+                                                                        class="form-control" placeholder="Masukan Model"
                                                                         id="first-name-icon" />
                                                                     <div class="form-control-icon">
                                                                         <i class="bi bi-person"></i>
                                                                     </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-12">
-                                                            <div class="form-group has-icon-left">
-                                                                <label for="first-name-icon">Jenis Kelamin</label>
-                                                                <div class="position-relative">
-                                                                    <select name="kelamin" id="">
-                                                                        <option value="Laki-Laki">Laki-laki</option>
-                                                                        <option value="Perempuan">Perempuan</option>
-                                                                    </select>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -185,7 +200,8 @@
                                                             <button type="submit" class="btn btn-primary me-1 mb-1">
                                                                 Submit
                                                             </button>
-                                                            <a href="/datakurir" class="btn btn-light-secondary me-1 mb-1"
+                                                            <a href="/datakendaraan"
+                                                                class="btn btn-light-secondary me-1 mb-1"
                                                                 role="button">Batal</a>
                                                         </div>
                                                     </div>
@@ -205,13 +221,13 @@
     <!-- End Modal Tambah -->
 
     <!-- Modal Detail -->
-    @foreach ($datak as $index => $row)
+    @foreach ($dataken as $index => $row)
         <div class="modal fade" id="exampleModalDetail{{ $row->id }}" tabindex="-1"
             aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-xl">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Detail Kurir</h5>
+                        <h5 class="modal-title" id="exampleModalLabel">Detail kendaraan</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
@@ -220,7 +236,7 @@
                             <div class="row">
                                 <div class="col-md-6 col-12">
                                     <div class="form-group">
-                                        <label for="exampleInputEmail1" class="form-label">Nama Kurir</label>
+                                        <label for="exampleInputEmail1" class="form-label">Nama kendaraan</label>
                                         <input type="text" name="nama" class="form-control"
                                             id="exampleInputEmail1" aria-describedby="emailHelp"
                                             value="{{ $row->nama }}" readonly>
@@ -248,22 +264,23 @@
     <!-- End Modal Detail -->
 
     <!-- Modal Edit -->
-    @foreach ($datak as $index => $row)
+    @foreach ($dataken as $index => $row)
         <div class="modal fade" id="exampleModalUbah{{ $row->id }}" tabindex="-1"
             aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-xl">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Edit Data Kurir</h5>
+                        <h5 class="modal-title" id="exampleModalLabel">Edit Data kendaraan</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <form action="/updatekurir/{{ $row->id }}" method="POST" enctype="multipart/form-data">
+                        <form action="/updatekendaraan/{{ $row->id }}" method="POST"
+                            enctype="multipart/form-data">
                             @csrf
                             <div class="row">
                                 <div class="col-md-6 col-12">
                                     <div class="form-group">
-                                        <label for="exampleInputEmail1" class="form-label">Nama Kurir</label>
+                                        <label for="exampleInputEmail1" class="form-label">Nama kendaraan</label>
                                         <input type="text" name="nama" class="form-control"
                                             id="exampleInputEmail1" aria-describedby="emailHelp"
                                             value="{{ $row->nama }}">
@@ -275,22 +292,6 @@
                                         <input type="text" name="nik" class="form-control"
                                             id="exampleInputEmail1" aria-describedby="emailHelp"
                                             value="{{ $row->nik }}">
-                                    </div>
-                                </div>
-                                <div class="col-md-6 col-12">
-                                    <div class="form-group">
-                                        <label for="exampleInputEmail1" class="form-label">Jenis Kelamin</label>
-                                        <select class="form-select" name="kelamin" aria-label="Default select example">
-
-                                            <!-- <option option>Pilih Status</option> -->
-                                            <option selected>{{ $row->kelamin }}</option>
-
-                                            @if ($row->kelamin == 'Laki-Laki')
-                                                <option value="Perempuan">Perempuan</option>
-                                            @else
-                                                <option value="Laki-Laki">Laki-Laki</option>
-                                            @endif
-                                        </select>
                                     </div>
                                 </div>
                                 <div class="col-12 d-flex justify-content-end">

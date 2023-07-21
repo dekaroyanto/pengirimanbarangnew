@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Pesanan;
 use App\Models\Kendaraan;
+use App\Models\Pelanggan;
 use Illuminate\Http\Request;
 
 class KendaraanController extends Controller
@@ -14,7 +16,10 @@ class KendaraanController extends Controller
      */
     public function index()
     {
-        //
+        $dataken = Kendaraan::paginate('5');
+        $infopesanan = Pesanan::latest()->paginate(1);
+        $infopelanggan = Pelanggan::latest()->paginate(1);
+        return view('datakendaraan', compact('dataken', 'infopesanan', 'infopelanggan'));
     }
 
     /**
@@ -24,7 +29,7 @@ class KendaraanController extends Controller
      */
     public function create()
     {
-        //
+        return view('tambahkendaraan');
     }
 
     /**
@@ -35,7 +40,24 @@ class KendaraanController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $dataken = Kendaraan::create($request->all());
+        return Redirect()->route('datakendaraan')->with('success', 'Data Berhasil Di Tambahkan');
+    }
+
+    public function tampilkankendaraan($id)
+    {
+        $dataken = Kendaraan::find($id);
+        // dd($data);
+
+        return view('tampilkendaraan', compact('dataken'));
+    }
+
+    public function updatekendaraan(Request $request, $id)
+    {
+        $dataken = Kendaraan::find($id);
+        $dataken->update($request->all());
+
+        return redirect()->route('datakendaraan')->with('success', 'Data Berhasil Di Ubah');
     }
 
     /**
@@ -70,6 +92,14 @@ class KendaraanController extends Controller
     public function update(Request $request, Kendaraan $kendaraan)
     {
         //
+    }
+
+    public function deletekendaraan($id)
+    {
+        $dataken = Kendaraan::find($id);
+        $dataken->delete();
+
+        return redirect()->route('datakendaraan')->with('success', 'Data Berhasil Di Hapus');
     }
 
     /**

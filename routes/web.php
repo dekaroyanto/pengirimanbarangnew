@@ -3,13 +3,14 @@
 use App\Models\User;
 use App\Models\Kurir;
 use App\Models\Pesanan;
+use App\Models\Pelanggan;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\KurirController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PesananController;
 use App\Http\Controllers\HomedashController;
+use App\Http\Controllers\KendaraanController;
 use App\Http\Controllers\PelangganController;
-use App\Models\Pelanggan;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,7 +34,7 @@ Route::get('/', function () {
 })->middleware('auth');
 
 // Route::get('/', [HomedashController::class, 'index']);
-
+Route::get('/filter', [PesananController::class, 'filter']);
 Route::get('/pesanan', [PesananController::class, 'index'])->name('pesanan')->middleware('auth');
 
 Route::get('/tambahpesanan', [PesananController::class, 'tambahpesanan'])->name('tambahpesanan')->middleware('auth');
@@ -87,3 +88,14 @@ Route::get('/deletepelanggan/{id}', [PelangganController::class, 'deletepelangga
 
 Route::get('/tampilkanpelanggan/{id}', [PelangganController::class, 'tampilkanpelanggan'])->name('tampilkanpelanggan')->middleware('auth');
 Route::post('/updatepelanggan/{id}', [PelangganController::class, 'updatepelanggan'])->name('updatepelanggan')->middleware('auth');
+
+//kendaraan
+Route::get('/datakendaraan', [KendaraanController::class, 'index'])->name('datakendaraan');
+
+Route::get('/tambahkendaraan', [KendaraanController::class, 'create'])->name('tambahkendaraan');
+Route::post('/insertdatakendaraan', [KendaraanController::class, 'store'])->name('insertdatakendaraan');
+
+Route::get('/deletekendaraan/{id}', [KendaraanController::class, 'deletekendaraan'])->name('deletekendaraan')->middleware('auth');
+
+Route::get('/tampilkankendaraan/{id}', [KendaraanController::class, 'tampilkankendaraan'])->name('tampilkankendaraan')->middleware('auth');
+Route::post('/updatekendaraan/{id}', [KendaraanController::class, 'updatekendaraan'])->name('updatekendaraan')->middleware('auth');

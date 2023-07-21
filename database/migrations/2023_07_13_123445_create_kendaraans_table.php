@@ -15,8 +15,11 @@ class CreateKendaraansTable extends Migration
     {
         Schema::create('kendaraans', function (Blueprint $table) {
             $table->id();
+            $table->bigInteger('platno');
+            $table->enum('jenis', ['motor', 'mobil']);
             $table->string('merk');
-
+            $table->string('model');
+            $table->string('warna');
             $table->timestamps();
         });
     }

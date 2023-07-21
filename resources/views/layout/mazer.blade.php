@@ -17,12 +17,19 @@
     <link rel="stylesheet" href="{{ asset('mazer/assets/compiled/css/app-dark.css') }}" />
     <link rel="stylesheet" href="{{ asset('mazer/assets/compiled/css/iconly.css') }}" />
     <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    {{-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous" /> --}}
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css"
         integrity="sha512-3pIirOrwegjM6erE5gPSwkUzO+3cTjpnV9lexlNZqvupR64iZBnOOTiiLPb9M36zpMScbmUNIcHUqKD47M719g=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <link rel="stylesheet" href="{{ asset('mazer/assets/extensions/choices.js/public/assets/styles/choices.css') }}" />
+
+
+    @yield('css2')
 </head>
 
 <body class="body">
@@ -84,18 +91,49 @@
                         </li>
 
                         <li class="{{ request()->is('datapelanggan') ? 'sidebar-item active' : '' }}">
-                            <a href="/datapelanggan" class="sidebar-link">
+                            <a href="/datapelanggan" class="sidebar-link" style="text-decoration: none">
                                 <i class="bi bi-people-fill"></i>
                                 <span>Data Pelanggan</span>
                             </a>
                         </li>
 
-                        <li class="{{ request()->is('pesanan') ? 'sidebar-item active' : '' }}">
+                        <li
+                            class="sidebar-item has-sub {{ request()->is('pesanan', 'tambahpesanan') ? 'active' : '' }}">
                             <a href="/pesanan" class="sidebar-link">
                                 <i class="bi bi-cart-fill"></i>
                                 <span>Pesanan</span>
                             </a>
+
+                            <ul class="submenu">
+                                <li class="submenu-item {{ request()->is('pesanan') ? 'active' : '' }}">
+                                    <a href="/pesanan" class="submenu-link" style="text-decoration: none">
+                                        <span>Data Pesanan</span>
+                                    </a>
+                                </li>
+                                <li class="submenu-item {{ request()->is('tambahpesanan') ? 'active' : '' }}">
+                                    <a href="/tambahpesanan" class="submenu-link"
+                                        style="text-decoration: none">Tambah Pesanan</a>
+                                </li>
+
+                                <li class="submenu-item">
+                                    <a href="layout-vertical-1-column.html" class="submenu-link">1 Column</a>
+                                </li>
+
+                                <li class="submenu-item">
+                                    <a href="layout-vertical-navbar.html" class="submenu-link">Vertical Navbar</a>
+                                </li>
+
+                                <li class="submenu-item">
+                                    <a href="layout-rtl.html" class="submenu-link">RTL Layout</a>
+                                </li>
+
+                                <li class="submenu-item">
+                                    <a href="layout-horizontal.html" class="submenu-link">Horizontal Menu</a>
+                                </li>
+                            </ul>
                         </li>
+
+
 
                         <li class="{{ request()->is('datakurir') ? 'sidebar-item active' : '' }}">
                             <a href="/datakurir" class="sidebar-link">
@@ -104,8 +142,8 @@
                             </a>
                         </li>
 
-                        <li class="sidebar-item">
-                            <a href="index.html" class="sidebar-link">
+                        <li class="{{ request()->is('datakendaraan') ? 'sidebar-item active' : '' }}">
+                            <a href="/datakendaraan" class="sidebar-link">
                                 <i class="bi bi-car-front-fill"></i>
                                 <span>Kendaraan</span>
                             </a>
@@ -326,14 +364,16 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"
         integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 
+    @yield('inijs')
 
-
-
+    <script src="{{ asset('mazer/assets/extensions/choices.js/public/assets/scripts/choices.js') }}"></script>
+    <script src="{{ asset('mazer/assets/static/js/pages/form-element-select.js') }}"></script>
 
     <script src="{{ asset('mazer/assets/static/js/components/dark.js') }} "></script>
     <script src="{{ asset('mazer/assets/extensions/perfect-scrollbar/perfect-scrollbar.min.js') }} "></script>
 
     <script src="{{ asset('mazer/assets/compiled/js/app.js') }} "></script>
+
     <script src="{{ asset('mazer/assets/extensions/flatpickr/flatpickr.min.js') }} "></script>
     <script src="{{ asset('mazer/assets/static/js/pages/date-picker.js') }} "></script>
 
