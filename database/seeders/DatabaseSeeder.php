@@ -23,7 +23,9 @@ class DatabaseSeeder extends Seeder
             'kdpsn' => 'KRM-10001',
             'namabarang' => 'Pesanan1',
             'jumlah' => '10',
+            'alamat' => 'cirebon',
             'id_pelanggans' => '1',
+            'tgl_msk' => '2023-07-31',
             'status' => 'proses',
             'id_kurirs' => '1',
         ]);

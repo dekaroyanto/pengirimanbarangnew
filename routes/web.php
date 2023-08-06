@@ -39,6 +39,8 @@ Route::get('/pesanan', [PesananController::class, 'index'])->name('pesanan')->mi
 
 Route::get('/tambahpesanan', [PesananController::class, 'tambahpesanan'])->name('tambahpesanan')->middleware('auth');
 Route::post('/insertpesanan', [PesananController::class, 'insertpesanan'])->name('insertpesanan')->middleware('auth');
+Route::get('/alamat/{id}', [PesananController::class, 'getAlamat']);
+
 
 Route::get('/tampilkanpesanan/{id}', [PesananController::class, 'tampilkanpesanan'])->name('tampilkanpesanan')->middleware('auth');
 Route::post('/updatepesanan/{id}', [PesananController::class, 'updatepesanan'])->name('updatepesanan')->middleware('auth');

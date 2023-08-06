@@ -6,6 +6,7 @@ use App\Models\Pesanan;
 use App\Models\Kendaraan;
 use App\Models\Pelanggan;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class KendaraanController extends Controller
 {
@@ -14,8 +15,20 @@ class KendaraanController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        if ($request->has('search')) {
+            $data = Pesanan::where('kdpsn', 'LIKE', '%' . $request->search . '%')
+                ->orWhere('namabarang', 'LIKE', '%' . $request->search . '%')
+                ->orWhere('id_pelanggans', 'LIKE', '%' . $request->search . '%')
+                ->orWhere('status', 'LIKE', '%' . $request->search . '%')
+                ->latest()->paginate(5);
+            Session::put('halaman_url', request()->fullUrl());
+        } else {
+            $data = Pesanan::latest()->paginate(5);
+            Session::put('halaman_url', request()->fullUrl());
+        }
+
         $dataken = Kendaraan::paginate('5');
         $infopesanan = Pesanan::latest()->paginate(1);
         $infopelanggan = Pelanggan::latest()->paginate(1);

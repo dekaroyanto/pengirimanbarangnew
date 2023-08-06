@@ -1,5 +1,8 @@
 @extends('layout.mazer')
 
+@section('inihead')
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+@endsection
 @section('inijs')
     <script>
         function addItem() {
@@ -112,8 +115,9 @@
                                         <div class="form-group">
                                             <label for="exampleInputEmail1" class="form-label">Nama
                                                 Pelanggan</label>
+                                            <option value="">Pilih</option>
                                             <select class="choices form-select" name="id_pelanggans"
-                                                aria-label="Default select example">
+                                                aria-label="Default select example" id="id_pelanggans">
 
 
                                                 @foreach ($datapelanggan as $datap)
@@ -121,37 +125,29 @@
                                                         {{ $datap->namapelanggan }}
                                                     </option>
                                                 @endforeach
-
-
-
                                             </select>
-
-                                            {{-- <select class="choices form-select" name="nama_pelanggan"
-                                                            aria-label="Default select example">
-
-
-                                                            @foreach ($datapelanggan as $datap)
-                                                                <option value="{{ $datap->id }}">
-                                                                    {{ $datap->namapelanggan }}
-                                                                </option>
-                                                            @endforeach
-
-
-
-                                                        </select> --}}
                                         </div>
                                     </div>
                                     <div class="col-md-6 col-12">
                                         <div class="form-group">
                                             <label for="exampleInputEmail1" class="form-label ">Tanggal
-                                                Pengiriman
+                                                Pesanan Masuk
                                             </label>
-                                            <input type="date" name="tgl_krm"
-                                                class="form-control mb-3 flatpickr-no-config" placeholder="Belum Dikirim"
-                                                readonly />
-                                            <div class="invalid-feedback">
-                                                Masukan tanggal dengan benar.
-                                            </div>
+                                            <input type="date" name="tgl_msk"
+                                                class="form-control mb-3 flatpickr-no-config @error('tgl_msk') is-invalid @enderror"
+                                                placeholder="Masukan Tanggal" readonly />
+                                            @error('tgl_msk')
+                                                <div class="invalid-feedback">
+                                                    {{ $message }}
+                                                </div>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-12">
+                                        <div class="form-group">
+                                            <label for="exampleInputEmail1" class="form-label">Alamat</label>
+                                            {{-- <textarea class="form-control" name="alamat" id="alamat" cols="8" rows="3"></textarea> --}}
+                                            <select name="alamat" id="alamat" class="form-select input"></select>
                                         </div>
                                     </div>
                                     <div class="col-lg-6">
@@ -184,65 +180,28 @@
                                     </div>
                                     <input id="hasilbarang" name="hasilbarang" class="form-control" type="hidden">
                                     <input id="hasiljumlah" name="hasiljumlah" class="form-control" type="hidden">
+                                    <div class="col-md-6 col-12">
+                                        <div class="form-group">
+                                            <label for="exampleInputEmail1" class="form-label ">Tanggal
+                                                Pengiriman
+                                            </label>
+                                            <input type="date" name="tgl_krm"
+                                                class="form-control mb-3 flatpickr-no-config" placeholder="Belum Dikirim"
+                                                readonly />
+                                            <div class="invalid-feedback">
+                                                Masukan tanggal dengan benar.
+                                            </div>
+                                        </div>
+                                    </div>
 
-
-                                    {{-- AWAL PESANAN --}}
-                                    {{-- <div class="col-md-4 col-12">
-                                                    <div class="form-group">
-                                                        <label for="exampleInputEmail1" class="form-label">Nama
-                                                            Barang</label>
-                                                        <input type="text" name="namabarang"
-                                                            class="form-control @error('namabarang')
-                                                        is-invalid @enderror"
-                                                            id="exampleInputEmail1" aria-describedby="emailHelp"
-                                                            value="{{ old('namabarang') }}">
-                                                        <div class="invalid-feedback">
-                                                            Masukan nama barang dengan benar.
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-1 col-12 text-center">
-                                                    <div id="" class="form-group">
-                                                        <label for="exampleInputEmail1"
-                                                            class="form-label">Jumlah</label>
-                                                        <input type="text" name="jumlah"
-                                                            class="form-control @error('jumlah')
-                                                        is-invalid @enderror"
-                                                            id="exampleInputEmail1" aria-describedby="emailHelp"
-                                                            value="{{ old('jumlah') }}">
-                                                        <div class="invalid-feedback">
-                                                            Masukan nama barang dengan benar.
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-1 mt-1 col-12">
-                                                    <div id="" class="form-group ">
-                                                        <label for="exampleInputEmail1"
-                                                            class="form-label">Tambah</label>
-                                                        <button type="text" name="namabarang" class="btn mt-3"
-                                                            id="exampleInputEmail1" aria-describedby="emailHelp"><i
-                                                                class="bi bi-plus-square-fill fs-2 align-center"></i>
-                                                            <div class="invalid-feedback">
-                                                                Masukan nama barang dengan benar.
-                                                            </div>
-                                                    </div>
-                                                </div> --}}
-                                    {{-- AKHIR PESANAN --}}
-
-                                    {{-- <div class="col-md-6 col-12">
-                                                    <div class="form-group">
-                                                        <label for="exampleFormControlTextarea1"
-                                                            class="form-label">Alamat Lengkap</label>
-                                                        <textarea
-                                                            class="form-control @error('alamat') is-invalid
-                                                        @enderror"
-                                                            name="alamat" id="exampleFormControlTextarea1" rows="3"></textarea>
-                                                        <div class="invalid-feedback">
-                                                            Masukan alamat dengan benar.
-                                                        </div>
-                                                    </div>
-                                                </div> --}}
-
+                                    <div class="col-md-6 col-12">
+                                        <div class="form-group">
+                                            <label for="exampleInputEmail1" class="form-label">Status</label>
+                                            <input type="text" name="status" class="form-control"
+                                                id="exampleInputEmail1" aria-describedby="emailHelp" value="proses"
+                                                readonly>
+                                        </div>
+                                    </div>
 
                                     <div class="col-md-6 col-12">
                                         <div class="form-group">
@@ -253,19 +212,7 @@
                                                 placeholder="Belum Diterima" readonly>
                                         </div>
                                     </div>
-                                    <div class="col-md-6 col-12">
-                                        <div class="form-group">
-                                            <label for="exampleInputEmail1" class="form-label">Status</label>
-                                            <input type="text" name="status" class="form-control"
-                                                id="exampleInputEmail1" aria-describedby="emailHelp" value="proses"
-                                                readonly>
-                                            {{-- <select class="form-select" name="status"
-                                                        aria-label="Default select example">
-                                                        <option value="Proses">Proses</option>
-                                                        <option value="Selesai">Selesai</option>
-                                                    </select> --}}
-                                        </div>
-                                    </div>
+
                                     <div class="col-12 d-flex justify-content-end">
                                         <button type="submit" class="btn btn-primary me-1 mb-1" onclick="captureData()">
                                             Simpan
@@ -282,5 +229,44 @@
             </div>
         </section>
         {{-- <button onclick="captureData()" class="btn btn-primary"></button> --}}
+
+        <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
+        <script>
+            $(document).ready(function() {
+                $('#id_pelanggans').on('change', function() {
+                    var id_pelanggans = $(this).val();
+                    // console.log(kode_kategori);
+                    if (id_pelanggans) {
+                        $.ajax({
+                            url: '/alamat/' + id_pelanggans,
+                            type: 'GET',
+                            data: {
+                                '_token': '{{ csrf_token() }}'
+                            },
+                            dataType: 'json',
+                            success: function(datap) {
+                                // console.log(data);
+                                if (datap) {
+                                    $('#alamat').empty();
+                                    // $('#alamat').append('<option value="">-Pilih-</option>');
+                                    $.each(datap, function(key, pelanggan) {
+                                        $('select[name="alamat"]').append(
+                                            '<option value="' + pelanggan
+                                            .id + '">' +
+                                            pelanggan.alamatpelanggan + '</option>'
+                                        );
+                                    });
+                                } else {
+                                    $('#alamat').empty();
+                                }
+                            }
+                        });
+                    } else {
+                        $('#alamat').empty();
+                    }
+                });
+            });
+        </script>
     </div>
 @endsection

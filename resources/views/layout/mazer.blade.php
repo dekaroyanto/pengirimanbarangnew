@@ -28,7 +28,7 @@
 
     <link rel="stylesheet" href="{{ asset('mazer/assets/extensions/choices.js/public/assets/styles/choices.css') }}" />
 
-
+    @yield('inihead')
     @yield('css2')
 </head>
 
@@ -321,14 +321,6 @@
                             <div class="col-12 col-md-6 order-md-2 order-first">
                                 <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
                                     @yield('page')
-                                    <!-- <ol class="breadcrumb">
-                                        <li class="breadcrumb-item">
-                                            <a href="index.html">Dashboard</a>
-                                        </li>
-                                        <li class="breadcrumb-item active" aria-current="page">
-                                            Layout Vertical Navbar
-                                        </li>
-                                    </ol> -->
                                 </nav>
                             </div>
                         </div>
@@ -386,11 +378,11 @@
                 e.preventDefault();
                 var link = $(this).attr("href");
                 var pesananid = $(this).attr("data-id");
-                var namabarang = $(this).attr("data-nama");
+                var kdpsn = $(this).attr("data-nama");
                 Swal.fire({
                     title: "Yakin ?",
-                    text: "Kamu akan menghapus data pesanan dengan nama " +
-                        namabarang +
+                    text: "Kamu akan menghapus data pesanan dengan Kode Pesanan " +
+                        kdpsn +
                         " ",
                     icon: "warning",
                     showCancelButton: true,

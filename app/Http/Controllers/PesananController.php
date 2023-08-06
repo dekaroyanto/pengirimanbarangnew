@@ -53,8 +53,8 @@ class PesananController extends Controller
         $infopelanggan = Pelanggan::latest()->paginate(1);
         $start_date = $request->start_date;
         $end_date = $request->end_date;
-        $data = Pesanan::whereDate('tgl_krm', '>=', $start_date)
-            ->whereDate('tgl_krm', '<=', $end_date)
+        $data = Pesanan::whereDate('tgl_msk', '>=', $start_date)
+            ->whereDate('tgl_msk', '<=', $end_date)
             ->paginate(5);
         return view('datapesanan', compact('data', 'infopesanan', 'infopelanggan', 'datapelanggan', 'datakurir'));
     }
@@ -67,6 +67,15 @@ class PesananController extends Controller
         $infopelanggan = Pelanggan::latest()->paginate(1);
         return view('tambahpesanan', compact('infopesanan', 'infopelanggan', 'datapelanggan', 'datakurir'));
     }
+
+    public function getAlamat($id)
+    {
+        $alamat = Pelanggan::where('id_pelanggans', $id)->get();
+        // $alamat = Pelanggan::find('id_pelanggans', $id)->get();
+        $datapelanggan = Pelanggan::all();
+        return response()->json($alamat, $datapelanggan);
+    }
+
 
     public function insertpesanan(Request $request)
     {
@@ -83,6 +92,7 @@ class PesananController extends Controller
 
         $validated = $request->validate([
             'kdpsn' => 'required|unique:pesanans',
+            'tgl_msk' => 'required',
             // 'penerima' => 'required|min:5',
             // 'notelp' => 'required',
             // 'namabarang' => 'required',
@@ -91,6 +101,7 @@ class PesananController extends Controller
         ], [
             'kdpsn.required' => 'Kode Pesanan tidak boleh kosong!',
             'kdpsn.unique' => 'Kode Pesanan tidak boleh sama!',
+            'tgl_msk.required' => 'Masukan tanggal!',
             // 'start_date.required' => 'Masukan Tanggal!',
             // 'end_date.required' => 'Masukan Tanggal'
         ]);
@@ -110,9 +121,11 @@ class PesananController extends Controller
         $pesanan->kdpsn = $request->kdpsn;
         $pesanan->namabarang = $request->hasilbarang;
         $pesanan->jumlah = $request->hasiljumlah;
+        $pesanan->alamat = $request->alamat;
         $pesanan->id_pelanggans = $request->id;
         $pesanan->id_kurirs = $request->id;
         $pesanan->status = "proses";
+        $pesanan->tgl_msk = $request->tgl_msk;
         $pesanan->tgl_krm = $request->tgl_krm;
         $pesanan->tgl_trm = $request->tgl_trm;
         // dd($pesanan);
@@ -137,8 +150,10 @@ class PesananController extends Controller
         $data = Pesanan::find($id);
         // dd($data);
         $datakurir = Kurir::all();
-        $datappelanggan = Pelanggan::all();
-        return view('tampilpesanan', compact('data', 'datakurir', 'datapelanggan'));
+        $datapelanggan = Pelanggan::all();
+        $infopesanan = Pesanan::latest()->paginate(1);
+        $infopelanggan = Pelanggan::latest()->paginate(1);
+        return view('tampilpesanan', compact('data', 'datakurir', 'datapelanggan', 'infopesanan', 'infopelanggan'));
     }
 
 
@@ -147,6 +162,17 @@ class PesananController extends Controller
         $data = Pesanan::find($id);
         // $datap = Pelanggan::where('id_pelanggans', $id)->get();
         $data->update($request->all());
+
+        // $data->kdpsn = $request->kdpsn;
+        // $data->namabarang = $request->hasilbarang;
+        // $data->jumlah = $request->hasiljumlah;
+        // $data->save();
+
+        // $pesanan = new Pesanan;
+        // $pesanan->namabarang = $data->hasilbarang;
+        // $pesanan->jumlah = $data->hasiljumlah;
+        // $pesanan->save();
+
         if (session('halaman_url')) {
             return Redirect(session('halaman_url'))->with('success', 'Data Berhasil Di Ubah');
         }

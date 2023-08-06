@@ -70,6 +70,54 @@
             // console.log(document.getElementById("hasiljumlah"))
         }
     </script>
+    <script>
+        function addItems() {
+            var kolomPesanan = document.getElementById("kolompesanan");
+            var kolomJumlah = document.getElementById("kolomjumlah");
+
+            var orderItem = document.createElement("div");
+            orderItem.setAttribute("class", "row mb-2");
+            var orderItem2 = document.createElement("div");
+            orderItem2.setAttribute("class", "row mb-2");
+
+            var html1 = `<div class="col">
+                <input type="text" name="jumlahku[]" id="pesanan" class="form-control"></div>`;
+            var html2 = `<div class="col"><input type="text" name="pesananku[]" id="pesanan" class="form-control"></div>`;
+
+            orderItem.innerHTML = html1;
+            orderItem2.innerHTML = html2;
+
+            kolomJumlah.appendChild(orderItem);
+            kolomPesanan.appendChild(orderItem2);
+
+        }
+
+        function combineValues() {
+            const input1Elements = document.querySelectorAll('input[name="pesananku[]"]');
+            const input2Elements = document.querySelectorAll('input[name="jumlahku[]"]');
+
+            var input1Values = [];
+            var input2Values = [];
+            var data1 = ""
+
+            for (var i = 0; i < input1Elements.length; i++) {
+                var itemPesanan = input1Elements[i].value;
+                var quantityInput = input2Elements[i].value;
+
+                data1 += quantityInput + ",";
+                input1Values.push(itemPesanan);
+                input2Values.push(quantityInput);
+            }
+
+            var hiddenInputPesanan = document.getElementById('hiddenInputPesanan');
+            var hiddenInputJumlah = document.getElementById('hiddenInputJumlah');
+            hiddenInputPesanan.value = input1Values.join(',');
+            hiddenInputJumlah.value = input2Values.join(',');
+
+            hiddenInputPesanan.dispatchEvent(new Event('input'));
+            hiddenInputJumlah.dispatchEvent(new Event('input'));
+        }
+    </script>
 @endsection
 
 @section('content')
@@ -185,6 +233,7 @@
                                                             <th>No</th>
                                                             <th>Kode Pesanan</th>
                                                             <th>Nama Barang</th>
+                                                            <th>Jumlah</th>
                                                             <th>Status</th>
                                                             <th>Aksi</th>
                                                         </tr>
@@ -195,10 +244,23 @@
                                                         @endphp
 
                                                         @foreach ($data as $index => $row)
+                                                            @php
+                                                                $items = explode(',', $row->namabarang);
+                                                                $qty = explode(',', $row->jumlah);
+                                                            @endphp
                                                             <tr class="text-center">
                                                                 <th scope="row">{{ $index + $data->firstItem() }}</th>
                                                                 <td>{{ $row->kdpsn }}</td>
-                                                                <td>{{ $row->namabarang }}</td>
+                                                                <td>
+                                                                    @foreach ($items as $item)
+                                                                        <p>{{ $item }}</p>
+                                                                    @endforeach
+                                                                </td>
+                                                                <td>
+                                                                    @foreach ($qty as $qty)
+                                                                        <p>{{ $qty }}</p>
+                                                                    @endforeach
+                                                                </td>
                                                                 <td>
                                                                     @if ($row->status == 'Proses')
                                                                         <span
@@ -218,16 +280,20 @@
                                                                         <i class="bi bi-eye-fill"></i>
                                                                     </button>
 
-                                                                    <button type="button" class="btn btn-warning"
+                                                                    <a href="/tampilkanpesanan/{{ $row->id }}"
+                                                                        class="btn btn-warning"><i
+                                                                            class="bi bi-pencil-square"></i></a>
+
+                                                                    {{-- <button type="button" class="btn btn-warning"
                                                                         data-bs-toggle="modal"
                                                                         data-bs-target="#exampleModalUbah{{ $row->id }}">
                                                                         <i class="bi bi-pencil-square"></i>
-                                                                    </button>
+                                                                    </button> --}}
 
                                                                     <a href="{{ route('deletepesanan', $row->id) }}"
                                                                         class="btn btn-danger delete" id="delete"
                                                                         data-id="{{ $row->id }}"
-                                                                        data-nama="{{ $row->namabarang }}"><i
+                                                                        data-nama="{{ $row->kdpsn }}"><i
                                                                             class="bi bi-trash3"></i></a>
                                                                 </td>
 
@@ -275,74 +341,29 @@
                                 </div>
                                 <div class="col-md-6 col-12">
                                     <div class="form-group">
+                                        <label for="exampleInputEmail1" class="form-label">Kurir</label>
+                                        <input type="text" name="id_kurirs" class="form-control"
+                                            id="exampleInputEmail1" aria-describedby="emailHelp"
+                                            value="{{ $row->kurirs->nama }}" readonly>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-12">
+                                    <div class="form-group">
                                         <label for="exampleInputEmail1" class="form-label">Nama Pelanggan</label>
                                         <input type="text" name="id_pelanggans" class="form-control"
                                             id="exampleInputEmail1" aria-describedby="emailHelp"
                                             value="{{ $row->pelanggans->namapelanggan }}" readonly>
                                     </div>
                                 </div>
-                                {{-- <div class="col-md-6 col-12">
-                                    <div class="form-group">
-                                        <label for="exampleInputEmail1" class="form-label">Nama
-                                            Barang</label>
-                                        <input type="text" name="namabarang" class="form-control"
-                                            id="exampleInputEmail1" aria-describedby="emailHelp"
-                                            value="{{ $row->namabarang }}" readonly>
-                                    </div>
-                                </div> --}}
-                                <div class="col-md-4 col-12">
-                                    <div id="" class="form-group">
-                                        <label for="exampleInputEmail1" class="form-label">Nama
-                                            Barang</label>
-                                        <input type="text" name="namabarang"
-                                            class="form-control @error('namabarang')
-                                        is-invalid @enderror"
-                                            id="exampleInputEmail1" aria-describedby="emailHelp"
-                                            value="{{ $row->namabarang }}" readonly>
-                                        <div class="invalid-feedback">
-                                            Masukan nama barang dengan benar.
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-1 col-12 text-center">
-                                    <div id="" class="form-group">
-                                        <label for="exampleInputEmail1" class="form-label">Jumlah</label>
-                                        <input type="text" name="jumlah"
-                                            class="form-control @error('jumlah')
-                                        is-invalid @enderror"
-                                            id="exampleInputEmail1" aria-describedby="emailHelp"
-                                            value="{{ $row->jumlah }}" readonly>
-                                        <div class="invalid-feedback">
-                                            Masukan nama barang dengan benar.
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-1 mt-1 col-12">
-                                    <div id="" class="form-group ">
-                                        {{-- <label for="exampleInputEmail1"
-                                            class="form-label">Tambah</label> --}}
-                                        <button type="text" name="namabarang" class="btn mt-3"
-                                            id="exampleInputEmail1" aria-describedby="emailHelp"><i
-                                                class="bi bi-plus-square-fill fs-2 align-center"></i>
-                                            <div class="invalid-feedback">
-                                                Masukan nama barang dengan benar.
-                                            </div>
-                                    </div>
-                                </div>
                                 <div class="col-md-6 col-12">
                                     <div class="form-group">
-                                        <label for="exampleInputEmail1" class="form-label">Alamat Lengkap</label>
-                                        <input type="text" name="id_pelanggans" class="form-control"
+                                        <label for="exampleInputEmail1" class="form-label">Tanggal
+                                            Pesanan Masuk</label>
+                                        <input type="text" name="tgl_krm" class="form-control"
                                             id="exampleInputEmail1" aria-describedby="emailHelp"
-                                            value="{{ $row->pelanggans->alamatpelanggan }}" readonly>
+                                            value="{{ $row->tgl_msk }}" readonly>
                                     </div>
                                 </div>
-                                {{-- <div class="col-md-6 col-12">
-                                    <div class="form-group">
-                                        <label for="exampleFormControlTextarea1" class="form-label">Alamat Lengkap</label>
-                                        <textarea class="form-control" name="alamat" id="exampleFormControlTextarea1" rows="3" readonly>{{ $row->alamat }}</textarea>
-                                    </div>
-                                </div> --}}
                                 <div class="col-md-6 col-12">
                                     <div class="form-group">
                                         <label for="exampleInputEmail1" class="form-label">Tanggal
@@ -352,14 +373,17 @@
                                             value="{{ $row->tgl_krm }}" readonly>
                                     </div>
                                 </div>
+
                                 <div class="col-md-6 col-12">
                                     <div class="form-group">
-                                        <label for="exampleInputEmail1" class="form-label">Kurir</label>
-                                        <input type="text" name="id_kurirs" class="form-control"
+                                        <label for="exampleInputEmail1" class="form-label">Alamat Lengkap</label>
+                                        <input type="text" name="id_pelanggans" class="form-control"
                                             id="exampleInputEmail1" aria-describedby="emailHelp"
-                                            value="{{ $row->kurirs->nama }}" readonly>
+                                            value="{{ $row->pelanggans->alamatpelanggan }}" readonly>
                                     </div>
                                 </div>
+
+
                                 <div class="col-md-6 col-12">
                                     <div class="form-group">
                                         <label for="exampleInputEmail1" class="form-label">Tanggal
@@ -367,6 +391,41 @@
                                         <input type="text" name="tgl_trm" class="form-control"
                                             id="exampleInputEmail1" aria-describedby="emailHelp"
                                             value="{{ $row->tgl_trm }}" readonly>
+                                    </div>
+                                </div>
+                                @php
+                                    $items = explode(',', $row->namabarang);
+                                    $qty = explode(',', $row->jumlah);
+                                @endphp
+                                <div class="col-md-4 col-12">
+                                    <div id="" class="form-group">
+                                        <label for="exampleInputEmail1" class="form-label">Nama
+                                            Barang</label>
+                                        @foreach ($items as $item)
+                                            <div class="form-floating">
+                                                <input type="text" id="namabarang" value="{{ $item }}"
+                                                    class="form-control">
+                                                <label for="namabarang">Nama Barang</label>
+                                            </div>
+                                        @endforeach
+                                        <div class="invalid-feedback">
+                                            Masukan nama barang dengan benar.
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-2 col-12 text-center">
+                                    <div id="" class="form-group">
+                                        <label for="exampleInputEmail1" class="form-label">Jumlah</label>
+                                        @foreach ($qty as $qty)
+                                            <div class="form-floating">
+                                                <input type="text" id="jumlah" class="form-control"
+                                                    value="{{ $qty }}">
+                                                <label for="jumlah">Jumlah</label>
+                                            </div>
+                                        @endforeach
+                                        <div class="invalid-feedback">
+                                            Masukan nama barang dengan benar.
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="col-md-6 col-12">
@@ -377,6 +436,7 @@
                                             value="{{ $row->status }}" readonly>
                                     </div>
                                 </div>
+
                                 <div class="col-12 d-flex justify-content-end">
                                     <a class="btn btn-light-secondary me-1 mb-1" href="/pesanan"
                                         role="button">Kembali</a>
@@ -415,11 +475,20 @@
                                 </div>
                                 <div class="col-md-6 col-12">
                                     <div class="form-group">
-                                        <label for="exampleInputEmail1" class="form-label">Nama
-                                            Barang</label>
-                                        <input type="text" name="namabarang" class="form-control"
-                                            id="exampleInputEmail1" aria-describedby="emailHelp"
-                                            value="{{ $row->namabarang }}">
+                                        <label for="exampleInputEmail1" class="form-label">Kurir</label>
+                                        <select class="form-select" name="id_kurirs" aria-label="Default select example">
+
+                                            {{-- <option selected>{{ $row->id_kurirs }}</option> --}}
+                                            @foreach ($datakurir as $datak)
+                                                <option value="{{ $datak->id }}"
+                                                    {{ $datak->id == $row->id_kurirs ? 'selected' : '' }}>
+                                                    {{ $datak->nama }}
+                                                </option>
+                                            @endforeach
+
+
+
+                                        </select>
                                     </div>
                                 </div>
                                 <div class="col-md-6 col-12">
@@ -443,34 +512,6 @@
                                 </div>
                                 <div class="col-md-6 col-12">
                                     <div class="form-group">
-                                        <label for="exampleInputEmail1" class="form-label">Alamat Lengkap</label>
-                                        <select class="form-select" name="id_pelanggans"
-                                            aria-label="Default select example">
-
-                                            {{-- <option selected>{{ $row->id_kurirs }}</option> --}}
-                                            @foreach ($datapelanggan as $datap)
-                                                <option value="{{ $datap->id }}"
-                                                    {{ $datap->id == $row->id_pelanggans ? 'selected' : '' }}>
-                                                    {{ $datap->alamatpelanggan }}
-                                                </option>
-                                            @endforeach
-
-
-
-                                        </select>
-                                        {{-- <input type="text" name="alamatpelanggan" class="form-control"
-                                            id="exampleInputEmail1" aria-describedby="emailHelp"
-                                            value="{{ $row->pelanggans->alamatpelanggan }}"> --}}
-                                    </div>
-                                </div>
-                                {{-- <div class="col-md-6 col-12">
-                                    <div class="form-group">
-                                        <label for="exampleFormControlTextarea1" class="form-label">Alamat Lengkap</label>
-                                        <textarea class="form-control" name="alamatpelanggan" id="exampleFormControlTextarea1" rows="3">{{ $row->alamatpelanggan }}</textarea>
-                                    </div>
-                                </div> --}}
-                                <div class="col-md-6 col-12">
-                                    <div class="form-group">
                                         <label for="exampleInputEmail1" class="form-label">Tanggal
                                             Pengiriman
                                         </label>
@@ -478,24 +519,7 @@
                                             class="form-control mb-3 flatpickr-no-config" value="{{ $row->tgl_krm }}" />
                                     </div>
                                 </div>
-                                <div class="col-md-6 col-12">
-                                    <div class="form-group">
-                                        <label for="exampleInputEmail1" class="form-label">Kurir</label>
-                                        <select class="form-select" name="id_kurirs" aria-label="Default select example">
 
-                                            {{-- <option selected>{{ $row->id_kurirs }}</option> --}}
-                                            @foreach ($datakurir as $datak)
-                                                <option value="{{ $datak->id }}"
-                                                    {{ $datak->id == $row->id_kurirs ? 'selected' : '' }}>
-                                                    {{ $datak->nama }}
-                                                </option>
-                                            @endforeach
-
-
-
-                                        </select>
-                                    </div>
-                                </div>
                                 <div class="col-md-6 col-12">
                                     <div class="form-group">
                                         <label for="exampleInputEmail1" class="form-label">Tanggal
@@ -504,6 +528,49 @@
                                             class="form-control mb-3 flatpickr-no-config" value="{{ $row->tgl_trm }}" />
                                     </div>
                                 </div>
+                                @php
+                                    $pesananku = explode(',', $row->namabarang);
+                                    $jumlahku = explode(',', $row->jumlah);
+                                @endphp
+                                <div class="col-lg-6">
+                                    <div id="orderContainer">
+                                        <div class="order-item">
+                                            <label>Nama Barang</label>
+                                            <div class="row g-3 mb-3">
+                                                <div class="col-md-6">
+                                                    @foreach ($pesananku as $item)
+                                                        <div class="form-floating">
+                                                            <input type="text" class="form-control "
+                                                                name="pesananku[]" id="namabarang" placeholder="Pesanan"
+                                                                value="{{ $item }}" required>
+                                                            <label for="namabarang">Pesanan</label>
+                                                        </div>
+                                                    @endforeach
+
+                                                </div>
+
+                                                <div class="col-md-5">
+                                                    @foreach ($jumlahku as $item)
+                                                        <div class="form-floating">
+                                                            <input type="number" class="form-control" name="jumlahku[]"
+                                                                id="jumlah" placeholder="Jumlah"
+                                                                value="{{ $item }}" required>
+                                                            <label for="jumlah">Jumlah</label>
+                                                        </div>
+                                                    @endforeach
+                                                </div>
+                                                <div class="col-md-1 d-flex align-items-center justify-content-center">
+                                                    <button class="btn btn-primary" onclick="addItem()" type="button"><i
+                                                            class="bi bi-plus-lg"></i></button>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <input id="hasilbarang" name="hasilbarang" class="form-control" type="hidden">
+                                <input id="hasiljumlah" name="hasiljumlah" class="form-control" type="hidden">
+
                                 <div class="col-md-6 col-12">
                                     <div class="form-group">
                                         <label for="exampleInputEmail1" class="form-label">Status</label>
@@ -525,8 +592,14 @@
                                         </select>
                                     </div>
                                 </div>
+                                <div class="col-md-6 col-12">
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1" class="form-label">Alamat Lengkap</label>
+                                        <textarea id="exampleFormControlTextarea1" rows="3" class="form-control" readonly>{{ $row->pelanggans->alamatpelanggan }}</textarea>
+                                    </div>
+                                </div>
                                 <div class="col-12 d-flex justify-content-end">
-                                    <button type="submit" class="btn btn-primary me-2 mb-1">
+                                    <button type="submit" class="btn btn-primary me-1 mb-1" onclick="combineValues()">
                                         Simpan
                                     </button>
                                     <a class="btn btn-light-secondary me-1 mb-1" href="/pesanan" role="button">Batal</a>

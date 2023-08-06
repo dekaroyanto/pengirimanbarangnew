@@ -26,7 +26,7 @@
 
                         </div>
                         <div class="card-content mt-2">
-                            {{ Session::get('halaman_url') }}
+                            {{-- {{ Session::get('halaman_url') }} --}}
                             <div class="row">
                                 <div class="col-md-4 mb-1">
                                     <form action="/kendaraan" method="GET">
@@ -75,6 +75,7 @@
                                                             <th>Jenis</th>
                                                             <th>Merk</th>
                                                             <th>Model</th>
+                                                            <th>Warna</th>
                                                             <th>Aksi</th>
                                                         </tr>
                                                     </thead>
@@ -91,6 +92,7 @@
                                                                 <td>{{ $row->jenis }}</td>
                                                                 <td>{{ $row->merk }}</td>
                                                                 <td>{{ $row->model }}</td>
+                                                                <td>{{ $row->warna }}</td>
                                                                 <td>
                                                                     <button type="button" class="btn btn-info"
                                                                         data-bs-toggle="modal"
@@ -129,7 +131,7 @@
 
     <!-- Modal Tambah -->
     <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-xl">
+        <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
                     <h1 class="modal-title" id="exampleModalLabel">Data Kendaraan</h1>
@@ -149,74 +151,73 @@
                                                 <div class="form-body">
                                                     <div class="row">
                                                         <div class="col-12">
-                                                            <div>
+                                                            <div class="form-group">
                                                                 <label>Plat Nomor</label>
                                                                 <div class="position-relative">
                                                                     <input type="text" name="platno"
                                                                         class="form-control"
                                                                         placeholder="Masukan Plat Nomor" />
-                                                                    <div class="form-control-icon">
-                                                                        <i class="bi bi-person"></i>
-                                                                    </div>
                                                                 </div>
                                                             </div>
-                                                        </div>
-                                                        <div class="col-12">
-                                                            <div class="form-group has-icon-left">
-                                                                <label for="first-name-icon">Jenis Kendaraan</label>
-                                                                <select name="jenis" class="form-select">
-                                                                    <option value="motor">Motor</option>
-                                                                    <option value="mobil">Mobil</option>
-                                                                </select>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-12">
-                                                            <div class="form-group has-icon-left">
-                                                                <label for="first-name-icon">Merk</label>
-                                                                <div class="position-relative">
-                                                                    <input type="text" name="merk"
-                                                                        class="form-control" placeholder="Masukan Merk"
-                                                                        id="first-name-icon" />
-                                                                    <div class="form-control-icon">
-                                                                        <i class="bi bi-person"></i>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-12">
-                                                            <div class="form-group has-icon-left">
-                                                                <label for="first-name-icon">Model</label>
-                                                                <div class="position-relative">
-                                                                    <input type="text" name="model"
-                                                                        class="form-control" placeholder="Masukan Model"
-                                                                        id="first-name-icon" />
-                                                                    <div class="form-control-icon">
-                                                                        <i class="bi bi-person"></i>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-12 d-flex justify-content-end">
-                                                            <button type="submit" class="btn btn-primary me-1 mb-1">
-                                                                Submit
-                                                            </button>
-                                                            <a href="/datakendaraan"
-                                                                class="btn btn-light-secondary me-1 mb-1"
-                                                                role="button">Batal</a>
                                                         </div>
                                                     </div>
+                                                    <div class="col-12">
+                                                        <div class="form-group">
+                                                            <label for="first-name-icon">Jenis Kendaraan</label>
+                                                            <select name="jenis" class="form-select">
+                                                                <option value="motor">Motor</option>
+                                                                <option value="mobil">Mobil</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12">
+                                                        <div class="form-group">
+                                                            <label>Merk</label>
+                                                            <div class="position-relative">
+                                                                <input type="text" name="merk" class="form-control"
+                                                                    placeholder="Masukan Merk" id="first-name-icon" />
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12">
+                                                        <div class="form-group">
+                                                            <label>Model</label>
+                                                            <div class="position-relative">
+                                                                <input type="text" name="model" class="form-control"
+                                                                    placeholder="Masukan Model" id="first-name-icon" />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12">
+                                                        <div class="form-group">
+                                                            <label>Warna</label>
+                                                            <div class="position-relative">
+                                                                <input type="text" name="warna" class="form-control"
+                                                                    placeholder="Masukan Model" id="first-name-icon" />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12 d-flex justify-content-end">
+                                                        <button type="submit" class="btn btn-primary me-1 mb-1">
+                                                            Submit
+                                                        </button>
+                                                        <a href="/datakendaraan" class="btn btn-light-secondary me-1 mb-1"
+                                                            role="button">Batal</a>
+                                                    </div>
                                                 </div>
-                                            </form>
                                         </div>
+                                        </form>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </section>
-                    <!-- // Basic multiple Column Form section end -->
                 </div>
+                </section>
+                <!-- // Basic multiple Column Form section end -->
             </div>
         </div>
+    </div>
     </div>
     <!-- End Modal Tambah -->
 
@@ -231,27 +232,52 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <form action="/updatepesanan/{{ $row->id }}" method="POST" enctype="multipart/form-data">
+                        <form action="/updatekendaraan/{{ $row->id }}" method="POST"
+                            enctype="multipart/form-data">
                             @csrf
                             <div class="row">
                                 <div class="col-md-6 col-12">
                                     <div class="form-group">
-                                        <label for="exampleInputEmail1" class="form-label">Nama kendaraan</label>
-                                        <input type="text" name="nama" class="form-control"
+                                        <label for="exampleInputEmail1" class="form-label">Plat Nomor</label>
+                                        <input type="text" name="platno" class="form-control"
                                             id="exampleInputEmail1" aria-describedby="emailHelp"
-                                            value="{{ $row->nama }}" readonly>
+                                            value="{{ $row->platno }}" readonly>
                                     </div>
                                 </div>
                                 <div class="col-md-6 col-12">
                                     <div class="form-group">
-                                        <label for="exampleInputEmail1" class="form-label">NIK</label>
-                                        <input type="text" name="nik" class="form-control"
+                                        <label for="exampleInputEmail1" class="form-label">Jenis</label>
+                                        <input type="text" name="jenis" class="form-control"
                                             id="exampleInputEmail1" aria-describedby="emailHelp"
-                                            value="{{ $row->nik }}" readonly>
+                                            value="{{ $row->jenis }}" readonly>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-12">
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1" class="form-label">Merk</label>
+                                        <input type="text" name="merk" class="form-control"
+                                            id="exampleInputEmail1" aria-describedby="emailHelp"
+                                            value="{{ $row->merk }}" readonly>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-12">
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1" class="form-label">Model</label>
+                                        <input type="text" name="jenis" class="form-control"
+                                            id="exampleInputEmail1" aria-describedby="emailHelp"
+                                            value="{{ $row->model }}" readonly>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-12">
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1" class="form-label">Warna</label>
+                                        <input type="text" name="warna" class="form-control"
+                                            id="exampleInputEmail1" aria-describedby="emailHelp"
+                                            value="{{ $row->warna }}" readonly>
                                     </div>
                                 </div>
                                 <div class="col-12 d-flex justify-content-end">
-                                    <a class="btn btn-light-secondary me-1 mb-1" href="/pesanan"
+                                    <a class="btn btn-light-secondary me-1 mb-1" href="/datakendaraan"
                                         role="button">Kembali</a>
                                 </div>
                             </div>

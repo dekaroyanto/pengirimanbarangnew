@@ -174,7 +174,7 @@
                                                             <div class="form-group has-icon-left">
                                                                 <label for="first-name-icon">Jenis Kelamin</label>
                                                                 <div class="position-relative">
-                                                                    <select name="kelamin" id="">
+                                                                    <select name="kelamin" class="form-select">
                                                                         <option value="Laki-Laki">Laki-laki</option>
                                                                         <option value="Perempuan">Perempuan</option>
                                                                     </select>
@@ -215,7 +215,7 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <form action="/updatepesanan/{{ $row->id }}" method="POST" enctype="multipart/form-data">
+                        <form action="/updatekurir/{{ $row->id }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             <div class="row">
                                 <div class="col-md-6 col-12">
