@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Kurir;
+use App\Models\Kendaraan;
 use App\Models\Pelanggan;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -23,5 +24,10 @@ class Pesanan extends Model
     {
         // return $this->belongsTo(Pelanggan::class, 'id_pelanggans', 'id');
         return $this->belongsTo(Pelanggan::class, 'id_pelanggans', 'id');
+    }
+
+    public function kendaraans()
+    {
+        return $this->belongsTo(Kendaraan::class, 'id_kendaraans', 'id');
     }
 }

@@ -165,8 +165,8 @@
                                                         <div class="form-group">
                                                             <label for="first-name-icon">Jenis Kendaraan</label>
                                                             <select name="jenis" class="form-select">
-                                                                <option value="motor">Motor</option>
-                                                                <option value="mobil">Mobil</option>
+                                                                <option value="Motor">Motor</option>
+                                                                <option value="Mobil">Mobil</option>
                                                             </select>
                                                         </div>
                                                     </div>
@@ -194,7 +194,7 @@
                                                             <label>Warna</label>
                                                             <div class="position-relative">
                                                                 <input type="text" name="warna" class="form-control"
-                                                                    placeholder="Masukan Model" id="first-name-icon" />
+                                                                    placeholder="Masukan Warna" id="first-name-icon" />
                                                             </div>
                                                         </div>
                                                     </div>
@@ -296,7 +296,7 @@
             <div class="modal-dialog modal-xl">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Edit Data kendaraan</h5>
+                        <h5 class="modal-title" id="exampleModalLabel">Detail kendaraan</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
@@ -306,25 +306,69 @@
                             <div class="row">
                                 <div class="col-md-6 col-12">
                                     <div class="form-group">
-                                        <label for="exampleInputEmail1" class="form-label">Nama kendaraan</label>
-                                        <input type="text" name="nama" class="form-control"
+                                        <label for="exampleInputEmail1" class="form-label">Plat Nomor</label>
+                                        <input type="text" name="platno" class="form-control"
                                             id="exampleInputEmail1" aria-describedby="emailHelp"
-                                            value="{{ $row->nama }}">
+                                            value="{{ $row->platno }}">
                                     </div>
                                 </div>
                                 <div class="col-md-6 col-12">
                                     <div class="form-group">
-                                        <label for="exampleInputEmail1" class="form-label">NIK</label>
-                                        <input type="text" name="nik" class="form-control"
+                                        <label for="exampleInputEmail1" class="form-label">Jenis</label>
+                                        <select class="form-select" name="jenis" aria-label="Default select example">
+
+                                            <!-- <option option>Pilih Status</option> -->
+                                            <option selected>{{ $row->jenis }}</option>
+
+                                            @if ($row->jenis == 'Mobil')
+                                                <option value="Motor">Motor</option>
+                                            @else
+                                                <option value="Mobil">Mobil</option>
+                                            @endif
+
+                                            {{-- @if ($data->status == 'Proses')
+                                                <option value="Selesai">Selesai</option>
+                                                <option value="Dikirim">Dikirim</option>
+                                            @elseif ($data->status == 'Dikirim')
+                                                <option value="Proses">Proses</option>
+                                                <option value="Selesai">Selesai</option>
+                                            @elseif ($data->status == 'Selesai')
+                                                <option value="Proses">Proses</option>
+                                                <option value="Dikirim">Dikirim</option>
+                                            @endif --}}
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-12">
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1" class="form-label">Merk</label>
+                                        <input type="text" name="merk" class="form-control"
                                             id="exampleInputEmail1" aria-describedby="emailHelp"
-                                            value="{{ $row->nik }}">
+                                            value="{{ $row->merk }}">
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-12">
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1" class="form-label">Model</label>
+                                        <input type="text" name="model" class="form-control"
+                                            id="exampleInputEmail1" aria-describedby="emailHelp"
+                                            value="{{ $row->model }}">
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-12">
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1" class="form-label">Warna</label>
+                                        <input type="text" name="warna" class="form-control"
+                                            id="exampleInputEmail1" aria-describedby="emailHelp"
+                                            value="{{ $row->warna }}">
                                     </div>
                                 </div>
                                 <div class="col-12 d-flex justify-content-end">
                                     <button type="submit" class="btn btn-primary me-2 mb-1">
                                         Simpan
                                     </button>
-                                    <a class="btn btn-light-secondary me-1 mb-1" href="/pesanan" role="button">Batal</a>
+                                    <a class="btn btn-light-secondary me-1 mb-1" href="/datakendaraan"
+                                        role="button">Kembali</a>
                                 </div>
                             </div>
                         </form>

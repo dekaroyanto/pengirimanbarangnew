@@ -1,65 +1,6 @@
 @extends('layout.mazer')
 
 @section('inijs')
-    <script>
-        function addItem() {
-            var orderContainer = document.getElementById("orderContainer");
-            var orderItem = document.createElement("div");
-            orderItem.className = "order-item";
-            var html = `
-        <div class="row g-3 mb-3">
-            <div class="col-md-6">
-                <div class="form-floating">
-                    <input type="text" class="form-control" name="item[]" id="namabarang" placeholder="Pesanan">
-                    <label for="namabarang">Pesanan</label>
-                </div>
-            </div>
-            <div class="col-md-5">
-                <div class="form-floating">
-                    <input type="number" class="form-control" name="quantity[]" id="jumlah" placeholder="Jumlah">
-                        <label for="jumlah">Jumlah</label>
-                </div>
-            </div>
-                <div class="col-md-1 d-flex align-items-center justify-content-center">
-                    <button class="btn btn-primary btn-sm" onclick="removeItem(this)"><i class="bi bi-dash""></i></button>
-                </div>
-            </div>
-        </div>
-`;
-            orderItem.innerHTML = html;
-            orderContainer.appendChild(orderItem);
-        }
-
-        function removeItem(button) {
-            var orderItem = button.closest(".order-item");
-            var orderContainer = orderItem.parentNode;
-            orderContainer.removeChild(orderItem);
-        }
-
-        function captureData() {
-            var orderItems = document.getElementsByClassName("order-item");
-            var table = document.getElementById("orderTable");
-
-            var itemData = "";
-            var quantityData = "";
-            var track_order = "";
-
-            for (var i = 0; i < orderItems.length; i++) {
-                // var itemInput = orderItems[i].getElementsByTagName("input")[0].value;
-                // var quantityInput = orderItems[i].getElementsByTagName("input")[1].value;
-                var quantityInput = orderItems[i].querySelector("input[name='quantity[]']").value;
-                var itemInput = orderItems[i].querySelector("input[name='item[]']").value;
-
-                itemData += itemInput + ",";
-                quantityData += quantityInput + ",";
-                track_order += "masuk" + ",";
-            }
-
-            document.getElementById("hasilbarang").value = itemData.slice(0, -1);
-            document.getElementById("hasiljumlah").value = quantityData.slice(0, -1);
-            // console.log(document.getElementById("hasiljumlah"))
-        }
-    </script>
 @endsection
 
 @section('content')
@@ -123,24 +64,7 @@
                                                         {{ $datap->namapelanggan }}
                                                     </option>
                                                 @endforeach
-
-
-
                                             </select>
-
-                                            {{-- <select class="choices form-select" name="nama_pelanggan"
-                                                            aria-label="Default select example">
-
-
-                                                            @foreach ($datapelanggan as $datap)
-                                                                <option value="{{ $datap->id }}">
-                                                                    {{ $datap->namapelanggan }}
-                                                                </option>
-                                                            @endforeach
-
-
-
-                                                        </select> --}}
                                         </div>
                                     </div>
                                     <div class="col-md-6 col-12">
@@ -156,103 +80,6 @@
                                             </div>
                                         </div>
                                     </div>
-                                    @php
-                                        $items = explode(',', $data->namabarang);
-                                        $qty = explode(',', $data->jumlah);
-                                    @endphp
-                                    <div class="col-lg-6">
-                                        <div id="orderContainer">
-                                            <div class="order-item">
-                                                <label>Nama Barang</label>
-                                                <div class="row g-3 mb-3">
-                                                    <div class="col-md-6">
-                                                        @foreach ($items as $item)
-                                                            <div class="form-floating">
-                                                                <input type="text" id="namabarang"
-                                                                    value="{{ $item }}" class="form-control">
-                                                                <label for="namabarang">Nama Barang</label>
-                                                            </div>
-                                                        @endforeach
-                                                    </div>
-                                                    <div class="col-md-5">
-                                                        @foreach ($qty as $qty)
-                                                            <div class="form-floating">
-                                                                <input type="text" id="jumlah" class="form-control"
-                                                                    value="{{ $qty }}">
-                                                                <label for="jumlah">Jumlah</label>
-                                                            </div>
-                                                        @endforeach
-                                                    </div>
-                                                    <div class="col-md-1 d-flex align-items-center justify-content-center">
-                                                        <button class="btn btn-primary" onclick="addItem()"
-                                                            type="button"><i class="bi bi-plus-lg"></i></button>
-                                                    </div>
-
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <input id="hasilbarang" name="hasilbarang" class="form-control" type="">
-                                    <input id="hasiljumlah" name="hasiljumlah" class="form-control" type="">
-                                    <button class="submit" type="button" onclick="">test</button>
-
-
-                                    {{-- AWAL PESANAN --}}
-                                    {{-- <div class="col-md-4 col-12">
-                                                    <div class="form-group">
-                                                        <label for="exampleInputEmail1" class="form-label">Nama
-                                                            Barang</label>
-                                                        <input type="text" name="namabarang"
-                                                            class="form-control @error('namabarang')
-                                                        is-invalid @enderror"
-                                                            id="exampleInputEmail1" aria-describedby="emailHelp"
-                                                            value="{{ old('namabarang') }}">
-                                                        <div class="invalid-feedback">
-                                                            Masukan nama barang dengan benar.
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-1 col-12 text-center">
-                                                    <div id="" class="form-group">
-                                                        <label for="exampleInputEmail1"
-                                                            class="form-label">Jumlah</label>
-                                                        <input type="text" name="jumlah"
-                                                            class="form-control @error('jumlah')
-                                                        is-invalid @enderror"
-                                                            id="exampleInputEmail1" aria-describedby="emailHelp"
-                                                            value="{{ old('jumlah') }}">
-                                                        <div class="invalid-feedback">
-                                                            Masukan nama barang dengan benar.
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-1 mt-1 col-12">
-                                                    <div id="" class="form-group ">
-                                                        <label for="exampleInputEmail1"
-                                                            class="form-label">Tambah</label>
-                                                        <button type="text" name="namabarang" class="btn mt-3"
-                                                            id="exampleInputEmail1" aria-describedby="emailHelp"><i
-                                                                class="bi bi-plus-square-fill fs-2 align-center"></i>
-                                                            <div class="invalid-feedback">
-                                                                Masukan nama barang dengan benar.
-                                                            </div>
-                                                    </div>
-                                                </div> --}}
-                                    {{-- AKHIR PESANAN --}}
-
-                                    {{-- <div class="col-md-6 col-12">
-                                                    <div class="form-group">
-                                                        <label for="exampleFormControlTextarea1"
-                                                            class="form-label">Alamat Lengkap</label>
-                                                        <textarea
-                                                            class="form-control @error('alamat') is-invalid
-                                                        @enderror"
-                                                            name="alamat" id="exampleFormControlTextarea1" rows="3"></textarea>
-                                                        <div class="invalid-feedback">
-                                                            Masukan alamat dengan benar.
-                                                        </div>
-                                                    </div>
-                                                </div> --}}
 
 
                                     <div class="col-md-6 col-12">
@@ -267,14 +94,22 @@
                                     <div class="col-md-6 col-12">
                                         <div class="form-group">
                                             <label for="exampleInputEmail1" class="form-label">Status</label>
-                                            <input type="text" name="status" class="form-control"
-                                                id="exampleInputEmail1" aria-describedby="emailHelp" value="proses"
-                                                readonly>
-                                            {{-- <select class="form-select" name="status"
-                                                        aria-label="Default select example">
-                                                        <option value="Proses">Proses</option>
-                                                        <option value="Selesai">Selesai</option>
-                                                    </select> --}}
+                                            <select class="form-select" name="status" aria-label="Default select example">
+
+                                                <!-- <option option>Pilih Status</option> -->
+                                                <option selected>{{ $data->status }}</option>
+
+                                                @if ($data->status == 'Proses')
+                                                    <option value="Selesai">Selesai</option>
+                                                    <option value="Dikirim">Dikirim</option>
+                                                @elseif ($data->status == 'Dikirim')
+                                                    <option value="Proses">Proses</option>
+                                                    <option value="Selesai">Selesai</option>
+                                                @elseif ($data->status == 'Selesai')
+                                                    <option value="Proses">Proses</option>
+                                                    <option value="Dikirim">Dikirim</option>
+                                                @endif
+                                            </select>
                                         </div>
                                     </div>
                                     <div class="col-12 d-flex justify-content-end">

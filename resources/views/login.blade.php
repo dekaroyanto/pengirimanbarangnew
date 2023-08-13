@@ -17,8 +17,7 @@
                     <form action="/loginproses" method="post" autocomplete="off" class="sign-in-form">
                         @csrf
                         <div class="logo">
-                            <img src="{{ asset('loginform/img/logo.png') }}" alt="easyclass" />
-                            <h4>CV Firmos</h4>
+                            <img src="{{ asset('loginform/img/logofirmos.png') }}" alt="easyclass" />
                         </div>
 
                         <div class="heading">
@@ -27,12 +26,14 @@
 
                         <div class="actual-form">
                             <div class="input-wrap">
-                                <input type="text" name="username" minlength="4" class="input-field" autocomplete="off" required />
+                                <input type="text" name="username" minlength="4" class="input-field"
+                                    autocomplete="off" required />
                                 <label>Username</label>
                             </div>
 
                             <div class="input-wrap">
-                                <input type="password" name="password" minlength="4" class="input-field" autocomplete="off" required />
+                                <input type="password" name="password" minlength="4" class="input-field"
+                                    autocomplete="off" required />
                                 <label>Password</label>
                             </div>
 

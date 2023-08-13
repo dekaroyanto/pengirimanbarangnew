@@ -28,6 +28,10 @@
 
     <link rel="stylesheet" href="{{ asset('mazer/assets/extensions/choices.js/public/assets/styles/choices.css') }}" />
 
+    <link rel="stylesheet" href="{{ asset('mazer/assets/extensions/simple-datatables/style.css') }}" />
+
+    <link rel="stylesheet" href="{{ asset('mazer/assets/compiled/css/table-datatable.css') }}" />
+
     @yield('inihead')
     @yield('css2')
 </head>
@@ -82,21 +86,23 @@
                 <div class="sidebar-menu">
                     <ul class="menu">
                         <li class="sidebar-title">Menu</li>
+                        @if (auth()->user()->role == 'admin')
+                            <li class="{{ request()->is('/') ? 'sidebar-item active' : '' }}">
+                                <a href="/" class="sidebar-link">
+                                    <i class="bi bi-grid-fill"></i>
+                                    <span>Dashboard</span>
+                                </a>
+                            </li>
+                        @endif
 
-                        <li class="{{ request()->is('/') ? 'sidebar-item active' : '' }}">
-                            <a href="/" class="sidebar-link">
-                                <i class="bi bi-grid-fill"></i>
-                                <span>Dashboard</span>
-                            </a>
-                        </li>
-
-                        <li class="{{ request()->is('datapelanggan') ? 'sidebar-item active' : '' }}">
-                            <a href="/datapelanggan" class="sidebar-link" style="text-decoration: none">
-                                <i class="bi bi-people-fill"></i>
-                                <span>Data Pelanggan</span>
-                            </a>
-                        </li>
-
+                        @if (auth()->user()->role == 'admin')
+                            <li class="{{ request()->is('datapelanggan') ? 'sidebar-item active' : '' }}">
+                                <a href="/datapelanggan" class="sidebar-link" style="text-decoration: none">
+                                    <i class="bi bi-people-fill"></i>
+                                    <span>Data Pelanggan</span>
+                                </a>
+                            </li>
+                        @endif
                         <li
                             class="sidebar-item has-sub {{ request()->is('pesanan', 'tambahpesanan') ? 'active' : '' }}">
                             <a href="/pesanan" class="sidebar-link">
@@ -110,51 +116,43 @@
                                         <span>Data Pesanan</span>
                                     </a>
                                 </li>
-                                <li class="submenu-item {{ request()->is('tambahpesanan') ? 'active' : '' }}">
-                                    <a href="/tambahpesanan" class="submenu-link"
-                                        style="text-decoration: none">Tambah Pesanan</a>
-                                </li>
 
-                                <li class="submenu-item">
-                                    <a href="layout-vertical-1-column.html" class="submenu-link">1 Column</a>
-                                </li>
-
-                                <li class="submenu-item">
-                                    <a href="layout-vertical-navbar.html" class="submenu-link">Vertical Navbar</a>
-                                </li>
-
-                                <li class="submenu-item">
-                                    <a href="layout-rtl.html" class="submenu-link">RTL Layout</a>
-                                </li>
-
-                                <li class="submenu-item">
-                                    <a href="layout-horizontal.html" class="submenu-link">Horizontal Menu</a>
-                                </li>
+                                @if (auth()->user()->role == 'admin')
+                                    <li class="submenu-item {{ request()->is('tambahpesanan') ? 'active' : '' }}">
+                                        <a href="/tambahpesanan" class="submenu-link"
+                                            style="text-decoration: none">Tambah Pesanan</a>
+                                    </li>
+                                @endif
                             </ul>
                         </li>
 
 
+                        @if (auth()->user()->role == 'admin')
+                            <li class="{{ request()->is('datakurir') ? 'sidebar-item active' : '' }}">
+                                <a href="/datakurir" class="sidebar-link">
+                                    <i class="bi bi-person-fill-gear"></i>
+                                    <span>Kurir</span>
+                                </a>
+                            </li>
+                        @endif
 
-                        <li class="{{ request()->is('datakurir') ? 'sidebar-item active' : '' }}">
-                            <a href="/datakurir" class="sidebar-link">
-                                <i class="bi bi-person-fill-gear"></i>
-                                <span>Kurir</span>
-                            </a>
-                        </li>
+                        @if (auth()->user()->role == 'admin')
+                            <li class="{{ request()->is('datakendaraan') ? 'sidebar-item active' : '' }}">
+                                <a href="/datakendaraan" class="sidebar-link">
+                                    <i class="bi bi-car-front-fill"></i>
+                                    <span>Kendaraan</span>
+                                </a>
+                            </li>
+                        @endif
 
-                        <li class="{{ request()->is('datakendaraan') ? 'sidebar-item active' : '' }}">
-                            <a href="/datakendaraan" class="sidebar-link">
-                                <i class="bi bi-car-front-fill"></i>
-                                <span>Kendaraan</span>
-                            </a>
-                        </li>
-
-                        <li class="{{ request()->is('register') ? 'sidebar-item active' : '' }}">
-                            <a href="/register" class="sidebar-link">
-                                <i class="bi bi-person-fill-add"></i>
-                                <span>Tambah Akun</span>
-                            </a>
-                        </li>
+                        @if (auth()->user()->role == 'admin')
+                            <li class="{{ request()->is('register') ? 'sidebar-item active' : '' }}">
+                                <a href="/register" class="sidebar-link">
+                                    <i class="bi bi-person-fill-add"></i>
+                                    <span>Tambah Akun</span>
+                                </a>
+                            </li>
+                        @endif
                     </ul>
                 </div>
             </div>
@@ -368,6 +366,12 @@
 
     <script src="{{ asset('mazer/assets/extensions/flatpickr/flatpickr.min.js') }} "></script>
     <script src="{{ asset('mazer/assets/static/js/pages/date-picker.js') }} "></script>
+
+    <script src="{{ asset('mazer/assets/extensions/simple-datatables/umd/simple-datatables.js') }}"></script>
+    <script src="{{ asset('mazer/assets/static/js/pages/simple-datatables.js') }}"></script>
+
+    <script src="{{ asset('mazer/assets/static/js/components/dark.js') }}"></script>
+
 
     <!-- Option 1: Bootstrap Bundle with Popper -->
 

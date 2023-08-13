@@ -79,8 +79,10 @@ form.sign-up-form {
 }
 
 .logo img {
-    width: 27px;
-    margin-right: 0.3rem;
+    width: 250px;
+    /* margin-right: 2rem; */
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .logo h4 {

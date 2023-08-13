@@ -55,7 +55,6 @@
 
                 itemData += itemInput + ",";
                 quantityData += quantityInput + ",";
-                track_order += "masuk" + ",";
             }
 
             document.getElementById("hasilbarang").value = itemData.slice(0, -1);
@@ -130,24 +129,20 @@
                                     </div>
                                     <div class="col-md-6 col-12">
                                         <div class="form-group">
-                                            <label for="exampleInputEmail1" class="form-label ">Tanggal
-                                                Pesanan Masuk
-                                            </label>
-                                            <input type="date" name="tgl_msk"
-                                                class="form-control mb-3 flatpickr-no-config @error('tgl_msk') is-invalid @enderror"
-                                                placeholder="Masukan Tanggal" readonly />
-                                            @error('tgl_msk')
-                                                <div class="invalid-feedback">
-                                                    {{ $message }}
-                                                </div>
-                                            @enderror
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6 col-12">
-                                        <div class="form-group">
-                                            <label for="exampleInputEmail1" class="form-label">Alamat</label>
-                                            {{-- <textarea class="form-control" name="alamat" id="alamat" cols="8" rows="3"></textarea> --}}
-                                            <select name="alamat" id="alamat" class="form-select input"></select>
+                                            <label for="exampleInputEmail1" class="form-label">Kendaraan</label>
+                                            <select class="choices form-select" name="id_kendaraans"
+                                                aria-label="Default select example">
+
+
+                                                @foreach ($datakendaraan as $dataken)
+                                                    <option value="{{ $dataken->id }}">
+                                                        {{ $dataken->platno }} - {{ $dataken->model }}
+                                                    </option>
+                                                @endforeach
+
+
+
+                                            </select>
                                         </div>
                                     </div>
                                     <div class="col-lg-6">
@@ -180,6 +175,22 @@
                                     </div>
                                     <input id="hasilbarang" name="hasilbarang" class="form-control" type="hidden">
                                     <input id="hasiljumlah" name="hasiljumlah" class="form-control" type="hidden">
+                                    <div class="col-md-6 col-12">
+                                        <div class="form-group">
+                                            <label for="exampleInputEmail1" class="form-label ">Tanggal
+                                                Pesanan Masuk
+                                            </label>
+                                            <input type="date" name="tgl_msk"
+                                                class="form-control mb-3 flatpickr-no-config @error('tgl_msk') is-invalid @enderror"
+                                                placeholder="Masukan Tanggal" readonly />
+                                            @error('tgl_msk')
+                                                <div class="invalid-feedback">
+                                                    {{ $message }}
+                                                </div>
+                                            @enderror
+                                        </div>
+                                    </div>
+
                                     <div class="col-md-6 col-12">
                                         <div class="form-group">
                                             <label for="exampleInputEmail1" class="form-label ">Tanggal
@@ -232,41 +243,5 @@
 
         <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 
-        <script>
-            $(document).ready(function() {
-                $('#id_pelanggans').on('change', function() {
-                    var id_pelanggans = $(this).val();
-                    // console.log(kode_kategori);
-                    if (id_pelanggans) {
-                        $.ajax({
-                            url: '/alamat/' + id_pelanggans,
-                            type: 'GET',
-                            data: {
-                                '_token': '{{ csrf_token() }}'
-                            },
-                            dataType: 'json',
-                            success: function(datap) {
-                                // console.log(data);
-                                if (datap) {
-                                    $('#alamat').empty();
-                                    // $('#alamat').append('<option value="">-Pilih-</option>');
-                                    $.each(datap, function(key, pelanggan) {
-                                        $('select[name="alamat"]').append(
-                                            '<option value="' + pelanggan
-                                            .id + '">' +
-                                            pelanggan.alamatpelanggan + '</option>'
-                                        );
-                                    });
-                                } else {
-                                    $('#alamat').empty();
-                                }
-                            }
-                        });
-                    } else {
-                        $('#alamat').empty();
-                    }
-                });
-            });
-        </script>
     </div>
 @endsection

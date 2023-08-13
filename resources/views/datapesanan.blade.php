@@ -122,17 +122,6 @@
 
 @section('content')
     <div class="page-content">
-        {{-- <div class="section">
-            @if ($errors->any())
-                <div class="alert alert-danger">
-                    <ul>
-                        @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                </div>
-            @endif
-        </div> --}}
 
         <section class="section">
             <div class="row" id="table-head">
@@ -145,20 +134,22 @@
 
                         </div>
                         <div class="card-body mt-2">
-                            <div class="row mt-2 ms-2">
-                                <div class="col-md-auto">
-                                    <div class="input-group mb-3">
-                                        <a href="/tambahpesanan" class="btn btn-outline-secondary">Tambah Data</a>
+                            @if (auth()->user()->role == 'admin')
+                                <div class="row mt-2 ms-2">
+                                    <div class="col-md-auto">
+                                        <div class="input-group mb-3">
+                                            <a href="/tambahpesanan" class="btn btn-outline-secondary">Tambah Data</a>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-auto">
+                                        <div class="input-group mb-3">
+                                            <a href="/tambahpesanan" class="btn icon icon-left btn-outline-secondary"
+                                                data-bs-toggle="modal" data-bs-target="#exampleModal2"><i
+                                                    data-feather="file"></i> Download</a>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="col-md-auto">
-                                    <div class="input-group mb-3">
-                                        <a href="/tambahpesanan" class="btn icon icon-left btn-outline-secondary"
-                                            data-bs-toggle="modal" data-bs-target="#exampleModal2"><i
-                                                data-feather="file"></i> Download</a>
-                                    </div>
-                                </div>
-                            </div>
+                            @endif
                             {{-- {{ Session::get('halaman_url') }} --}}
                             <div class="row">
                                 <div class="col-sm-6 mt-4 pb-4">
@@ -198,7 +189,7 @@
                                                 <div class="form-group">
                                                     <label for="first-name-column">Tanggal Akhir</label>
                                                     <input type="date" name="end_date" id="end_date"
-                                                        class="form-control @error('start_date') is-invalid @enderror"
+                                                        class="form-control @error('end_date') is-invalid @enderror"
                                                         placeholder="Masukan Tanggal" aria-label="Recipient's username"
                                                         aria-describedby="button-addon2"
                                                         value="{{ request('end_date') }}" />
@@ -232,6 +223,7 @@
                                                         <tr>
                                                             <th>No</th>
                                                             <th>Kode Pesanan</th>
+                                                            <th>Nama Pelanggan</th>
                                                             <th>Nama Barang</th>
                                                             <th>Jumlah</th>
                                                             <th>Status</th>
@@ -251,6 +243,7 @@
                                                             <tr class="text-center">
                                                                 <th scope="row">{{ $index + $data->firstItem() }}</th>
                                                                 <td>{{ $row->kdpsn }}</td>
+                                                                <td>{{ $row->pelanggans->namapelanggan }}</td>
                                                                 <td>
                                                                     @foreach ($items as $item)
                                                                         <p>{{ $item }}</p>
@@ -289,12 +282,13 @@
                                                                         data-bs-target="#exampleModalUbah{{ $row->id }}">
                                                                         <i class="bi bi-pencil-square"></i>
                                                                     </button> --}}
-
-                                                                    <a href="{{ route('deletepesanan', $row->id) }}"
-                                                                        class="btn btn-danger delete" id="delete"
-                                                                        data-id="{{ $row->id }}"
-                                                                        data-nama="{{ $row->kdpsn }}"><i
-                                                                            class="bi bi-trash3"></i></a>
+                                                                    @if (auth()->user()->role == 'admin')
+                                                                        <a href="{{ route('deletepesanan', $row->id) }}"
+                                                                            class="btn btn-danger delete" id="delete"
+                                                                            data-id="{{ $row->id }}"
+                                                                            data-nama="{{ $row->kdpsn }}"><i
+                                                                                class="bi bi-trash3"></i></a>
+                                                                    @endif
                                                                 </td>
 
                                                             </tr>
@@ -315,6 +309,84 @@
     </div>
     </section>
     </div>
+
+    <section class="section">
+        <div class="card">
+            <div class="card-header">Simple Datatable</div>
+            <div class="card-body">
+                <table class="table table-striped" id="table1">
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Kode Pesanan</th>
+                            <th>Nama Pelanggan</th>
+                            <th>Nama Barang</th>
+                            <th>Jumlah</th>
+                            <th>Status</th>
+                            <th>Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @php
+                            $no = 1;
+                        @endphp
+
+                        @foreach ($data as $index => $row)
+                            @php
+                                $items = explode(',', $row->namabarang);
+                                $qty = explode(',', $row->jumlah);
+                            @endphp
+                            <tr class="text-center">
+                                <th scope="row">{{ $index + $data->firstItem() }}</th>
+                                <td>{{ $row->kdpsn }}</td>
+                                <td>{{ $row->pelanggans->namapelanggan }}</td>
+                                <td>
+                                    @foreach ($items as $item)
+                                        <p>{{ $item }}</p>
+                                    @endforeach
+                                </td>
+                                <td>
+                                    @foreach ($qty as $qty)
+                                        <p>{{ $qty }}</p>
+                                    @endforeach
+                                </td>
+                                <td>
+                                    @if ($row->status == 'Proses')
+                                        <span class="badge bg-warning">{{ $row->status }}</span>
+                                    @elseif ($row->status == 'Dikirim')
+                                        <span class="badge bg-info">{{ $row->status }}</span>
+                                    @elseif ($row->status == 'Selesai')
+                                        <span class="badge bg-success">{{ $row->status }}</span>
+                                    @endif
+                                </td>
+                                <td>
+                                    <button type="button" class="btn btn-info" data-bs-toggle="modal"
+                                        data-bs-target="#exampleModalDetail{{ $row->id }}">
+                                        <i class="bi bi-eye-fill"></i>
+                                    </button>
+
+                                    <a href="/tampilkanpesanan/{{ $row->id }}" class="btn btn-warning"><i
+                                            class="bi bi-pencil-square"></i></a>
+
+                                    {{-- <button type="button" class="btn btn-warning"
+                                        data-bs-toggle="modal"
+                                        data-bs-target="#exampleModalUbah{{ $row->id }}">
+                                        <i class="bi bi-pencil-square"></i>
+                                    </button> --}}
+                                    @if (auth()->user()->role == 'admin')
+                                        <a href="{{ route('deletepesanan', $row->id) }}" class="btn btn-danger delete"
+                                            id="delete" data-id="{{ $row->id }}"
+                                            data-nama="{{ $row->kdpsn }}"><i class="bi bi-trash3"></i></a>
+                                    @endif
+                                </td>
+
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
 
     <!-- Modal Detail -->
     @foreach ($data as $index => $row)
@@ -357,6 +429,23 @@
                                 </div>
                                 <div class="col-md-6 col-12">
                                     <div class="form-group">
+                                        <label for="exampleInputEmail1" class="form-label">Kendaraan</label>
+                                        <input type="text" name="id_kendaraans" class="form-control"
+                                            id="exampleInputEmail1" aria-describedby="emailHelp"
+                                            value="{{ $row->kendaraans->platno }} - {{ $row->kendaraans->model }}"
+                                            readonly>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-12">
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1" class="form-label">No Telepon</label>
+                                        <input type="text" name="id_pelanggans" class="form-control"
+                                            id="exampleInputEmail1" aria-describedby="emailHelp"
+                                            value="{{ $row->pelanggans->notelp }}" readonly>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-12">
+                                    <div class="form-group">
                                         <label for="exampleInputEmail1" class="form-label">Tanggal
                                             Pesanan Masuk</label>
                                         <input type="text" name="tgl_krm" class="form-control"
@@ -364,6 +453,9 @@
                                             value="{{ $row->tgl_msk }}" readonly>
                                     </div>
                                 </div>
+
+
+
                                 <div class="col-md-6 col-12">
                                     <div class="form-group">
                                         <label for="exampleInputEmail1" class="form-label">Tanggal
@@ -373,17 +465,6 @@
                                             value="{{ $row->tgl_krm }}" readonly>
                                     </div>
                                 </div>
-
-                                <div class="col-md-6 col-12">
-                                    <div class="form-group">
-                                        <label for="exampleInputEmail1" class="form-label">Alamat Lengkap</label>
-                                        <input type="text" name="id_pelanggans" class="form-control"
-                                            id="exampleInputEmail1" aria-describedby="emailHelp"
-                                            value="{{ $row->pelanggans->alamatpelanggan }}" readonly>
-                                    </div>
-                                </div>
-
-
                                 <div class="col-md-6 col-12">
                                     <div class="form-group">
                                         <label for="exampleInputEmail1" class="form-label">Tanggal
@@ -393,11 +474,27 @@
                                             value="{{ $row->tgl_trm }}" readonly>
                                     </div>
                                 </div>
+                                <div class="col-md-6 col-12">
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1" class="form-label">Alamat Lengkap</label>
+                                        <input type="text" name="id_pelanggans" class="form-control"
+                                            id="exampleInputEmail1" aria-describedby="emailHelp"
+                                            value="{{ $row->pelanggans->alamatpelanggan }}" readonly>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-12">
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1" class="form-label">Status</label>
+                                        <input type="text" name="status" class="form-control"
+                                            id="exampleInputEmail1" aria-describedby="emailHelp"
+                                            value="{{ $row->status }}" readonly>
+                                    </div>
+                                </div>
                                 @php
                                     $items = explode(',', $row->namabarang);
                                     $qty = explode(',', $row->jumlah);
                                 @endphp
-                                <div class="col-md-4 col-12">
+                                <div class="col-md-6 col-12">
                                     <div id="" class="form-group">
                                         <label for="exampleInputEmail1" class="form-label">Nama
                                             Barang</label>
@@ -413,7 +510,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-2 col-12 text-center">
+                                <div class="col-md-6 col-12 text-center">
                                     <div id="" class="form-group">
                                         <label for="exampleInputEmail1" class="form-label">Jumlah</label>
                                         @foreach ($qty as $qty)
@@ -426,14 +523,6 @@
                                         <div class="invalid-feedback">
                                             Masukan nama barang dengan benar.
                                         </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-6 col-12">
-                                    <div class="form-group">
-                                        <label for="exampleInputEmail1" class="form-label">Status</label>
-                                        <input type="text" name="status" class="form-control"
-                                            id="exampleInputEmail1" aria-describedby="emailHelp"
-                                            value="{{ $row->status }}" readonly>
                                     </div>
                                 </div>
 
