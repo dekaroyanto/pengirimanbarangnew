@@ -3,9 +3,28 @@
 @section('css2')
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <link rel="stylesheet" type="text/css" href="https://npmcdn.com/flatpickr/dist/themes/dark.css">
+
+    <link rel="shortcut icon" href="{{ asset('mazer/assets/compiled/svg/favicon.svg') }} " type="image/x-icon" />
+    <link rel="shortcut icon"
+        href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACEAAAAiCAYAAADRcLDBAAAEs2lUWHRYTUw6Y29tLmFkb2JlLnhtcAAAAAAAPD94cGFja2V0IGJlZ2luPSLvu78iIGlkPSJXNU0wTXBDZWhpSHpyZVN6TlRjemtjOWQiPz4KPHg6eG1wbWV0YSB4bWxuczp4PSJhZG9iZTpuczptZXRhLyIgeDp4bXB0az0iWE1QIENvcmUgNS41LjAiPgogPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4KICA8cmRmOkRlc2NyaXB0aW9uIHJkZjphYm91dD0iIgogICAgeG1sbnM6ZXhpZj0iaHR0cDovL25zLmFkb2JlLmNvbS9leGlmLzEuMC8iCiAgICB4bWxuczp0aWZmPSJodHRwOi8vbnMuYWRvYmUuY29tL3RpZmYvMS4wLyIKICAgIHhtbG5zOnBob3Rvc2hvcD0iaHR0cDovL25zLmFkb2JlLmNvbS9waG90b3Nob3AvMS4wLyIKICAgIHhtbG5zOnhtcD0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wLyIKICAgIHhtbG5zOnhtcE1NPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvbW0vIgogICAgeG1sbnM6c3RFdnQ9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZUV2ZW50IyIKICAgZXhpZjpQaXhlbFhEaW1lbnNpb249IjMzIgogICBleGlmOlBpeGVsWURpbWVuc2lvbj0iMzQiCiAgIGV4aWY6Q29sb3JTcGFjZT0iMSIKICAgdGlmZjpJbWFnZVdpZHRoPSIzMyIKICAgdGlmZjpJbWFnZUxlbmd0aD0iMzQiCiAgIHRpZmY6UmVzb2x1dGlvblVuaXQ9IjIiCiAgIHRpZmY6WFJlc29sdXRpb249Ijk2LjAiCiAgIHRpZmY6WVJlc29sdXRpb249Ijk2LjAiCiAgIHBob3Rvc2hvcDpDb2xvck1vZGU9IjMiCiAgIHBob3Rvc2hvcDpJQ0NQcm9maWxlPSJzUkdCIElFQzYxOTY2LTIuMSIKICAgeG1wOk1vZGlmeURhdGU9IjIwMjItMDMtMzFUMTA6NTA6MjMrMDI6MDAiCiAgIHhtcDpNZXRhZGF0YURhdGU9IjIwMjItMDMtMzFUMTA6NTA6MjMrMDI6MDAiPgogICA8eG1wTU06SGlzdG9yeT4KICAgIDxyZGY6U2VxPgogICAgIDxyZGY6bGkKICAgICAgc3RFdnQ6YWN0aW9uPSJwcm9kdWNlZCIKICAgICAgc3RFdnQ6c29mdHdhcmVBZ2VudD0iQWZmaW5pdHkgRGVzaWduZXIgMS4xMC4xIgogICAgICBzdEV2dDp3aGVuPSIyMDIyLTAzLTMxVDEwOjUwOjIzKzAyOjAwIi8+CiAgICA8L3JkZjpTZXE+CiAgIDwveG1wTU06SGlzdG9yeT4KICA8L3JkZjpEZXNjcmlwdGlvbj4KIDwvcmRmOlJERj4KPC94OnhtcG1ldGE+Cjw/eHBhY2tldCBlbmQ9InIiPz5V57uAAAABgmlDQ1BzUkdCIElFQzYxOTY2LTIuMQAAKJF1kc8rRFEUxz9maORHo1hYKC9hISNGTWwsRn4VFmOUX5uZZ36oeTOv954kW2WrKLHxa8FfwFZZK0WkZClrYoOe87ypmWTO7dzzud97z+nec8ETzaiaWd4NWtYyIiNhZWZ2TvE946WZSjqoj6mmPjE1HKWkfdxR5sSbgFOr9Ll/rXoxYapQVik8oOqGJTwqPL5i6Q5vCzeo6dii8KlwpyEXFL519LjLLw6nXP5y2IhGBsFTJ6ykijhexGra0ITl5bRqmWU1fx/nJTWJ7PSUxBbxJkwijBBGYYwhBgnRQ7/MIQIE6ZIVJfK7f/MnyUmuKrPOKgZLpEhj0SnqslRPSEyKnpCRYdXp/9++msneoFu9JgwVT7b91ga+LfjetO3PQ9v+PgLvI1xkC/m5A+h7F32zoLXug38dzi4LWnwHzjeg8UGPGbFfySvuSSbh9QRqZ6H+Gqrm3Z7l9zm+h+iafNUV7O5Bu5z3L/wAdthn7QIme0YAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAJTSURBVFiF7Zi9axRBGIefEw2IdxFBRQsLWUTBaywSK4ubdSGVIY1Y6HZql8ZKCGIqwX/AYLmCgVQKfiDn7jZeEQMWfsSAHAiKqPiB5mIgELWYOW5vzc3O7niHhT/YZvY37/swM/vOzJbIqVq9uQ04CYwCI8AhYAlYAB4Dc7HnrOSJWcoJcBS4ARzQ2F4BZ2LPmTeNuykHwEWgkQGAet9QfiMZjUSt3hwD7psGTWgs9pwH1hC1enMYeA7sKwDxBqjGnvNdZzKZjqmCAKh+U1kmEwi3IEBbIsugnY5avTkEtIAtFhBrQCX2nLVehqyRqFoCAAwBh3WGLAhbgCRIYYinwLolwLqKUwwi9pxV4KUlxKKKUwxC6ZElRCPLYAJxGfhSEOCz6m8HEXvOB2CyIMSk6m8HoXQTmMkJcA2YNTHm3congOvATo3tE3A29pxbpnFzQSiQPcB55IFmFNgFfEQeahaAGZMpsIJIAZWAHcDX2HN+2cT6r39GxmvC9aPNwH5gO1BOPFuBVWAZue0vA9+A12EgjPadnhCuH1WAE8ivYAQ4ohKaagV4gvxi5oG7YSA2vApsCOH60WngKrA3R9IsvQUuhIGY00K4flQG7gHH/mLytB4C42EgfrQb0mV7us8AAMeBS8mGNMR4nwHamtBB7B4QRNdaS0M8GxDEog7iyoAguvJ0QYSBuAOcAt71Kfl7wA8DcTvZ2KtOlJEr+ByyQtqqhTyHTIeB+ONeqi3brh+VgIN0fohUgWGggizZFTplu12yW8iy/YLOGWMpDMTPXnl+Az9vj2HERYqPAAAAAElFTkSuQmCC"
+        type="image/png" />
+
+    <link rel="stylesheet" href="{{ asset('mazer/assets/extensions/simple-datatables/style.css') }} " />
+
+    <link rel="stylesheet" href="{{ asset('mazer/assets/compiled/css/table-datatable.css') }}" />
+    <link rel="stylesheet" href="{{ asset('mazer/assets/compiled/css/app.css') }}" />
+    <link rel="stylesheet" href="{{ asset('mazer/assets/compiled/css/app-dark.css') }}" />
 @endsection
 
 @section('inijs')
+    <script src="{{ asset('mazer/assets/static/js/components/dark.js') }}"></script>
+    <script src="{{ asset('assets/extensions/perfect-scrollbar/perfect-scrollbar.min.js') }}"></script>
+
+    <script src="{{ asset('mazer/assets/compiled/js/app.js') }}"></script>
+
+    <script src="{{ asset('mazer/assets/extensions/simple-datatables/umd/simple-datatables.js') }}"></script>
+    <script src="{{ asset('mazer/assets/static/js/pages/simple-datatables.js') }}"></script>
+
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <script>
         flatpickr("#start_date");
@@ -121,203 +140,16 @@
 @endsection
 
 @section('content')
-    <div class="page-content">
-
-        <section class="section">
-            <div class="row" id="table-head">
-                <div class="col-12">
-                    <div class="card">
-                        <div class="card-header">
-
-                            <h1>Data Pesanan</h1>
-
-
-                        </div>
-                        <div class="card-body mt-2">
-                            @if (auth()->user()->role == 'admin')
-                                <div class="row mt-2 ms-2">
-                                    <div class="col-md-auto">
-                                        <div class="input-group mb-3">
-                                            <a href="/tambahpesanan" class="btn btn-outline-secondary">Tambah Data</a>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-auto">
-                                        <div class="input-group mb-3">
-                                            <a href="/tambahpesanan" class="btn icon icon-left btn-outline-secondary"
-                                                data-bs-toggle="modal" data-bs-target="#exampleModal2"><i
-                                                    data-feather="file"></i> Download</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            @endif
-                            {{-- {{ Session::get('halaman_url') }} --}}
-                            <div class="row">
-                                <div class="col-sm-6 mt-4 pb-4">
-                                    <form action="/pesanan" method="GET">
-                                        <div class="input-group mb-3 ms-3">
-
-                                            <span class="input-group-text" id="basic-addon1"><i
-                                                    class="bi bi-search"></i></span>
-                                            <input type="search" name="search" class="form-control"
-                                                placeholder="Cari data..." aria-label="Recipient's username"
-                                                aria-describedby="button-addon2" value="{{ request('search') }}" />
-                                            <button class="btn btn-outline-secondary" type="submit" id="button-addon2">
-                                                Cari
-                                            </button>
-                                        </div>
-                                    </form>
-                                </div>
-                                <div class="col-sm">
-                                    <form action="/filter" method="GET">
-                                        <div class="row">
-                                            <div class="col-md-4 col-12">
-                                                <div class="form-group">
-                                                    <label for="first-name-column">Tanggal Awal</label>
-                                                    <input type="date" name="start_date" id="start_date"
-                                                        class="flatpickr flatpickr-input active form-control @error('start_date') is-invalid @enderror"
-                                                        placeholder="Masukan Tanggal" aria-label="Recipient's username"
-                                                        aria-describedby="button-addon2"
-                                                        value="{{ request('start_date') }}" />
-                                                    @error('start_date')
-                                                        <div class="invalid-feedback">
-                                                            {{ $message }}
-                                                        </div>
-                                                    @enderror
-                                                </div>
-                                            </div>
-                                            <div class="col-md-4 col-12">
-                                                <div class="form-group">
-                                                    <label for="first-name-column">Tanggal Akhir</label>
-                                                    <input type="date" name="end_date" id="end_date"
-                                                        class="form-control @error('end_date') is-invalid @enderror"
-                                                        placeholder="Masukan Tanggal" aria-label="Recipient's username"
-                                                        aria-describedby="button-addon2"
-                                                        value="{{ request('end_date') }}" />
-                                                    @error('end_date')
-                                                        <div class="invalid-feedback">
-                                                            {{ $message }}
-                                                        </div>
-                                                    @enderror
-                                                </div>
-                                            </div>
-                                            <div class="col-md-1 mt-4 pe-2">
-                                                <button class="btn btn-primary" type="submit" id="button-addon2">
-                                                    Filter
-                                                </button>
-                                            </div>
-
-                                    </form>
-                                </div>
-
-                            </div>
-
-                            <div class="row" id="table-striped">
-                                <div class="col-12">
-                                    <div class="card">
-                                        <div class="card-content">
-
-                                            <!-- table striped -->
-                                            <div class="table-responsive">
-                                                <table class="table table-striped">
-                                                    <thead class="text-center">
-                                                        <tr>
-                                                            <th>No</th>
-                                                            <th>Kode Pesanan</th>
-                                                            <th>Nama Pelanggan</th>
-                                                            <th>Nama Barang</th>
-                                                            <th>Jumlah</th>
-                                                            <th>Status</th>
-                                                            <th>Aksi</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        @php
-                                                            $no = 1;
-                                                        @endphp
-
-                                                        @foreach ($data as $index => $row)
-                                                            @php
-                                                                $items = explode(',', $row->namabarang);
-                                                                $qty = explode(',', $row->jumlah);
-                                                            @endphp
-                                                            <tr class="text-center">
-                                                                <th scope="row">{{ $index + $data->firstItem() }}</th>
-                                                                <td>{{ $row->kdpsn }}</td>
-                                                                <td>{{ $row->pelanggans->namapelanggan }}</td>
-                                                                <td>
-                                                                    @foreach ($items as $item)
-                                                                        <p>{{ $item }}</p>
-                                                                    @endforeach
-                                                                </td>
-                                                                <td>
-                                                                    @foreach ($qty as $qty)
-                                                                        <p>{{ $qty }}</p>
-                                                                    @endforeach
-                                                                </td>
-                                                                <td>
-                                                                    @if ($row->status == 'Proses')
-                                                                        <span
-                                                                            class="badge bg-warning">{{ $row->status }}</span>
-                                                                    @elseif ($row->status == 'Dikirim')
-                                                                        <span
-                                                                            class="badge bg-info">{{ $row->status }}</span>
-                                                                    @elseif ($row->status == 'Selesai')
-                                                                        <span
-                                                                            class="badge bg-success">{{ $row->status }}</span>
-                                                                    @endif
-                                                                </td>
-                                                                <td>
-                                                                    <button type="button" class="btn btn-info"
-                                                                        data-bs-toggle="modal"
-                                                                        data-bs-target="#exampleModalDetail{{ $row->id }}">
-                                                                        <i class="bi bi-eye-fill"></i>
-                                                                    </button>
-
-                                                                    <a href="/tampilkanpesanan/{{ $row->id }}"
-                                                                        class="btn btn-warning"><i
-                                                                            class="bi bi-pencil-square"></i></a>
-
-                                                                    {{-- <button type="button" class="btn btn-warning"
-                                                                        data-bs-toggle="modal"
-                                                                        data-bs-target="#exampleModalUbah{{ $row->id }}">
-                                                                        <i class="bi bi-pencil-square"></i>
-                                                                    </button> --}}
-                                                                    @if (auth()->user()->role == 'admin')
-                                                                        <a href="{{ route('deletepesanan', $row->id) }}"
-                                                                            class="btn btn-danger delete" id="delete"
-                                                                            data-id="{{ $row->id }}"
-                                                                            data-nama="{{ $row->kdpsn }}"><i
-                                                                                class="bi bi-trash3"></i></a>
-                                                                    @endif
-                                                                </td>
-
-                                                            </tr>
-                                                        @endforeach
-                                                    </tbody>
-                                                </table>
-                                                {{ $data->links() }}
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-    </div>
-    </div>
-    </section>
-    </div>
-
     <section class="section">
         <div class="card">
-            <div class="card-header">Simple Datatable</div>
+            <div class="card-header">
+                <h3>Data Pesanan</h3>
+            </div>
             <div class="card-body">
                 <table class="table table-striped" id="table1">
                     <thead>
                         <tr>
-                            <th>No</th>
+                            {{-- <th>No</th> --}}
                             <th>Kode Pesanan</th>
                             <th>Nama Pelanggan</th>
                             <th>Nama Barang</th>
@@ -327,9 +159,9 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @php
+                        {{-- @php
                             $no = 1;
-                        @endphp
+                        @endphp --}}
 
                         @foreach ($data as $index => $row)
                             @php
@@ -337,7 +169,7 @@
                                 $qty = explode(',', $row->jumlah);
                             @endphp
                             <tr class="text-center">
-                                <th scope="row">{{ $index + $data->firstItem() }}</th>
+                                {{-- <th scope="row">{{ $index + $data->firstItem() }}</th> --}}
                                 <td>{{ $row->kdpsn }}</td>
                                 <td>{{ $row->pelanggans->namapelanggan }}</td>
                                 <td>
@@ -388,6 +220,8 @@
         </div>
     </section>
 
+
+
     <!-- Modal Detail -->
     @foreach ($data as $index => $row)
         <div class="modal fade" id="exampleModalDetail{{ $row->id }}" tabindex="-1"
@@ -406,17 +240,15 @@
                                     <div class="form-group">
                                         <label for="exampleInputEmail1" class="form-label">Kode
                                             Pesanan</label>
-                                        <input type="text" name="kdpsn" class="form-control"
-                                            id="exampleInputEmail1" aria-describedby="emailHelp"
-                                            value="{{ $row->kdpsn }}" readonly>
+                                        <input type="text" name="kdpsn" class="form-control" id="exampleInputEmail1"
+                                            aria-describedby="emailHelp" value="{{ $row->kdpsn }}" readonly>
                                     </div>
                                 </div>
                                 <div class="col-md-6 col-12">
                                     <div class="form-group">
                                         <label for="exampleInputEmail1" class="form-label">Kurir</label>
-                                        <input type="text" name="id_kurirs" class="form-control"
-                                            id="exampleInputEmail1" aria-describedby="emailHelp"
-                                            value="{{ $row->kurirs->nama }}" readonly>
+                                        <input type="text" name="id_kurirs" class="form-control" id="exampleInputEmail1"
+                                            aria-describedby="emailHelp" value="{{ $row->kurirs->nama }}" readonly>
                                     </div>
                                 </div>
                                 <div class="col-md-6 col-12">
@@ -450,7 +282,7 @@
                                             Pesanan Masuk</label>
                                         <input type="text" name="tgl_krm" class="form-control"
                                             id="exampleInputEmail1" aria-describedby="emailHelp"
-                                            value="{{ $row->tgl_msk }}" readonly>
+                                            value="{{ date('d M Y', strtotime($row->tgl_msk)) }}" readonly>
                                     </div>
                                 </div>
 
@@ -580,6 +412,7 @@
                                         </select>
                                     </div>
                                 </div>
+
                                 <div class="col-md-6 col-12">
                                     <div class="form-group">
                                         <label for="exampleInputEmail1" class="form-label">Nama Pelanggan</label>
