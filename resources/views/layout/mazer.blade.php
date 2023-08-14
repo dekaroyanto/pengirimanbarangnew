@@ -259,7 +259,7 @@
                                             @endif
 
                                             <p class="mb-0 text-sm text-gray-600">
-                                                Role
+                                                {{ Auth::user()->role }}
                                             </p>
                                         </div>
                                         <div class="user-img d-flex align-items-center">

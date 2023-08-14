@@ -2,14 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Kendaraan;
-use App\Models\Kurir;
-use App\Models\Pelanggan;
 use PDF;
+use App\Models\Kurir;
 use App\Models\Pesanan;
+use App\Models\Kendaraan;
+use App\Models\Pelanggan;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Redirect;
 // use GuzzleHttp\Promise\Create;
 // use App\Http\Controllers\Controller;
 
@@ -24,18 +25,21 @@ class PesananController extends Controller
         //         ->orWhere('namabarang', 'LIKE', '%' . $search . '%')
         //         ->orWhere('status', 'LIKE', '%' . $search . '%');
         // })->latest()->paginate(5);
-        if ($request->has('search')) {
-            $data = Pesanan::where('kdpsn', 'LIKE', '%' . $request->search . '%')
-                ->orWhere('namabarang', 'LIKE', '%' . $request->search . '%')
-                ->orWhere('$row->pelanggans->namapelanggan', 'LIKE', '%' . $request->search . '%')
-                ->orWhere('status', 'LIKE', '%' . $request->search . '%')
-                ->orWhereHas('status', 'LIKE', '%' . $request->search . '%')
-                ->latest()->paginate(5);
-            Session::put('halaman_url', request()->fullUrl());
-        } else {
-            $data = Pesanan::latest()->paginate(5);
-            Session::put('halaman_url', request()->fullUrl());
-        }
+        // if ($request->has('search')) {
+        //     $data = Pesanan::where('kdpsn', 'LIKE', '%' . $request->search . '%')
+        //         ->orWhere('namabarang', 'LIKE', '%' . $request->search . '%')
+        //         ->orWhere('$row->pelanggans->namapelanggan', 'LIKE', '%' . $request->search . '%')
+        //         ->orWhere('status', 'LIKE', '%' . $request->search . '%')
+        //         ->orWhereHas('status', 'LIKE', '%' . $request->search . '%')
+        //         ->latest();
+        //     Session::put('halaman_url', request()->fullUrl());
+        // } else {
+        //     $data = Pesanan::latest();
+        //     Session::put('halaman_url', request()->fullUrl());
+        // }
+
+
+        $data = Pesanan::all();
         $datakurir = Kurir::all();
         $datakendaraan = Kendaraan::all();
         $datapelanggan = Pelanggan::all();
@@ -166,8 +170,39 @@ class PesananController extends Controller
 
     public function updatepesanan(Request $request, $id)
     {
-        $data = Pesanan::find($id);
-        $data->update($request->all());
+        // $data = Pesanan::find($id);
+        // $data->update($request->all());
+
+        $pelanggan = $request->id_pelanggans;
+        // $pelanggans1 = new  Pelanggan(['id_pelanggans' => $pelanggan]);
+        $kurir = $request->id_kurirs;
+        $kendaraan = $request->id_kendaraans;
+
+        $pelanggans1 = Pelanggan::find($pelanggan);
+        $kurirs1 = Kurir::find($kurir);
+        $kendaraans1 = Kendaraan::find($kendaraan);
+        // dd($kurir, $request);
+
+
+
+        $pesanan = Pesanan::find($id);
+        $pesanan->kdpsn = $request->kdpsn;
+        $pesanan->namabarang = $request->hasilbarang;
+        $pesanan->jumlah = $request->hasiljumlah;
+        $pesanan->id_pelanggans = $request->id;
+        $pesanan->id_kurirs = $request->id;
+        $pesanan->id_kendaraans = $request->id;
+        $pesanan->status = $request->status;
+
+        $pesanan->tgl_krm = $request->tgl_krm;
+        $pesanan->tgl_trm = $request->tgl_trm;
+        // dd($pesanan);
+        // dd($request);
+
+        $pesanan->pelanggans()->associate($pelanggans1);
+        $pesanan->kurirs()->associate($kurirs1);
+        $pesanan->kendaraans()->associate($kendaraans1);
+        $pesanan->save();
 
         if (session('halaman_url')) {
             return Redirect(session('halaman_url'))->with('success', 'Data Berhasil Di Ubah');
