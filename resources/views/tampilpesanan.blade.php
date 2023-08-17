@@ -1,6 +1,26 @@
 @extends('layout.mazer')
 
+@section('css2')
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+@endsection
+
 @section('inijs')
+    <script>
+        function previewImage() {
+            const image = document.querySelector('#image');
+            const imgPreview = document.querySelector('.img-preview');
+
+            imgPreview.style.display = 'block';
+
+            const oFReader = new FileReader();
+            oFReader.readAsDataURL(image.files[0]);
+
+            oFReader.onload = function(oFREvent) {
+                imgPreview.src = oFREvent.target.result;
+            }
+        }
+    </script>
+
     <script>
         function captureData() {
             var orderItems = document.getElementsByClassName("barang");
@@ -147,7 +167,86 @@
                                         </div>
                                     </div>
 
+                                    <div class="col-md-6 col-12">
+                                        <div class="form-group">
+                                            <label for="exampleInputEmail1" class="form-label">Tanggal
+                                                Pesanan Masuk
+                                            </label>
+                                            <input type="date" name="tgl_msk" id="tanggal"
+                                                class="form-control mb-3 flatpickr-no-config"
+                                                value="{{ $data->tgl_msk }}" />
+                                            <div class="invalid-feedback">
+                                                Masukan tanggal dengan benar.
+                                            </div>
+                                        </div>
+                                    </div>
 
+                                    <div class="col-md-6 col-12">
+                                        <div class="form-group">
+                                            <label for="exampleInputEmail1" class="form-label">Tanggal
+                                                Pengiriman
+                                            </label>
+                                            <input type="date" name="tgl_krm" id="tanggal"
+                                                class="form-control mb-3 flatpickr-no-config"
+                                                value="{{ $data->tgl_krm }}" />
+                                            <div class="invalid-feedback">
+                                                Masukan tanggal dengan benar.
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6 col-12">
+                                        <div class="form-group">
+                                            <label for="exampleInputEmail1" class="form-label">Tanggal
+                                                Diterima</label>
+                                            <input type="date" name="tgl_trm" id="tanggal"
+                                                class="form-control mb-3 flatpickr-no-config"
+                                                value="{{ $data->tgl_trm }}" />
+                                        </div>
+                                    </div>
+
+
+
+
+
+                                    <div class="col-md-6 col-12">
+                                        <div class="form-group">
+                                            <label for="exampleInputEmail1" class="form-label">Status</label>
+                                            <select class="form-select" name="status" aria-label="Default select example">
+
+                                                <!-- <option option>Pilih Status</option> -->
+                                                <option selected>{{ $data->status }}</option>
+
+                                                @if ($data->status == 'Proses')
+                                                    <option value="Selesai">Selesai</option>
+                                                    <option value="Dikirim">Dikirim</option>
+                                                @elseif ($data->status == 'Dikirim')
+                                                    <option value="Proses">Proses</option>
+                                                    <option value="Selesai">Selesai</option>
+                                                @elseif ($data->status == 'Selesai')
+                                                    <option value="Proses">Proses</option>
+                                                    <option value="Dikirim">Dikirim</option>
+                                                @endif
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12">
+                                        <label for="image" class="form-label">Foto Bukti</label>
+                                        @if ($data->image)
+                                            <img src="{{ asset('storage/' . $data->image) }}"
+                                                class="img-preview img-fluid mb-3 col-sm-5 d-block">
+                                        @else
+                                            <img class="img-preview img-fluid mb-3 col-sm-5">
+                                        @endif
+                                        <input class="form-control @error('image') is-invalid @enderror" type="file"
+                                            id="image" name="image" onchange="previewImage()" />
+                                        @error('image')
+                                            <div class="invalid-feedback">
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
+                                    </div>
 
                                     @php
                                         $pesananku = explode(',', $data->namabarang);
@@ -185,90 +284,15 @@
                                     </div>
 
 
-                                    {{-- <div class="col-lg-6">
-                                        <div id="orderContainer">
-                                            <div class="order-item">
 
-                                                <label>Nama Barang</label>
-                                                <div class="row g-3 mb-3">
-                                                    <div class="col-md-6">
-                                                        @foreach ($pesananku as $item)
-                                                            <div class="form-floating">
-                                                                <input type="text" class="form-control barang "
-                                                                    name="pesananku[]" id="namabarang" placeholder="Pesanan"
-                                                                    value="{{ $item }}" required>
-                                                                <label for="namabarang">Pesanan</label>
-                                                            </div>
-                                                        @endforeach
-
-                                                    </div>
-
-                                                    <div class="col-md-5">
-                                                        @foreach ($jumlahku as $item)
-                                                            <div class="form-floating">
-                                                                <input type="number" class="form-control jumlah"
-                                                                    name="jumlahku[]" id="jumlah" placeholder="Jumlah"
-                                                                    value="{{ $item }}" required>
-                                                                <label for="jumlah">Jumlah</label>
-                                                            </div>
-                                                        @endforeach
-                                                    </div>
-                                                    <div class="col-md-1 d-flex align-items-center justify-content-center">
-                                                        <button class="btn btn-primary" onclick="addItem()"
-                                                            type="button"><i class="bi bi-plus-lg"></i></button>
-                                                    </div>
-
-                                                </div> --}}
                                     <input id="hasilbarang" name="hasilbarang" class="form-control" type="hidden">
                                     <input id="hasiljumlah" name="hasiljumlah" class="form-control" type="hidden">
-                                    {{-- <button class="btn btn-primary" onclick="captureData()" type="button"><i
-                                            class="bi bi-plus-lg"></i></button> --}}
+
                                 </div>
                         </div>
                     </div>
 
-                    <div class="col-md-6 col-12">
-                        <div class="form-group">
-                            <label for="exampleInputEmail1" class="form-label">Tanggal
-                                Pengiriman
-                            </label>
-                            <input type="text" name="tgl_krm" class="form-control mb-3 flatpickr-no-config"
-                                value="{{ $data->tgl_krm }}" />
-                            <div class="invalid-feedback">
-                                Masukan tanggal dengan benar.
-                            </div>
-                        </div>
-                    </div>
 
-                    <div class="col-md-6 col-12">
-                        <div class="form-group">
-                            <label for="exampleInputEmail1" class="form-label">Tanggal
-                                Diterima</label>
-                            <input type="date" name="tgl_trm" class="form-control mb-3 flatpickr-no-config"
-                                value="{{ $data->tgl_trm }}" />
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-12">
-                        <div class="form-group">
-                            <label for="exampleInputEmail1" class="form-label">Status</label>
-                            <select class="form-select" name="status" aria-label="Default select example">
-
-                                <!-- <option option>Pilih Status</option> -->
-                                <option selected>{{ $data->status }}</option>
-
-                                @if ($data->status == 'Proses')
-                                    <option value="Selesai">Selesai</option>
-                                    <option value="Dikirim">Dikirim</option>
-                                @elseif ($data->status == 'Dikirim')
-                                    <option value="Proses">Proses</option>
-                                    <option value="Selesai">Selesai</option>
-                                @elseif ($data->status == 'Selesai')
-                                    <option value="Proses">Proses</option>
-                                    <option value="Dikirim">Dikirim</option>
-                                @endif
-                            </select>
-                        </div>
-                    </div>
                     <div class="col-12 d-flex justify-content-end">
                         <button type="submit" class="btn btn-primary me-1 mb-1" onclick="captureData()">
                             Simpan

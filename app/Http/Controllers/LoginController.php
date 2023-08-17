@@ -59,4 +59,28 @@ class LoginController extends Controller
         Auth::logout();
         return redirect('login');
     }
+
+    public function tampilkanuser($id)
+    {
+        $user = User::find($id);
+        // dd($data);
+
+        return view('register', compact('user'));
+    }
+
+    public function updateuser(Request $request, $id)
+    {
+        $user = User::find($id);
+        $user->update($request->all());
+
+        return redirect('register')->with('success', 'Data Berhasil Di Ubah');
+    }
+
+    public function deleteuser($id)
+    {
+        $user = User::find($id);
+        $user->delete();
+
+        return redirect('register')->with('success', 'Data Berhasil Di Hapus');
+    }
 }

@@ -3,7 +3,27 @@
 @section('inihead')
     <meta name="csrf-token" content="{{ csrf_token() }}">
 @endsection
+
+@section('css2')
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+@endsection
+
 @section('inijs')
+    <script>
+        function previewImage() {
+            const image = document.querySelector('#image');
+            const imgPreview = document.querySelector('.img-preview');
+
+            imgPreview.style.display = 'block';
+
+            const oFReader = new FileReader();
+            oFReader.readAsDataURL(image.files[0]);
+
+            oFReader.onload = function(oFREvent) {
+                imgPreview.src = oFREvent.target.result;
+            }
+        }
+    </script>
     <script>
         function addItem() {
             var orderContainer = document.getElementById("orderContainer");
@@ -181,7 +201,7 @@
                                                 Pesanan Masuk
                                             </label>
                                             <input type="date" name="tgl_msk"
-                                                class="form-control mb-3 flatpickr-no-config @error('tgl_msk') is-invalid @enderror"
+                                                class="form-control mb-3 flatpickr-no-config @error('tgl_msk') is-invalid @enderror "
                                                 placeholder="Masukan Tanggal" readonly />
                                             @error('tgl_msk')
                                                 <div class="invalid-feedback">
@@ -205,14 +225,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="col-md-6 col-12">
-                                        <div class="form-group">
-                                            <label for="exampleInputEmail1" class="form-label">Status</label>
-                                            <input type="text" name="status" class="form-control"
-                                                id="exampleInputEmail1" aria-describedby="emailHelp" value="proses"
-                                                readonly>
-                                        </div>
-                                    </div>
+
 
                                     <div class="col-md-6 col-12">
                                         <div class="form-group">
@@ -221,6 +234,26 @@
                                             <input type="date" name="tgl_trm" class="form-control flatpickr-no-config"
                                                 id="exampleInputEmail1" aria-describedby="emailHelp"
                                                 placeholder="Belum Diterima" readonly>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-12">
+                                        <label for="image" class="form-label">Foto Bukti</label>
+                                        <img class="img-preview img-fluid mb-3 col-sm-5">
+                                        <input class="form-control @error('image') is-invalid @enderror" type="file"
+                                            id="image" name="image" onchange="previewImage()" />
+                                        @error('image')
+                                            <div class="invalid-feedback">
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
+                                    </div>
+
+                                    <div class="col-md-6 col-12">
+                                        <div class="form-group">
+                                            <label for="exampleInputEmail1" class="form-label">Status</label>
+                                            <input type="text" name="status" class="form-control"
+                                                id="exampleInputEmail1" aria-describedby="emailHelp" value="proses"
+                                                readonly>
                                         </div>
                                     </div>
 

@@ -18,18 +18,21 @@
 
 @section('inijs')
     <script src="{{ asset('mazer/assets/static/js/components/dark.js') }}"></script>
-    <script src="{{ asset('assets/extensions/perfect-scrollbar/perfect-scrollbar.min.js') }}"></script>
+    <script src="{{ asset('mazer/assets/extensions/perfect-scrollbar/perfect-scrollbar.min.js') }}"></script>
+
+    <script src="{{ asset('mazer/assets/compiled/js/app.js') }}"></script>
+    <script src="{{ asset('mazer/assets/extensions/flatpickr/flatpickr.min.js') }}"></script>
+    <script src="{{ asset('mazer/assets/static/js/pages/date-picker.js') }}"></script>
+
+    <script src="{{ asset('mazer/assets/static/js/components/dark.js') }}"></script>
+    <script src="{{ asset('mazer/assets/extensions/perfect-scrollbar/perfect-scrollbar.min.js') }}"></script>
 
     <script src="{{ asset('mazer/assets/compiled/js/app.js') }}"></script>
 
     <script src="{{ asset('mazer/assets/extensions/simple-datatables/umd/simple-datatables.js') }}"></script>
     <script src="{{ asset('mazer/assets/static/js/pages/simple-datatables.js') }}"></script>
 
-    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-    <script>
-        flatpickr("#start_date");
-        flatpickr("#end_date");
-    </script>
+
     <script>
         function addItem() {
             var orderContainer = document.getElementById("orderContainer");
@@ -138,12 +141,37 @@
         }
     </script>
 @endsection
+@section('judulhal')
+    <h1>Data Pesanan</h1>
+@endsection
 
 @section('content')
     <section class="section">
+        <form action="/filter" method="get">
+            @csrf
+            <div class="col-md-8 mb-1">
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="basic-addon1"><i class="bi bi-search"></i></span>
+
+                    <select name="filterkurir" class="form-select">
+                        <option value="">Pilih Kurir</option>
+                        @foreach ($datakurir as $datak)
+                            <option value="{{ $datak->id }}"
+                                {{ request('filterkurir') == $datak->id ? 'selected' : '' }}>
+                                {{ $datak->nama }}
+                            </option>
+                        @endforeach
+                    </select>
+                    <button class="btn btn-outline-secondary" type="submit" id="button-addon2">
+                        Pilih
+                    </button>
+                </div>
+            </div>
+        </form>
         <div class="card">
             <div class="card-header">
-                <h3>Data Pesanan</h3>
+                <a href="{{ route('cetak-pesanan') }}" target="_blank" class="btn btn-primary">Cetak Data <i
+                        class="fas fa-print"></i></a>
             </div>
             <div class="card-body">
                 <table class="table table-striped" id="table1">
@@ -154,6 +182,7 @@
                             <th>Nama Pelanggan</th>
                             <th>Nama Barang</th>
                             <th>Jumlah</th>
+                            <th>Kurir</th>
                             <th>Status</th>
                             <th>Aksi</th>
                         </tr>
@@ -182,6 +211,7 @@
                                         <p>{{ $qty }}</p>
                                     @endforeach
                                 </td>
+                                <td>{{ $row->kurirs->nama }}</td>
                                 <td>
                                     @if ($row->status == 'Proses')
                                         <span class="badge bg-warning">{{ $row->status }}</span>
@@ -280,53 +310,17 @@
                                     <div class="form-group">
                                         <label for="exampleInputEmail1" class="form-label">Tanggal
                                             Pesanan Masuk</label>
-                                        <input type="text" name="tgl_krm" class="form-control"
-                                            id="exampleInputEmail1" aria-describedby="emailHelp"
-                                            value="{{ date('d M Y', strtotime($row->tgl_msk)) }}" readonly>
+                                        <input type="date" name="tgl_msk" id="tanggal"
+                                            class="form-control flatpickr-no-config" id="exampleInputEmail1"
+                                            aria-describedby="emailHelp" value="{{ $row->tgl_msk }}" readonly>
                                     </div>
                                 </div>
 
-
-
-                                <div class="col-md-6 col-12">
-                                    <div class="form-group">
-                                        <label for="exampleInputEmail1" class="form-label">Tanggal
-                                            Pengiriman</label>
-                                        <input type="text" name="tgl_krm" class="form-control"
-                                            id="exampleInputEmail1" aria-describedby="emailHelp"
-                                            value="{{ $row->tgl_krm }}" readonly>
-                                    </div>
-                                </div>
-                                <div class="col-md-6 col-12">
-                                    <div class="form-group">
-                                        <label for="exampleInputEmail1" class="form-label">Tanggal
-                                            Diterima</label>
-                                        <input type="text" name="tgl_trm" class="form-control"
-                                            id="exampleInputEmail1" aria-describedby="emailHelp"
-                                            value="{{ $row->tgl_trm }}" readonly>
-                                    </div>
-                                </div>
-                                <div class="col-md-6 col-12">
-                                    <div class="form-group">
-                                        <label for="exampleInputEmail1" class="form-label">Alamat Lengkap</label>
-                                        <input type="text" name="id_pelanggans" class="form-control"
-                                            id="exampleInputEmail1" aria-describedby="emailHelp"
-                                            value="{{ $row->pelanggans->alamatpelanggan }}" readonly>
-                                    </div>
-                                </div>
-                                <div class="col-md-6 col-12">
-                                    <div class="form-group">
-                                        <label for="exampleInputEmail1" class="form-label">Status</label>
-                                        <input type="text" name="status" class="form-control"
-                                            id="exampleInputEmail1" aria-describedby="emailHelp"
-                                            value="{{ $row->status }}" readonly>
-                                    </div>
-                                </div>
                                 @php
                                     $items = explode(',', $row->namabarang);
                                     $qty = explode(',', $row->jumlah);
                                 @endphp
-                                <div class="col-md-6 col-12">
+                                <div class="col-md-3 col-12 ">
                                     <div id="" class="form-group">
                                         <label for="exampleInputEmail1" class="form-label">Nama
                                             Barang</label>
@@ -342,7 +336,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-6 col-12 text-center">
+                                <div class="col-md-3 col-12">
                                     <div id="" class="form-group">
                                         <label for="exampleInputEmail1" class="form-label">Jumlah</label>
                                         @foreach ($qty as $qty)
@@ -357,6 +351,47 @@
                                         </div>
                                     </div>
                                 </div>
+
+                                <div class="col-md-6 col-12">
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1" class="form-label">Tanggal
+                                            Pengiriman</label>
+                                        <input type="text" name="tgl_krm" id="tanggal"
+                                            class="form-control flatpickr-no-config" id="exampleInputEmail1"
+                                            aria-describedby="emailHelp" value="{{ $row->tgl_krm }}" readonly>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-12">
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1" class="form-label">Status</label>
+                                        <input type="text" name="status" class="form-control"
+                                            id="exampleInputEmail1" aria-describedby="emailHelp"
+                                            value="{{ $row->status }}" readonly>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-12">
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1" class="form-label">Tanggal
+                                            Diterima</label>
+                                        <input type="text" name="tgl_trm" id="tanggal"
+                                            class="form-control flatpickr-no-config" id="exampleInputEmail1"
+                                            aria-describedby="emailHelp" value="{{ $row->tgl_trm }}" readonly>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6 col-12">
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1" class="form-label">Alamat Lengkap</label>
+                                        <textarea name="id_pelanggans" class="form-control" cols="3" rows="3">{{ $row->pelanggans->alamatpelanggan }}</textarea>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6 col-12 mb-2">
+                                    <label for="exampleInputEmail1" class="form-label">Bukti Foto</label>
+                                    <img src="{{ asset('storage/' . $row->image) }}" class="img-fluid">
+                                </div>
+
+
 
                                 <div class="col-12 d-flex justify-content-end">
                                     <a class="btn btn-light-secondary me-1 mb-1" href="/pesanan"
@@ -437,8 +472,8 @@
                                         <label for="exampleInputEmail1" class="form-label">Tanggal
                                             Pengiriman
                                         </label>
-                                        <input type="text" name="tgl_krm"
-                                            class="form-control mb-3 flatpickr-no-config" value="{{ $row->tgl_krm }}" />
+                                        <input type="text" name="tgl_krm" class="form-control mb-3"
+                                            value="{{ $row->tgl_krm }}" />
                                     </div>
                                 </div>
 
@@ -446,8 +481,8 @@
                                     <div class="form-group">
                                         <label for="exampleInputEmail1" class="form-label">Tanggal
                                             Diterima</label>
-                                        <input type="date" name="tgl_trm"
-                                            class="form-control mb-3 flatpickr-no-config" value="{{ $row->tgl_trm }}" />
+                                        <input type="date" name="tgl_trm" class="form-control mb-3"
+                                            value="{{ $row->tgl_trm }}" />
                                     </div>
                                 </div>
                                 @php

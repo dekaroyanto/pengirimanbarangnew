@@ -19,9 +19,10 @@ class CreatePesanansTable extends Migration
             $table->string('kdpsn');
             $table->string('namabarang');
             $table->string('jumlah');
-            $table->date('tgl_msk');
-            $table->date('tgl_krm')->nullable();
-            $table->date('tgl_trm')->nullable();
+            $table->dateTime('tgl_msk');
+            $table->dateTime('tgl_krm')->nullable();
+            $table->dateTime('tgl_trm')->nullable();
+            $table->string('image')->nullable();
             $table->enum('status', ['Selesai', 'Proses', 'Dikirim'])->nullable();
             $table->timestamps();
         });

@@ -2,7 +2,6 @@
 
 @section('judulhal')
     <h3>Halaman Utama</h3>
-    <h1>INI SUDAH DI BACKUP</h1>
 @endsection
 
 @section('content')
@@ -45,7 +44,7 @@
                                             Kurir
                                         </h6>
                                         <h6 class="font-extrabold mb-0">
-                                            {{ $jumlahuser }}
+                                            {{ $jumlahkurir }}
                                         </h6>
                                     </div>
                                 </div>
@@ -64,10 +63,10 @@
                                     </div>
                                     <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7">
                                         <h6 class="text-muted font-semibold">
-                                            Ini juga gatau
+                                            Kendaraan
                                         </h6>
                                         <h6 class="font-extrabold mb-0">
-                                            80.000
+                                            {{ $jumlahkendaraan }}
                                         </h6>
                                     </div>
                                 </div>
@@ -116,7 +115,10 @@
                                         <tr>
                                             <th>No</th>
                                             <th>Kode Pesanan</th>
+                                            <th>Nama Pelanggan</th>
                                             <th>Nama Barang</th>
+                                            <th>Jumlah</th>
+                                            <th>Kurir</th>
                                             <th>Status</th>
                                         </tr>
                                     </thead>
@@ -129,7 +131,22 @@
                                             <tr class="text-center">
                                                 <th scope="row">{{ $index + $data->firstItem() }}</th>
                                                 <td>{{ $row->kdpsn }}</td>
-                                                <td>{{ $row->namabarang }}</td>
+                                                <td>{{ $row->pelanggans->namapelanggan }}</td>
+                                                @php
+                                                    $items = explode(',', $row->namabarang);
+                                                    $qty = explode(',', $row->jumlah);
+                                                @endphp
+                                                <td>
+                                                    @foreach ($items as $item)
+                                                        <p>{{ $item }}</p>
+                                                    @endforeach
+                                                </td>
+                                                <td>
+                                                    @foreach ($qty as $qty)
+                                                        <p>{{ $qty }}</p>
+                                                    @endforeach
+                                                </td>
+                                                <td>{{ $row->kurirs->nama }}</td>
                                                 <td>
                                                     @if ($row->status == 'Proses')
                                                         <span class="badge bg-warning">{{ $row->status }}</span>

@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Admin - CV Firmos</title>
+    <title>CV Firmos</title>
 
     <link rel="shortcut icon" href="{{ asset('mazer/assets/compiled/svg/favicon.svg') }}" type="image/x-icon" />
 
@@ -111,6 +111,7 @@
                             </a>
 
                             <ul class="submenu">
+
                                 <li class="submenu-item {{ request()->is('pesanan') ? 'active' : '' }}">
                                     <a href="/pesanan" class="submenu-link" style="text-decoration: none">
                                         <span>Data Pesanan</span>
@@ -150,6 +151,15 @@
                                 <a href="/register" class="sidebar-link">
                                     <i class="bi bi-person-fill-add"></i>
                                     <span>Tambah Akun</span>
+                                </a>
+                            </li>
+                        @endif
+
+                        @if (auth()->user()->role == 'admin')
+                            <li class="{{ request()->is('cetak-pesanan-form') ? 'sidebar-item active' : '' }}">
+                                <a href="/cetak-pesanan-form" class="sidebar-link">
+                                    <i class="bi bi-printer-fill"></i>
+                                    <span>Cetak Laporan</span>
                                 </a>
                             </li>
                         @endif
@@ -239,15 +249,11 @@
                                                 </div>
                                             </a>
                                         </li>
-                                        {{-- <li>
-                                            <p class="text-center py-2 mb-0">
-                                                <a href="#">See all notification</a>
-                                            </p>
-                                        </li> --}}
+
                                     </ul>
                                 </li>
                             </ul>
-                            {{-- @if (Auth::check()) --}}
+
                             <div class="dropdown">
                                 <a href="#" data-bs-toggle="dropdown" aria-expanded="false">
                                     <div class="user-menu d-flex">
@@ -385,7 +391,7 @@
                 var kdpsn = $(this).attr("data-nama");
                 Swal.fire({
                     title: "Yakin ?",
-                    text: "Kamu akan menghapus data pesanan dengan Kode Pesanan " +
+                    text: "Kamu akan menghapus data " +
                         kdpsn +
                         " ",
                     icon: "warning",

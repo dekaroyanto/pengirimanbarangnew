@@ -19,27 +19,7 @@ class PesananController extends Controller
 
     public function index(Request $request)
     {
-        // $search = $request->search;
-        // $data = Pesanan::where(function ($query) use ($search) {
-        //     $query->where('kdpsn', 'LIKE', '%' . $search . '%')
-        //         ->orWhere('namabarang', 'LIKE', '%' . $search . '%')
-        //         ->orWhere('status', 'LIKE', '%' . $search . '%');
-        // })->latest()->paginate(5);
-        // if ($request->has('search')) {
-        //     $data = Pesanan::where('kdpsn', 'LIKE', '%' . $request->search . '%')
-        //         ->orWhere('namabarang', 'LIKE', '%' . $request->search . '%')
-        //         ->orWhere('$row->pelanggans->namapelanggan', 'LIKE', '%' . $request->search . '%')
-        //         ->orWhere('status', 'LIKE', '%' . $request->search . '%')
-        //         ->orWhereHas('status', 'LIKE', '%' . $request->search . '%')
-        //         ->latest();
-        //     Session::put('halaman_url', request()->fullUrl());
-        // } else {
-        //     $data = Pesanan::latest();
-        //     Session::put('halaman_url', request()->fullUrl());
-        // }
-
-
-        $data = Pesanan::all();
+        $data = Pesanan::latest()->get();
         $datakurir = Kurir::all();
         $datakendaraan = Kendaraan::all();
         $datapelanggan = Pelanggan::all();
@@ -48,28 +28,56 @@ class PesananController extends Controller
         return view('datapesanan', compact('data', 'infopesanan', 'infopelanggan', 'datapelanggan', 'datakurir', 'datakendaraan'));
     }
 
+    public function cetakForm()
+    {
+        $data = Pesanan::latest()->get();
+        $datakurir = Kurir::all();
+        $datakendaraan = Kendaraan::all();
+        $datapelanggan = Pelanggan::all();
+        $infopesanan = Pesanan::latest()->paginate(1);
+        $infopelanggan = Pelanggan::latest()->paginate(1);
+        return view('cetak-pesanan-form', compact('data', 'infopesanan', 'infopelanggan', 'datapelanggan', 'datakurir', 'datakendaraan'));
+    }
+
+    public function cetakPesananPertanggal($tglawal, $tglakhir)
+    {
+        // dd("Tanggal Awal: " . $tglawal, "Tanggal Akhir: " . $tglakhir);
+
+        $data = Pesanan::latest()->get();
+        $datakurir = Kurir::all();
+        $datakendaraan = Kendaraan::all();
+        $datapelanggan = Pelanggan::all();
+        $infopesanan = Pesanan::latest()->paginate(1);
+        $infopelanggan = Pelanggan::latest()->paginate(1);
+        $cetakPertanggal = Pesanan::all()->whereBetween('tgl_msk', [$tglawal, $tglakhir]);
+
+        return view('cetak-pesanan-pertanggal', compact('data', 'infopesanan', 'infopelanggan', 'datapelanggan', 'datakurir', 'datakendaraan', 'cetakPertanggal'));
+    }
+
+    public function cetakPesanan()
+    {
+        $data = Pesanan::all();
+        $datakurir = Kurir::all();
+        $datakendaraan = Kendaraan::all();
+        $datapelanggan = Pelanggan::all();
+        $infopesanan = Pesanan::latest()->paginate(1);
+        $infopelanggan = Pelanggan::latest()->paginate(1);
+        return view('cetak-pesanan', compact('data', 'infopesanan', 'infopelanggan', 'datapelanggan', 'datakurir', 'datakendaraan'));
+    }
+
     public function filter(Request $request)
     {
-        $validated = $request->validate([
-
-            'start_date' => 'required',
-            'end_date' => 'required',
-        ], [
-            'start_date.required' => 'Masukan tanggal dengan benar',
-            'end_date.required' => 'Masukan tanggal dengan benar'
-        ]);
-
-        $data = Pesanan::paginate(5);
-        $datakendaraan = Kendaraan::all();
+        $filterkurir = $request->filterkurir;
+        $data = Pesanan::all();
         $datakurir = Kurir::all();
+        $datakendaraan = Kendaraan::all();
         $datapelanggan = Pelanggan::all();
         $infopesanan = Pesanan::latest()->paginate(1);
         $infopelanggan = Pelanggan::latest()->paginate(1);
         $start_date = $request->start_date;
         $end_date = $request->end_date;
-        $data = Pesanan::whereDate('tgl_msk', '>=', $start_date)
-            ->whereDate('tgl_msk', '<=', $end_date)
-            ->paginate(5);
+        $data = Pesanan::where('id_kurirs', 'LIKE', '%' . $request->filterkurir . '%')
+            ->get();
         return view('datapesanan', compact('data', 'infopesanan', 'infopelanggan', 'datapelanggan', 'datakurir', 'datakendaraan'));
     }
 
@@ -97,14 +105,11 @@ class PesananController extends Controller
         //     ]
         // );
 
+
         $validated = $request->validate([
             'kdpsn' => 'required|unique:pesanans',
             'tgl_msk' => 'required',
-            // 'penerima' => 'required|min:5',
-            // 'notelp' => 'required',
-            // 'namabarang' => 'required',
-            // 'start_date' => 'required',
-            // 'end_date' => 'required',
+            'image' => 'image|file|max:5000'
         ], [
             'kdpsn.required' => 'Kode Pesanan tidak boleh kosong!',
             'kdpsn.unique' => 'Kode Pesanan tidak boleh sama!',
@@ -134,6 +139,7 @@ class PesananController extends Controller
         $pesanan->id_kurirs = $request->id;
         $pesanan->id_kendaraans = $request->id;
         $pesanan->status = "proses";
+        $pesanan->image = $request->file('image')->store('post-images');
         $pesanan->tgl_msk = $request->tgl_msk;
         $pesanan->tgl_krm = $request->tgl_krm;
         $pesanan->tgl_trm = $request->tgl_trm;
@@ -170,8 +176,22 @@ class PesananController extends Controller
 
     public function updatepesanan(Request $request, $id)
     {
-        // $data = Pesanan::find($id);
-        // $data->update($request->all());
+
+        $validated = $request->validate([
+            'tgl_msk' => 'required',
+            'image' => 'image|file|max:5000'
+        ], [
+
+            'tgl_msk.required' => 'Masukan tanggal!',
+            // 'start_date.required' => 'Masukan Tanggal!',
+            // 'end_date.required' => 'Masukan Tanggal'
+        ]);
+        $data = Pesanan::all();
+        $datakurir = Kurir::all();
+        $datakendaraan = Kendaraan::all();
+        $datapelanggan = Pelanggan::all();
+        $infopesanan = Pesanan::latest()->paginate(1);
+        $infopelanggan = Pelanggan::latest()->paginate(1);
 
         $pelanggan = $request->id_pelanggans;
         // $pelanggans1 = new  Pelanggan(['id_pelanggans' => $pelanggan]);
@@ -193,7 +213,7 @@ class PesananController extends Controller
         $pesanan->id_kurirs = $request->id;
         $pesanan->id_kendaraans = $request->id;
         $pesanan->status = $request->status;
-
+        $pesanan->image = $request->file('image')->store('post-images');
         $pesanan->tgl_krm = $request->tgl_krm;
         $pesanan->tgl_trm = $request->tgl_trm;
         // dd($pesanan);
@@ -204,10 +224,11 @@ class PesananController extends Controller
         $pesanan->kendaraans()->associate($kendaraans1);
         $pesanan->save();
 
-        if (session('halaman_url')) {
-            return Redirect(session('halaman_url'))->with('success', 'Data Berhasil Di Ubah');
-        }
-        return view('pesanan', compact('data', 'datap'))->with('success', 'Data Berhasil Di Ubah');
+        // if (session('halaman_url')) {
+        //     return Redirect(session('halaman_url'))->with('success', 'Data Berhasil Di Ubah');
+        // }
+        // return view('pesanan', compact('data'))->with('success', 'Data Berhasil Di Ubah');
+        return redirect()->route('pesanan')->with('success', 'Data Berhasil Di Ubah');
     }
 
     public function deletepesanan($id)
@@ -216,14 +237,5 @@ class PesananController extends Controller
         $data->delete();
 
         return redirect()->route('pesanan')->with('success', 'Data Berhasil Di Hapus');
-    }
-
-    public function exportpdf()
-    {
-        $data = Pesanan::all();
-
-        view()->share('data', $data);
-        $pdf = PDF::loadview('datapesanan-pdf');
-        return $pdf->download('pesanan.pdf');
     }
 }

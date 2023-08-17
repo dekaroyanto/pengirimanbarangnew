@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Kendaraan;
 use App\Models\Kurir;
 use App\Models\Pelanggan;
 use App\Models\Pesanan;
@@ -30,7 +31,9 @@ class DatabaseSeeder extends Seeder
             'id_pelanggans' => '1',
             'tgl_msk' => '2023-07-31',
             'status' => 'proses',
+            'image' => 'actdiagramkurir.png',
             'id_kurirs' => '1',
+            'id_kendaraans' => '1',
         ]);
 
         User::create([
@@ -65,6 +68,14 @@ class DatabaseSeeder extends Seeder
             'nama' => 'kurir1',
             'nik' => '1234',
             'kelamin' => 'Perempuan',
+        ]);
+
+        Kendaraan::create([
+            'platno' => 'E1305DB',
+            'jenis' => 'Mobil',
+            'merk' => 'Toyota',
+            'model' => 'Agya',
+            'warna' => 'Merah'
         ]);
     }
 }

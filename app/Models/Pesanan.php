@@ -13,7 +13,7 @@ class Pesanan extends Model
     use HasFactory;
 
     protected $guarded = [];
-    protected $dates = ['created_at', 'tgl_krm', 'tgl_trm'];
+    protected $dates = ['created_at', 'tgl_msk', 'tgl_krm', 'tgl_trm'];
 
     public function kurirs()
     {

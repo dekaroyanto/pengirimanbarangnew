@@ -11,6 +11,7 @@ use App\Http\Controllers\PesananController;
 use App\Http\Controllers\HomedashController;
 use App\Http\Controllers\KendaraanController;
 use App\Http\Controllers\PelangganController;
+use App\Models\Kendaraan;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,11 +32,12 @@ Route::group(['middleware' => ['auth', 'hakakses:admin']], function () {
     Route::get('/', function () {
 
         $jumlahpesanan = Pesanan::count();
-        $jumlahuser = User::count();
+        $jumlahkurir = Kurir::count();
+        $jumlahkendaraan = Kendaraan::count();
         $data = Pesanan::latest()->paginate(3);
         $infopesanan = Pesanan::latest()->paginate(1);
         $infopelanggan = Pelanggan::latest()->paginate(1);
-        return view('welcome', compact('jumlahpesanan', 'jumlahuser', 'data', 'infopesanan', 'infopelanggan'));
+        return view('welcome', compact('jumlahpesanan', 'jumlahkurir', 'jumlahkendaraan', 'data', 'infopesanan', 'infopelanggan'));
     });
     Route::get('/tambahpesanan', [PesananController::class, 'tambahpesanan'])->name('tambahpesanan');
     Route::post('/insertpesanan', [PesananController::class, 'insertpesanan'])->name('insertpesanan');
@@ -47,6 +49,8 @@ Route::group(['middleware' => ['auth', 'hakakses:admin']], function () {
     Route::get('/register', [LoginController::class, 'register'])->name('register');
     Route::post('/registeruser', [LoginController::class, 'registeruser'])->name('registeruser');
     Route::get('/register', [LoginController::class, 'index']);
+    Route::get('/deleteuser/{id}', [LoginController::class, 'deleteuser'])->name('deleteuser');
+    Route::post('/deleteuser/{id}', [LoginController::class, 'deleteuser'])->name('deleteuser');
 
     //PELANGGAN
     Route::get('/tambahpelanggan', [PelangganController::class, 'create'])->name('tambahpelanggan');
@@ -93,7 +97,10 @@ Route::post('/updatepesanan/{id}', [PesananController::class, 'updatepesanan'])-
 
 
 // export PDF
-Route::get('/exportpdf', [PesananController::class, 'exportpdf'])->name('exportpdf');
+Route::get('/cetak-pesanan', [PesananController::class, 'cetakPesanan'])->name('cetak-pesanan');
+Route::get('/cetak-pesanan-form', [PesananController::class, 'cetakForm'])->name('cetak-pesanan-form');
+Route::get('/cetak-pesanan-pertanggal/{tglawal}/{tglakhir}', [PesananController::class, 'cetakPesananPertanggal'])->name('cetak-pesanan-pertanggal');
+
 
 
 
@@ -109,7 +116,3 @@ Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 
 //user
 // Route::get('/register', 'LoginController@index');
-
-
-// Route::get('/deletekurir/{id}', [KurirController::class, 'deletekurir'])->name('deletekurir');
-// Route::post('/updatekurir/{id}', [KurirController::class, 'updatekurir'])->name('updatekurir');
