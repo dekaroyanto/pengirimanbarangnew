@@ -167,7 +167,8 @@
                                                                 <label for="exampleInputEmail1"
                                                                     class="form-label">Email</label>
 
-                                                                <input type="text" name="email" class="form-control"
+                                                                <input type="text" name="emailpelanggan"
+                                                                    class="form-control"
                                                                     placeholder="Masukan Alamat Email" />
                                                             </div>
                                                         </div>

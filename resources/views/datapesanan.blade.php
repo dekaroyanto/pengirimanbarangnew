@@ -169,8 +169,10 @@
         </form>
         <div class="card">
             <div class="card-header">
-                <a href="{{ route('cetak-pesanan') }}" target="_blank" class="btn btn-primary">Cetak Data <i
-                        class="fas fa-print"></i></a>
+                @if (auth()->user()->role == 'Admin')
+                    <a href="{{ route('cetak-pesanan') }}" target="_blank" class="btn btn-primary">Cetak Data <i
+                            class="fas fa-print"></i></a>
+                @endif
             </div>
             <div class="card-body">
                 <table class="table table-striped" id="table1">

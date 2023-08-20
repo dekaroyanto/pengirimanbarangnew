@@ -15,7 +15,7 @@ class PelangganController extends Controller
      */
     public function index()
     {
-        $datap = Pelanggan::paginate('5');
+        $datap = Pelanggan::latest()->paginate('5');
         $infopesanan = Pesanan::latest()->paginate(1);
         $infopelanggan = Pelanggan::latest()->paginate(1);
         return view('datapelanggan', compact('datap', 'infopesanan', 'infopelanggan'));
@@ -46,7 +46,6 @@ class PelangganController extends Controller
     public function tampilkanpelanggan($id)
     {
         $datap = Pelanggan::find($id);
-        // dd($data);
 
         return view('tampilpelanggan', compact('datap'));
     }

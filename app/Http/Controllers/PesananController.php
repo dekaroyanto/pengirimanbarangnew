@@ -28,6 +28,22 @@ class PesananController extends Controller
         return view('datapesanan', compact('data', 'infopesanan', 'infopelanggan', 'datapelanggan', 'datakurir', 'datakendaraan'));
     }
 
+    public function filter(Request $request)
+    {
+        $filterkurir = $request->filterkurir;
+        $data = Pesanan::all();
+        $datakurir = Kurir::all();
+        $datakendaraan = Kendaraan::all();
+        $datapelanggan = Pelanggan::all();
+        $infopesanan = Pesanan::latest()->paginate(1);
+        $infopelanggan = Pelanggan::latest()->paginate(1);
+        $start_date = $request->start_date;
+        $end_date = $request->end_date;
+        $data = Pesanan::where('id_kurirs', 'LIKE', '%' . $request->filterkurir . '%')
+            ->get();
+        return view('datapesanan', compact('data', 'infopesanan', 'infopelanggan', 'datapelanggan', 'datakurir', 'datakendaraan'));
+    }
+
     public function cetakForm()
     {
         $data = Pesanan::latest()->get();
@@ -65,21 +81,7 @@ class PesananController extends Controller
         return view('cetak-pesanan', compact('data', 'infopesanan', 'infopelanggan', 'datapelanggan', 'datakurir', 'datakendaraan'));
     }
 
-    public function filter(Request $request)
-    {
-        $filterkurir = $request->filterkurir;
-        $data = Pesanan::all();
-        $datakurir = Kurir::all();
-        $datakendaraan = Kendaraan::all();
-        $datapelanggan = Pelanggan::all();
-        $infopesanan = Pesanan::latest()->paginate(1);
-        $infopelanggan = Pelanggan::latest()->paginate(1);
-        $start_date = $request->start_date;
-        $end_date = $request->end_date;
-        $data = Pesanan::where('id_kurirs', 'LIKE', '%' . $request->filterkurir . '%')
-            ->get();
-        return view('datapesanan', compact('data', 'infopesanan', 'infopelanggan', 'datapelanggan', 'datakurir', 'datakendaraan'));
-    }
+
 
     public function tambahpesanan()
     {
@@ -94,18 +96,6 @@ class PesananController extends Controller
 
     public function insertpesanan(Request $request)
     {
-        // $request->validate(
-        //     [
-        //         'kdpsn' => 'required',
-        //         'kdpsn' => 'unique:pesanans',
-        //     ],
-        //     [
-        //         'kdpsn.required' => 'Kode Pesanan tidak boleh kosong!',
-        //         'kdpsn.unique' => 'Kode Pesanan tidak boleh sama!',
-        //     ]
-        // );
-
-
         $validated = $request->validate([
             'kdpsn' => 'required|unique:pesanans',
             'tgl_msk' => 'required',
@@ -114,22 +104,15 @@ class PesananController extends Controller
             'kdpsn.required' => 'Kode Pesanan tidak boleh kosong!',
             'kdpsn.unique' => 'Kode Pesanan tidak boleh sama!',
             'tgl_msk.required' => 'Masukan tanggal!',
-            // 'start_date.required' => 'Masukan Tanggal!',
-            // 'end_date.required' => 'Masukan Tanggal'
         ]);
 
 
         $pelanggan = $request->id_pelanggans;
-        // $pelanggans1 = new  Pelanggan(['id_pelanggans' => $pelanggan]);
         $kurir = $request->id_kurirs;
         $kendaraan = $request->id_kendaraans;
-
         $pelanggans1 = Pelanggan::find($pelanggan);
         $kurirs1 = Kurir::find($kurir);
         $kendaraans1 = Kendaraan::find($kendaraan);
-        // dd($kurir, $request);
-
-
 
         $pesanan = new Pesanan;
         $pesanan->kdpsn = $request->kdpsn;
@@ -143,21 +126,12 @@ class PesananController extends Controller
         $pesanan->tgl_msk = $request->tgl_msk;
         $pesanan->tgl_krm = $request->tgl_krm;
         $pesanan->tgl_trm = $request->tgl_trm;
-        // dd($pesanan);
-        // dd($request);
 
         $pesanan->pelanggans()->associate($pelanggans1);
         $pesanan->kurirs()->associate($kurirs1);
         $pesanan->kendaraans()->associate($kendaraans1);
         $pesanan->save();
 
-
-        // $data = Pesanan::create($request->all());
-        // if ($request->hasFile('foto')) {
-        //     $request->file('foto')->move('fotopesanan/', $request->file('foto')->getClientOriginalName());
-        //     $data->foto = $request->file('foto')->getClientOriginalName();
-        //     $data->save();
-        // }
         return redirect()->route('pesanan')->with('success', 'Data Berhasil Di Tambahkan');
     }
 

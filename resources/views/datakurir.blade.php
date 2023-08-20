@@ -169,7 +169,7 @@
                                                             <label class="form-label">Alamat Email</label>
                                                             <div class="position-relative">
                                                                 <input type="text" name="emailkurir"
-                                                                    class="form-control" placeholder="Masukan Nama"
+                                                                    class="form-control" placeholder="Masukan Email"
                                                                     id="first-name-icon" />
                                                             </div>
                                                         </div>
@@ -336,7 +336,7 @@
                                         <label for="exampleInputEmail1" class="form-label">Email</label>
                                         <input type="text" name="emailkurir" class="form-control"
                                             id="exampleInputEmail1" aria-describedby="emailHelp"
-                                            value="{{ $row->nama }}">
+                                            value="{{ $row->emailkurir }}">
                                     </div>
                                 </div>
 

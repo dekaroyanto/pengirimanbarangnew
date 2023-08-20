@@ -21,7 +21,6 @@ class LoginController extends Controller
         $infopesanan = Pesanan::latest()->paginate(1);
         $infopelanggan = Pelanggan::latest()->paginate(1);
         return view('register', compact('infopesanan', 'infopelanggan'))->with('user', $user);
-        // return view('register', compact('user'));
     }
 
     public function login()
