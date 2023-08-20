@@ -26,7 +26,7 @@
 
                         </div>
                         <div class="card-content mt-2">
-                            {{ Session::get('halaman_url') }}
+                            {{-- {{ Session::get('halaman_url') }} --}}
                             <div class="row">
                                 <div class="col-md-4 mb-1">
                                     <form action="/pelanggan" method="GET">
@@ -49,13 +49,6 @@
                                             data-bs-target="#exampleModal2">Tambah Data</a>
                                     </div>
                                 </div>
-                                <div class="col-md-auto">
-                                    <div class="input-group mb-3">
-                                        <a href="/tambahpelanggan" class="btn icon icon-left btn-outline-secondary"
-                                            data-bs-toggle="modal" data-bs-target="#exampleModal2"><i
-                                                data-feather="file"></i> Download</a>
-                                    </div>
-                                </div>
 
 
                             </div>
@@ -73,6 +66,7 @@
                                                             <th>No</th>
                                                             <th>Nama pelanggan</th>
                                                             <th>No Telepon</th>
+                                                            <th>Email</th>
                                                             <th>Alamat</th>
                                                             <th>Aksi</th>
                                                         </tr>
@@ -88,6 +82,7 @@
 
                                                                 <td>{{ $row->namapelanggan }}</td>
                                                                 <td>0{{ $row->notelp }}</td>
+                                                                <td>{{ $row->emailpelanggan }}</td>
                                                                 <td>{{ $row->alamatpelanggan }}</td>
                                                                 <td>
                                                                     <button type="button" class="btn btn-info"
@@ -130,7 +125,7 @@
         <div class="modal-dialog modal-xl">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title" id="exampleModalLabel">Data pelanggan</h1>
+                    <h1 class="modal-title" id="exampleModalLabel">Tambah Data pelanggan</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -147,50 +142,41 @@
                                                 <div class="form-body">
                                                     <div class="row">
                                                         <div class="col-12">
-                                                            <div class="form-group has-icon-left">
-                                                                <label for="first-name-icon">Nama Lengkap</label>
-                                                                <div class="position-relative">
-                                                                    <input type="text" name="namapelanggan"
-                                                                        class="form-control"
-                                                                        placeholder="Masukan Nama Lengkap"
-                                                                        id="first-name-icon" />
-                                                                    <div class="form-control-icon">
-                                                                        <i class="bi bi-person"></i>
-                                                                    </div>
-                                                                </div>
+                                                            <div class="form-group">
+                                                                <label for="exampleInputEmail1" class="form-label">Nama
+                                                                    Lengkap</label>
+
+                                                                <input type="text" name="namapelanggan"
+                                                                    class="form-control"
+                                                                    placeholder="Masukan Nama Lengkap" />
                                                             </div>
                                                         </div>
                                                         <div class="col-12">
-                                                            <div class="form-group has-icon-left">
-                                                                <label for="first-name-icon">No Telepon</label>
+                                                            <div class="form-group">
+                                                                <label class="form-label">No Telepon</label>
                                                                 <div class="position-relative">
                                                                     <input type="number" name="notelp"
                                                                         class="form-control" placeholder="Masukan No Telp"
                                                                         id="first-name-icon" />
-                                                                    <div class="form-control-icon">
-                                                                        <i class="bi bi-person"></i>
-                                                                    </div>
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        {{-- <div class="col-12">
-                                                            <div class="form-group has-icon-left">
-                                                                <label for="first-name-icon">Alamat</label>
-                                                                <div class="position-relative">
-                                                                    <input type="text" name="alamatpelanggan"
-                                                                        class="form-control" placeholder="Masukan Alamat"
-                                                                        id="first-name-icon" />
-                                                                    <div class="form-control-icon">
-                                                                        <i class="bi bi-person"></i>
-                                                                    </div>
-                                                                </div>
+
+                                                        <div class="col-12">
+                                                            <div class="form-group">
+                                                                <label for="exampleInputEmail1"
+                                                                    class="form-label">Email</label>
+
+                                                                <input type="text" name="email" class="form-control"
+                                                                    placeholder="Masukan Alamat Email" />
                                                             </div>
-                                                        </div> --}}
+                                                        </div>
+
                                                         <div class="col-12">
                                                             <div class="form-group">
                                                                 <label for="exampleFormControlTextarea1"
                                                                     class="form-label">Alamat Lengkap</label>
-                                                                <textarea
+                                                                <textarea placeholder="Masukan Alamat Lengkap"
                                                                     class="form-control @error('alamat') is-invalid
                                                             @enderror"
                                                                     name="alamatpelanggan" id="exampleFormControlTextarea1" rows="3"></textarea>
@@ -255,14 +241,23 @@
                                 </div>
                                 <div class="col-md-6 col-12">
                                     <div class="form-group">
-                                        <label for="exampleInputEmail1" class="form-label">Alamat</label>
-                                        <input type="text" name="alamatpelanggan" class="form-control"
+                                        <label for="exampleInputEmail1" class="form-label">Email</label>
+                                        <input type="text" name="email" class="form-control"
                                             id="exampleInputEmail1" aria-describedby="emailHelp"
-                                            value="{{ $row->alamatpelanggan }}" readonly>
+                                            value="{{ $row->emailpelanggan }}" readonly>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-12">
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1" class="form-label">Alamat</label>
+                                        {{-- <input type="text" name="alamatpelanggan" class="form-control"
+                                            id="exampleInputEmail1" aria-describedby="emailHelp"
+                                            value="{{ $row->alamatpelanggan }}" readonly> --}}
+                                        <textarea name="email" class="form-control" cols="3" rows="3" readonly> {{ $row->alamatpelanggan }}</textarea>
                                     </div>
                                 </div>
                                 <div class="col-12 d-flex justify-content-end">
-                                    <a class="btn btn-light-secondary me-1 mb-1" href="/pesanan"
+                                    <a class="btn btn-light-secondary me-1 mb-1" href="/datapelanggan"
                                         role="button">Kembali</a>
                                 </div>
                             </div>
@@ -305,14 +300,14 @@
                                             value="0{{ $row->notelp }}">
                                     </div>
                                 </div>
-                                {{-- <div class="col-md-6 col-12">
+                                <div class="col-md-6 col-12">
                                     <div class="form-group">
-                                        <label for="exampleInputEmail1" class="form-label">Alamat Lengkap</label>
-                                        <input type="text" name="alamatpelanggan" class="form-control"
+                                        <label for="exampleInputEmail1" class="form-label">Email</label>
+                                        <input type="text" name="emailpelanggan" class="form-control"
                                             id="exampleInputEmail1" aria-describedby="emailHelp"
-                                            value="{{ $row->alamatpelanggan }}">
+                                            value="{{ $row->emailpelanggan }}">
                                     </div>
-                                </div> --}}
+                                </div>
                                 <div class="col-md-6 col-12">
                                     <div class="form-group">
                                         <label for="exampleFormControlTextarea1" class="form-label">Alamat Lengkap</label>

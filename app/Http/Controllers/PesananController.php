@@ -161,6 +161,18 @@ class PesananController extends Controller
         return redirect()->route('pesanan')->with('success', 'Data Berhasil Di Tambahkan');
     }
 
+    public function detailpesanan($id)
+    {
+        $data = Pesanan::find($id);
+        // dd($data);
+        $datakurir = Kurir::all();
+        $datakendaraan = Kendaraan::all();
+        $datapelanggan = Pelanggan::all();
+        $infopesanan = Pesanan::latest()->paginate(1);
+        $infopelanggan = Pelanggan::latest()->paginate(1);
+        return view('detailpesanan', compact('data', 'datakurir', 'datapelanggan', 'infopesanan', 'infopelanggan', 'datakendaraan'));
+    }
+
     public function tampilkanpesanan($id)
     {
         $data = Pesanan::find($id);

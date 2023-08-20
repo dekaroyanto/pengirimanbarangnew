@@ -26,6 +26,7 @@
                                         <tr>
                                             {{-- <th>No</th> --}}
                                             <th>Nama</th>
+                                            <th>Username</th>
                                             <th>Email</th>
                                             <th>Role</th>
                                             <th>Aksi</th>
@@ -40,6 +41,7 @@
                                             <tr class="text-center">
                                                 {{-- <th scope="row">{{ $index + $user->firstItem() }}</th> --}}
                                                 <td>{{ $row->name }}</td>
+                                                <td>{{ $row->username }}</td>
                                                 <td>{{ $row->email }}</td>
                                                 <td>{{ $row->role }}</td>
                                                 <td>
@@ -140,14 +142,22 @@
                                                                 </div>
                                                             </div>
                                                         </div>
+
+                                                        <div class="col-12">
+                                                            <div class="form-group">
+                                                                <label for="first-name-icon">Role User</label>
+                                                                <select name="role1" class="form-select">
+                                                                    <option value="Admin">Admin</option>
+                                                                    <option value="Kurir">Kurir</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
                                                         <div class="col-12 d-flex justify-content-end">
                                                             <button type="submit" class="btn btn-primary me-1 mb-1">
                                                                 Submit
                                                             </button>
-                                                            <button type="reset"
-                                                                class="btn btn-light-secondary me-1 mb-1">
-                                                                Reset
-                                                            </button>
+                                                            <a class="btn btn-light-secondary me-1 mb-1" href="/register"
+                                                                role="button">Kembali</a>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -169,33 +179,42 @@
     @foreach ($user as $index => $row)
         <div class="modal fade" id="exampleModalDetail{{ $row->id }}" tabindex="-1"
             aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-xl">
+            <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Detail Pelanggan</h5>
+                        <h5 class="modal-title" id="exampleModalLabel">Detail Akun</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
                         <form action="/updateuser/{{ $row->id }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             <div class="row">
-                                <div class="col-md-6 col-12">
+                                <div class=" col-12">
                                     <div class="form-group">
                                         <label for="exampleInputEmail1" class="form-label">Nama</label>
-                                        <input type="text" name="namapelanggan" class="form-control"
+                                        <input type="text" name="neme" class="form-control"
                                             id="exampleInputEmail1" aria-describedby="emailHelp"
                                             value="{{ $row->name }}" readonly>
                                     </div>
                                 </div>
-                                <div class="col-md-6 col-12">
+                                <div class=" col-12">
                                     <div class="form-group">
                                         <label for="exampleInputEmail1" class="form-label">Username</label>
-                                        <input type="text" name="notelp" class="form-control"
+                                        <input type="text" name="username" class="form-control"
                                             id="exampleInputEmail1" aria-describedby="emailHelp"
                                             value="{{ $row->username }}" readonly>
                                     </div>
                                 </div>
-                                <div class="col-md-6 col-12">
+                                <div class=" col-12">
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1" class="form-label">Email</label>
+                                        <input type="text" name="email" class="form-control"
+                                            id="exampleInputEmail1" aria-describedby="emailHelp"
+                                            value="{{ $row->email }}" readonly>
+                                    </div>
+                                </div>
+
+                                <div class=" col-12">
                                     <div class="form-group">
                                         <label for="exampleInputEmail1" class="form-label">Role</label>
                                         <input type="text" name="alamatpelanggan" class="form-control"
@@ -215,4 +234,81 @@
         </div>
     @endforeach
     <!-- End Modal Detail -->
+
+    <!-- Modal Edit -->
+    @foreach ($user as $index => $row)
+        <div class="modal fade" id="exampleModalUbah{{ $row->id }}" tabindex="-1"
+            aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Edit Data Akun</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form action="/updateuser/{{ $row->id }}" method="POST" enctype="multipart/form-data">
+                            @csrf
+                            <div class="row">
+                                <div class=" col-12">
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1" class="form-label">Nama</label>
+                                        <input type="text" name="name" class="form-control"
+                                            id="exampleInputEmail1" aria-describedby="emailHelp"
+                                            value="{{ $row->name }}">
+                                    </div>
+                                </div>
+                                <div class=" col-12">
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1" class="form-label">Username</label>
+                                        <input type="text" name="username" class="form-control"
+                                            id="exampleInputEmail1" aria-describedby="emailHelp"
+                                            value="{{ $row->username }}">
+                                    </div>
+                                </div>
+                                <div class=" col-12">
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1" class="form-label">Email</label>
+                                        <input type="text" name="email" class="form-control"
+                                            id="exampleInputEmail1" aria-describedby="emailHelp"
+                                            value="{{ $row->email }}">
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="form-group">
+                                        <label class="form-label">Password Baru</label>
+                                        <input type="password" name="password" class="form-control"
+                                            id="password-id-icon" />
+                                    </div>
+                                </div>
+                                <div class=" col-12">
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1" class="form-label">Role</label>
+                                        <select class="form-select" name="role" aria-label="Default select example">
+
+                                            <!-- <option option>Pilih Status</option> -->
+                                            <option selected>{{ $row->role }}</option>
+
+                                            @if ($row->role == 'Admin')
+                                                <option value="Kurir">Kurir</option>
+                                            @else
+                                                <option value="Admin">Admin</option>
+                                            @endif
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-12 d-flex justify-content-end">
+                                    <button type="submit" class="btn btn-primary me-2 mb-1">
+                                        Simpan
+                                    </button>
+                                    <a class="btn btn-light-secondary me-1 mb-1" href="/register"
+                                        role="button">Kembali</a>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endforeach
+    <!-- End Modal Edit -->
 @endsection

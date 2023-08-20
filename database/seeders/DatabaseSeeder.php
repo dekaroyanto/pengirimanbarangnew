@@ -41,33 +41,38 @@ class DatabaseSeeder extends Seeder
             'email' => 'admin@admin.com',
             'username' => 'admin',
             'password' => Hash::make('admin'),
-            'role' => 'admin',
+            'role' => 'Admin',
         ]);
 
         User::create([
             'name' => 'kurir',
-            'email' => 'kurir@admin.com',
+            'email' => 'kurir@gmail.com',
             'username' => 'kurir',
             'password' => Hash::make('kurir'),
-            'role' => 'user',
+            'role' => 'Kurir',
         ]);
 
         Pelanggan::create([
             'namapelanggan' => 'pelanggan1',
             'notelp' => '0882006487100',
+            'emailpelanggan' => 'pelanggan1@gmail.com',
             'alamatpelanggan' => 'Cirebon',
         ]);
 
         Pelanggan::create([
             'namapelanggan' => 'pelanggan2',
             'notelp' => '085316260660',
+            'emailpelanggan' => 'pelanggan2@gmail.com',
             'alamatpelanggan' => 'Purbalingga',
         ]);
 
         Kurir::create([
-            'nama' => 'kurir1',
             'nik' => '1234',
+            'nama' => 'kurir1',
+            'notelpkurir' => '081805032002',
             'kelamin' => 'Perempuan',
+            'alamatkurir' => 'Blater',
+            'emailkurir' => 'emailkurir@gmail.com',
         ]);
 
         Kendaraan::create([

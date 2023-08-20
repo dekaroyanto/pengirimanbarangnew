@@ -50,6 +50,7 @@ class LoginController extends Controller
             'username' => $request->username,
             'password' => bcrypt($request->password),
             'remember_token' => Str::random(60),
+            'role' => $request->role1,
         ]);
         return redirect('register')->with('success', 'Data Berhasil Di Tambahkan');
     }
@@ -71,7 +72,12 @@ class LoginController extends Controller
     public function updateuser(Request $request, $id)
     {
         $user = User::find($id);
-        $user->update($request->all());
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->username = $request->username;
+        $user->password = bcrypt($request->password);
+        $user->role = $request->role;
+        $user->save();
 
         return redirect('register')->with('success', 'Data Berhasil Di Ubah');
     }

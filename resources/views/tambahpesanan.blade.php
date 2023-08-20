@@ -165,10 +165,9 @@
                                             </select>
                                         </div>
                                     </div>
-                                    <div class="col-lg-6">
+                                    <div class="col-lg-6 mt-3">
                                         <div id="orderContainer">
                                             <div class="order-item">
-                                                <label>Nama Barang</label>
                                                 <div class="row g-3 mb-3">
                                                     <div class="col-md-6">
                                                         <div class="form-floating">

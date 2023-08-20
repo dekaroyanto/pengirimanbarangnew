@@ -32,7 +32,6 @@
     <script src="{{ asset('mazer/assets/extensions/simple-datatables/umd/simple-datatables.js') }}"></script>
     <script src="{{ asset('mazer/assets/static/js/pages/simple-datatables.js') }}"></script>
 
-
     <script>
         function addItem() {
             var orderContainer = document.getElementById("orderContainer");
@@ -222,10 +221,13 @@
                                     @endif
                                 </td>
                                 <td>
-                                    <button type="button" class="btn btn-info" data-bs-toggle="modal"
+                                    {{-- <button type="button" class="btn btn-info" data-bs-toggle="modal"
                                         data-bs-target="#exampleModalDetail{{ $row->id }}">
                                         <i class="bi bi-eye-fill"></i>
-                                    </button>
+                                    </button> --}}
+
+                                    <a href="/detailpesanan/{{ $row->id }}" class="btn btn-info"><i
+                                            class="bi bi-eye-fill"></i></a>
 
                                     <a href="/tampilkanpesanan/{{ $row->id }}" class="btn btn-warning"><i
                                             class="bi bi-pencil-square"></i></a>
@@ -235,7 +237,7 @@
                                         data-bs-target="#exampleModalUbah{{ $row->id }}">
                                         <i class="bi bi-pencil-square"></i>
                                     </button> --}}
-                                    @if (auth()->user()->role == 'admin')
+                                    @if (auth()->user()->role == 'Admin')
                                         <a href="{{ route('deletepesanan', $row->id) }}" class="btn btn-danger delete"
                                             id="delete" data-id="{{ $row->id }}"
                                             data-nama="{{ $row->kdpsn }}"><i class="bi bi-trash3"></i></a>
@@ -249,7 +251,6 @@
             </div>
         </div>
     </section>
-
 
 
     <!-- Modal Detail -->
@@ -386,12 +387,28 @@
                                     </div>
                                 </div>
 
-                                <div class="col-md-6 col-12 mb-2">
+                                {{-- <div class="col-md-6 col-12 mb-2">
                                     <label for="exampleInputEmail1" class="form-label">Bukti Foto</label>
                                     <img src="{{ asset('storage/' . $row->image) }}" class="img-fluid">
+                                </div> --}}
+                                <!-- Menampilkan thumbnail gambar -->
+                                <div class="col-md-6 col-12 mb-2" style="max-height: 150px; overflow:hidden;">
+                                    <label for="exampleInputEmail1" class="form-label">Bukti Foto</for=>
+                                        <a href="#gambar-1">
+                                            <img class="thumb mb-3 col-sm-5 d-block"
+                                                src="{{ asset('storage/' . $row->image) }}" alt="gambar bukti" />
+                                        </a>
                                 </div>
-
-
+                                <!-- Menampilkan popup gambar -->
+                                <div class="overlay" id="gambar-1">
+                                    <a href="#" class="close">
+                                        <svg style="width:47px;height:47px" viewBox="0 0 24 24">
+                                            <path fill="currentColor"
+                                                d="M12,20C7.59,20 4,16.41 4,12C4,7.59 7.59,4 12,4C16.41,4 20,7.59 20,12C20,16.41 16.41,20 12,20M12,2C6.47,2 2,6.47 2,12C2,17.53 6.47,22 12,22C17.53,22 22,17.53 22,12C22,6.47 17.53,2 12,2M14.59,8L12,10.59L9.41,8L8,9.41L10.59,12L8,14.59L9.41,16L12,13.41L14.59,16L16,14.59L13.41,12L16,9.41L14.59,8Z" />
+                                        </svg>
+                                    </a>
+                                    <img src="{{ asset('storage/' . $row->image) }}" alt="Nelayan Kode">
+                                </div>
 
                                 <div class="col-12 d-flex justify-content-end">
                                     <a class="btn btn-light-secondary me-1 mb-1" href="/pesanan"

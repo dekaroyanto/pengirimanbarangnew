@@ -2,6 +2,9 @@
 <html lang="en">
 
 <head>
+
+
+
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>CV Firmos</title>
@@ -86,7 +89,7 @@
                 <div class="sidebar-menu">
                     <ul class="menu">
                         <li class="sidebar-title">Menu</li>
-                        @if (auth()->user()->role == 'admin')
+                        @if (auth()->user()->role == 'Admin')
                             <li class="{{ request()->is('/') ? 'sidebar-item active' : '' }}">
                                 <a href="/" class="sidebar-link">
                                     <i class="bi bi-grid-fill"></i>
@@ -95,7 +98,7 @@
                             </li>
                         @endif
 
-                        @if (auth()->user()->role == 'admin')
+                        @if (auth()->user()->role == 'Admin')
                             <li class="{{ request()->is('datapelanggan') ? 'sidebar-item active' : '' }}">
                                 <a href="/datapelanggan" class="sidebar-link" style="text-decoration: none">
                                     <i class="bi bi-people-fill"></i>
@@ -118,7 +121,7 @@
                                     </a>
                                 </li>
 
-                                @if (auth()->user()->role == 'admin')
+                                @if (auth()->user()->role == 'Admin')
                                     <li class="submenu-item {{ request()->is('tambahpesanan') ? 'active' : '' }}">
                                         <a href="/tambahpesanan" class="submenu-link"
                                             style="text-decoration: none">Tambah Pesanan</a>
@@ -128,7 +131,7 @@
                         </li>
 
 
-                        @if (auth()->user()->role == 'admin')
+                        @if (auth()->user()->role == 'Admin')
                             <li class="{{ request()->is('datakurir') ? 'sidebar-item active' : '' }}">
                                 <a href="/datakurir" class="sidebar-link">
                                     <i class="bi bi-person-fill-gear"></i>
@@ -137,7 +140,7 @@
                             </li>
                         @endif
 
-                        @if (auth()->user()->role == 'admin')
+                        @if (auth()->user()->role == 'Admin')
                             <li class="{{ request()->is('datakendaraan') ? 'sidebar-item active' : '' }}">
                                 <a href="/datakendaraan" class="sidebar-link">
                                     <i class="bi bi-car-front-fill"></i>
@@ -146,7 +149,7 @@
                             </li>
                         @endif
 
-                        @if (auth()->user()->role == 'admin')
+                        @if (auth()->user()->role == 'Admin')
                             <li class="{{ request()->is('register') ? 'sidebar-item active' : '' }}">
                                 <a href="/register" class="sidebar-link">
                                     <i class="bi bi-person-fill-add"></i>
@@ -155,7 +158,7 @@
                             </li>
                         @endif
 
-                        @if (auth()->user()->role == 'admin')
+                        @if (auth()->user()->role == 'Admin')
                             <li class="{{ request()->is('cetak-pesanan-form') ? 'sidebar-item active' : '' }}">
                                 <a href="/cetak-pesanan-form" class="sidebar-link">
                                     <i class="bi bi-printer-fill"></i>
@@ -182,22 +185,6 @@
                         </button>
                         <div class="collapse navbar-collapse" id="navbarSupportedContent">
                             <ul class="navbar-nav ms-auto mb-lg-0">
-                                <li class="nav-item dropdown me-1">
-                                    <a class="nav-link active dropdown-toggle text-gray-600" href="#"
-                                        data-bs-toggle="dropdown" aria-expanded="false">
-                                        <i class="bi bi-envelope bi-sub fs-4"></i>
-                                    </a>
-                                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton">
-                                        <li>
-                                            <h6 class="dropdown-header">
-                                                Mail
-                                            </h6>
-                                        </li>
-                                        <li>
-                                            <a class="dropdown-item" href="#">No new mail</a>
-                                        </li>
-                                    </ul>
-                                </li>
                                 <li class="nav-item dropdown me-3">
                                     <a class="nav-link active dropdown-toggle text-gray-600" href="/datapesanan"
                                         data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false">
@@ -284,24 +271,6 @@
                                             </h6>
                                         @endif
 
-                                    </li>
-                                    <li>
-                                        <a class="dropdown-item" href="#"><i
-                                                class="icon-mid bi bi-person me-2"></i>
-                                            My Profile</a>
-                                    </li>
-                                    <li>
-                                        <a class="dropdown-item" href="#"><i
-                                                class="icon-mid bi bi-gear me-2"></i>
-                                            Settings</a>
-                                    </li>
-                                    <li>
-                                        <a class="dropdown-item" href="#"><i
-                                                class="icon-mid bi bi-wallet me-2"></i>
-                                            Wallet</a>
-                                    </li>
-                                    <li>
-                                        <hr class="dropdown-divider" />
                                     </li>
                                     <li>
                                         <a class="dropdown-item" href="/logout"><i

@@ -17,6 +17,7 @@ class CreatePelanggansTable extends Migration
             $table->id();
             $table->string('namapelanggan');
             $table->bigInteger('notelp');
+            $table->string('emailpelanggan');
             $table->string('alamatpelanggan');
             $table->timestamps();
         });

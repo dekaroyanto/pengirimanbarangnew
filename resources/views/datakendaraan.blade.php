@@ -51,13 +51,6 @@
                                             data-bs-target="#exampleModal2">Tambah Data</a>
                                     </div>
                                 </div>
-                                <div class="col-md-auto">
-                                    <div class="input-group mb-3">
-                                        <a href="/tambahkendaraan" class="btn icon icon-left btn-outline-secondary"
-                                            data-bs-toggle="modal" data-bs-target="#exampleModal2"><i
-                                                data-feather="file"></i> Download</a>
-                                    </div>
-                                </div>
 
 
                             </div>

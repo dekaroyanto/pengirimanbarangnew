@@ -26,7 +26,7 @@ use App\Models\Kendaraan;
 
 
 
-Route::group(['middleware' => ['auth', 'hakakses:admin']], function () {
+Route::group(['middleware' => ['auth', 'hakakses:Admin']], function () {
 
     //PESANAN
     Route::get('/', function () {
@@ -34,10 +34,11 @@ Route::group(['middleware' => ['auth', 'hakakses:admin']], function () {
         $jumlahpesanan = Pesanan::count();
         $jumlahkurir = Kurir::count();
         $jumlahkendaraan = Kendaraan::count();
+        $jumlahpelanggan = Pelanggan::count();
         $data = Pesanan::latest()->paginate(3);
         $infopesanan = Pesanan::latest()->paginate(1);
         $infopelanggan = Pelanggan::latest()->paginate(1);
-        return view('welcome', compact('jumlahpesanan', 'jumlahkurir', 'jumlahkendaraan', 'data', 'infopesanan', 'infopelanggan'));
+        return view('welcome', compact('jumlahpesanan', 'jumlahpelanggan', 'jumlahkurir', 'jumlahkendaraan', 'data', 'infopesanan', 'infopelanggan'));
     });
     Route::get('/tambahpesanan', [PesananController::class, 'tambahpesanan'])->name('tambahpesanan');
     Route::post('/insertpesanan', [PesananController::class, 'insertpesanan'])->name('insertpesanan');
@@ -50,7 +51,7 @@ Route::group(['middleware' => ['auth', 'hakakses:admin']], function () {
     Route::post('/registeruser', [LoginController::class, 'registeruser'])->name('registeruser');
     Route::get('/register', [LoginController::class, 'index']);
     Route::get('/deleteuser/{id}', [LoginController::class, 'deleteuser'])->name('deleteuser');
-    Route::post('/deleteuser/{id}', [LoginController::class, 'deleteuser'])->name('deleteuser');
+    Route::post('/updateuser/{id}', [LoginController::class, 'updateuser'])->name('updateuser');
 
     //PELANGGAN
     Route::get('/tambahpelanggan', [PelangganController::class, 'create'])->name('tambahpelanggan');
@@ -93,6 +94,7 @@ Route::get('/pesanan', [PesananController::class, 'index'])->name('pesanan')->mi
 
 
 Route::get('/tampilkanpesanan/{id}', [PesananController::class, 'tampilkanpesanan'])->name('tampilkanpesanan')->middleware('auth');
+Route::get('/detailpesanan/{id}', [PesananController::class, 'detailpesanan'])->name('detailpesanan')->middleware('auth');
 Route::post('/updatepesanan/{id}', [PesananController::class, 'updatepesanan'])->name('updatepesanan')->middleware('auth');
 
 
