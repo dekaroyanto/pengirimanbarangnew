@@ -30,23 +30,8 @@
                         <div class="card-content mt-2">
                             {{-- {{ Session::get('halaman_url') }} --}}
                             <div class="row">
-                                <div class="col-md-4 mb-1">
-                                    <form action="/kendaraan" method="GET">
-                                        <div class="input-group mb-3 ms-3">
-
-                                            <span class="input-group-text" id="basic-addon1"><i
-                                                    class="bi bi-search"></i></span>
-                                            <input type="search" name="search" class="form-control"
-                                                placeholder="Cari data..." aria-label="Recipient's username"
-                                                aria-describedby="button-addon2" value="{{ request('search') }}" />
-                                            <button class="btn btn-outline-secondary" type="submit" id="button-addon2">
-                                                Cari
-                                            </button>
-                                        </div>
-                                    </form>
-                                </div>
                                 <div class="col-md-auto">
-                                    <div class="input-group mb-3">
+                                    <div class="input-group mb-3 ms-2">
                                         <a href="/tambahkendaraan" class="btn btn-outline-secondary" data-bs-toggle="modal"
                                             data-bs-target="#exampleModal2">Tambah Data</a>
                                     </div>
@@ -62,7 +47,7 @@
 
                                             <!-- table striped -->
                                             <div class="table-responsive">
-                                                <table class="table table-striped mb-0">
+                                                <table class="table table-striped mb-0" id="table1">
                                                     <thead class="text-center">
                                                         <tr>
                                                             <th>No</th>
@@ -80,7 +65,7 @@
                                                         @endphp
 
                                                         @foreach ($dataken as $index => $row)
-                                                            <tr class="text-center">
+                                                            <tr>
                                                                 <th scope="row">{{ $index + $dataken->firstItem() }}</th>
 
                                                                 <td>{{ $row->platno }}</td>
@@ -104,7 +89,7 @@
                                                                     <a href="{{ route('deletekendaraan', $row->id) }}"
                                                                         class="btn btn-danger delete" id="delete"
                                                                         data-id="{{ $row->id }}"
-                                                                        data-nama="{{ $row->nama }}"><i
+                                                                        data-nama="{{ $row->platno }}"><i
                                                                             class="bi bi-trash3"></i></a>
                                                                 </td>
                                                             </tr>
@@ -129,7 +114,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title" id="exampleModalLabel">Data Kendaraan</h1>
+                    <h1 class="modal-title" id="exampleModalLabel">Tambah Data Kendaraan</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -149,9 +134,15 @@
                                                             <div class="form-group">
                                                                 <label>Plat Nomor</label>
                                                                 <div class="position-relative">
-                                                                    <input type="text" name="platno"
-                                                                        class="form-control"
+                                                                    <input value="{{ old('platno') }}" type="text"
+                                                                        name="platno"
+                                                                        class="form-control @error('platno') is-invalid @enderror"
                                                                         placeholder="Masukan Plat Nomor" />
+                                                                    @error('platno')
+                                                                        <div class="invalid-feedback">
+                                                                            {{ $message }}
+                                                                        </div>
+                                                                    @enderror
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -163,15 +154,26 @@
                                                                 <option value="Motor">Motor</option>
                                                                 <option value="Mobil">Mobil</option>
                                                             </select>
+                                                            @error('jenis')
+                                                                <div class="invalid-feedback">
+                                                                    {{ $message }}
+                                                                </div>
+                                                            @enderror
                                                         </div>
                                                     </div>
                                                     <div class="col-12">
                                                         <div class="form-group">
                                                             <label>Merk</label>
                                                             <div class="position-relative">
-                                                                <input type="text" name="merk" class="form-control"
+                                                                <input value="{{ old('merk') }}" type="text"
+                                                                    name="merk"
+                                                                    class="form-control @error('merk') is-invalid @enderror "
                                                                     placeholder="Masukan Merk" id="first-name-icon" />
-
+                                                                @error('merk')
+                                                                    <div class="invalid-feedback">
+                                                                        {{ $message }}
+                                                                    </div>
+                                                                @enderror
                                                             </div>
                                                         </div>
                                                     </div>
@@ -179,8 +181,15 @@
                                                         <div class="form-group">
                                                             <label>Model</label>
                                                             <div class="position-relative">
-                                                                <input type="text" name="model" class="form-control"
+                                                                <input value="{{ old('model') }}" type="text"
+                                                                    name="model"
+                                                                    class="form-control @error('model') is-invalid @enderror"
                                                                     placeholder="Masukan Model" id="first-name-icon" />
+                                                                @error('model')
+                                                                    <div class="invalid-feedback">
+                                                                        {{ $message }}
+                                                                    </div>
+                                                                @enderror
                                                             </div>
                                                         </div>
                                                     </div>
@@ -188,8 +197,15 @@
                                                         <div class="form-group">
                                                             <label>Warna</label>
                                                             <div class="position-relative">
-                                                                <input type="text" name="warna" class="form-control"
+                                                                <input value="{{ old('warna') }}" type="text"
+                                                                    name="warna"
+                                                                    class="form-control @error('warna') is-invalid @enderror"
                                                                     placeholder="Masukan Warna" id="first-name-icon" />
+                                                                @error('warna')
+                                                                    <div class="invalid-feedback">
+                                                                        {{ $message }}
+                                                                    </div>
+                                                                @enderror
                                                             </div>
                                                         </div>
                                                     </div>
@@ -220,7 +236,7 @@
     @foreach ($dataken as $index => $row)
         <div class="modal fade" id="exampleModalDetail{{ $row->id }}" tabindex="-1"
             aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-xl">
+            <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="exampleModalLabel">Detail kendaraan</h5>
@@ -231,7 +247,7 @@
                             enctype="multipart/form-data">
                             @csrf
                             <div class="row">
-                                <div class="col-md-6 col-12">
+                                <div class=" col-12">
                                     <div class="form-group">
                                         <label for="exampleInputEmail1" class="form-label">Plat Nomor</label>
                                         <input type="text" name="platno" class="form-control"
@@ -239,7 +255,7 @@
                                             value="{{ $row->platno }}" readonly>
                                     </div>
                                 </div>
-                                <div class="col-md-6 col-12">
+                                <div class=" col-12">
                                     <div class="form-group">
                                         <label for="exampleInputEmail1" class="form-label">Jenis</label>
                                         <input type="text" name="jenis" class="form-control"
@@ -247,7 +263,7 @@
                                             value="{{ $row->jenis }}" readonly>
                                     </div>
                                 </div>
-                                <div class="col-md-6 col-12">
+                                <div class=" col-12">
                                     <div class="form-group">
                                         <label for="exampleInputEmail1" class="form-label">Merk</label>
                                         <input type="text" name="merk" class="form-control"
@@ -255,7 +271,7 @@
                                             value="{{ $row->merk }}" readonly>
                                     </div>
                                 </div>
-                                <div class="col-md-6 col-12">
+                                <div class=" col-12">
                                     <div class="form-group">
                                         <label for="exampleInputEmail1" class="form-label">Model</label>
                                         <input type="text" name="jenis" class="form-control"
@@ -263,7 +279,7 @@
                                             value="{{ $row->model }}" readonly>
                                     </div>
                                 </div>
-                                <div class="col-md-6 col-12">
+                                <div class=" col-12">
                                     <div class="form-group">
                                         <label for="exampleInputEmail1" class="form-label">Warna</label>
                                         <input type="text" name="warna" class="form-control"
@@ -288,10 +304,10 @@
     @foreach ($dataken as $index => $row)
         <div class="modal fade" id="exampleModalUbah{{ $row->id }}" tabindex="-1"
             aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-xl">
+            <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Detail kendaraan</h5>
+                        <h5 class="modal-title" id="exampleModalLabel">Edit Data Kendaraan</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
@@ -299,15 +315,21 @@
                             enctype="multipart/form-data">
                             @csrf
                             <div class="row">
-                                <div class="col-md-6 col-12">
+                                <div class=" col-12">
                                     <div class="form-group">
                                         <label for="exampleInputEmail1" class="form-label">Plat Nomor</label>
-                                        <input type="text" name="platno" class="form-control"
+                                        <input type="text" name="platno"
+                                            class="form-control @error('platno') is-invalid @enderror"
                                             id="exampleInputEmail1" aria-describedby="emailHelp"
                                             value="{{ $row->platno }}">
+                                        @error('platno')
+                                            <div class="invalid-feedback">
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
                                     </div>
                                 </div>
-                                <div class="col-md-6 col-12">
+                                <div class=" col-12">
                                     <div class="form-group">
                                         <label for="exampleInputEmail1" class="form-label">Jenis</label>
                                         <select class="form-select" name="jenis" aria-label="Default select example">
@@ -334,28 +356,46 @@
                                         </select>
                                     </div>
                                 </div>
-                                <div class="col-md-6 col-12">
+                                <div class=" col-12">
                                     <div class="form-group">
                                         <label for="exampleInputEmail1" class="form-label">Merk</label>
-                                        <input type="text" name="merk" class="form-control"
+                                        <input type="text" name="merk"
+                                            class="form-control @error('merk') is-invalid @enderror"
                                             id="exampleInputEmail1" aria-describedby="emailHelp"
                                             value="{{ $row->merk }}">
+                                        @error('merk')
+                                            <div class="invalid-feedback">
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
                                     </div>
                                 </div>
-                                <div class="col-md-6 col-12">
+                                <div class=" col-12">
                                     <div class="form-group">
                                         <label for="exampleInputEmail1" class="form-label">Model</label>
-                                        <input type="text" name="model" class="form-control"
+                                        <input type="text" name="model"
+                                            class="form-control @error('model') is-invalid @enderror"
                                             id="exampleInputEmail1" aria-describedby="emailHelp"
                                             value="{{ $row->model }}">
+                                        @error('model')
+                                            <div class="invalid-feedback">
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
                                     </div>
                                 </div>
-                                <div class="col-md-6 col-12">
+                                <div class=" col-12">
                                     <div class="form-group">
                                         <label for="exampleInputEmail1" class="form-label">Warna</label>
-                                        <input type="text" name="warna" class="form-control"
+                                        <input type="text" name="warna"
+                                            class="form-control @error('warna') is-invalid @enderror"
                                             id="exampleInputEmail1" aria-describedby="emailHelp"
                                             value="{{ $row->warna }}">
+                                        @error('warna')
+                                            <div class="invalid-feedback">
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
                                     </div>
                                 </div>
                                 <div class="col-12 d-flex justify-content-end">

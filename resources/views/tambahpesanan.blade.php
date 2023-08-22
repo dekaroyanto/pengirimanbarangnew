@@ -201,7 +201,7 @@
                                             </label>
                                             <input type="date" name="tgl_msk"
                                                 class="form-control mb-3 flatpickr-no-config @error('tgl_msk') is-invalid @enderror "
-                                                placeholder="Masukan Tanggal" readonly />
+                                                placeholder="Masukan Tanggal" />
                                             @error('tgl_msk')
                                                 <div class="invalid-feedback">
                                                     {{ $message }}

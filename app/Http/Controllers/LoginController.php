@@ -30,10 +30,22 @@ class LoginController extends Controller
 
     public function loginproses(Request $request)
     {
-        if (Auth::attempt($request->only('username', 'password'))) {
+        // if (Auth::attempt($request->only('username', 'password'))) {
+        //     return redirect('/');
+        // }
+        // return redirect('login');
+
+
+        $credentials = $request->only('username', 'password');
+
+        if (Auth::attempt($credentials)) {
+            $request->session()->regenerate();
             return redirect('/');
         }
-        return redirect('login');
+
+        return back()->withErrors([
+            'loginError' => 'Username atau password salah'
+        ]);
     }
 
     public function register()
@@ -43,6 +55,18 @@ class LoginController extends Controller
 
     public function registeruser(Request $request)
     {
+        $validated = $request->validate([
+            'name' => 'required',
+            'email' => 'required',
+            'username' => 'required|unique:users',
+            'password' => 'required',
+        ], [
+            'name.required' => 'Masukan nama',
+            'email.required' => 'Masukan email',
+            'username.required' => 'Masukan username',
+            'username.unique' => 'Username tidak boleh sama',
+            'password.required' => 'Masukan password'
+        ]);
         User::create([
             'name' => $request->name,
             'email' => $request->email,
@@ -70,6 +94,17 @@ class LoginController extends Controller
 
     public function updateuser(Request $request, $id)
     {
+        $validated = $request->validate([
+            'name' => 'required',
+            'email' => 'required',
+            'username' => 'required',
+            'password' => 'required',
+        ], [
+            'name.required' => 'Masukan nama',
+            'email.required' => 'Masukan email',
+            'username.required' => 'Masukan username',
+            'passowrd.required' => 'Masukan password'
+        ]);
         $user = User::find($id);
         $user->name = $request->name;
         $user->email = $request->email;

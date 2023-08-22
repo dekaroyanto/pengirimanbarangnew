@@ -173,11 +173,13 @@
                                                 Pesanan Masuk
                                             </label>
                                             <input type="date" name="tgl_msk" id="tanggal"
-                                                class="form-control mb-3 flatpickr-no-config"
+                                                class="form-control mb-3 flatpickr-no-config @error('kdpsn') is-invalid @enderror"
                                                 value="{{ $data->tgl_msk }}" />
-                                            <div class="invalid-feedback">
-                                                Masukan tanggal dengan benar.
-                                            </div>
+                                            @error('kdpsn')
+                                                <div class="invalid-feedback">
+                                                    {{ $message }}
+                                                </div>
+                                            @enderror
                                         </div>
                                     </div>
 
@@ -259,7 +261,8 @@
                                             <div class="row mb-2 ulangin">
                                                 <div class="col">
                                                     <input type="text" name="pesananku[]" id="pesanan"
-                                                        class="form-control barang" value="{{ $item }}">
+                                                        class="form-control barang" value="{{ $item }}" required>
+
                                                 </div>
                                             </div>
                                         @endforeach
@@ -270,7 +273,7 @@
                                             <div class="row mb-2 ulangin">
                                                 <div class="col">
                                                     <input type="text" name="jumlahku[]" id="pesanan"
-                                                        class="form-control jumlah" value="{{ $item }}">
+                                                        class="form-control jumlah" value="{{ $item }}" required>
                                                 </div>
                                             </div>
                                         @endforeach

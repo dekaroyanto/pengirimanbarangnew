@@ -57,8 +57,6 @@ class PesananController extends Controller
 
     public function cetakPesananPertanggal($tglawal, $tglakhir)
     {
-        // dd("Tanggal Awal: " . $tglawal, "Tanggal Akhir: " . $tglakhir);
-
         $data = Pesanan::latest()->get();
         $datakurir = Kurir::all();
         $datakendaraan = Kendaraan::all();
@@ -93,19 +91,20 @@ class PesananController extends Controller
         return view('tambahpesanan', compact('infopesanan', 'infopelanggan', 'datapelanggan', 'datakurir', 'datakendaraan'));
     }
 
-
     public function insertpesanan(Request $request)
     {
         $validated = $request->validate([
             'kdpsn' => 'required|unique:pesanans',
             'tgl_msk' => 'required',
-            'image' => 'image|file|max:5000'
+            'image' => 'image|file|max:5000',
+            'image' => 'required'
         ], [
-            'kdpsn.required' => 'Kode Pesanan tidak boleh kosong!',
-            'kdpsn.unique' => 'Kode Pesanan tidak boleh sama!',
-            'tgl_msk.required' => 'Masukan tanggal!',
-        ]);
+            'kdpsn.required' => 'Kode Pesanan tidak boleh kosong',
+            'kdpsn.unique' => 'Kode Pesanan tidak boleh sama',
+            'tgl_msk.required' => 'Masukan tanggal masuk',
+            'image.required' => 'Masukan foto',
 
+        ]);
 
         $pelanggan = $request->id_pelanggans;
         $kurir = $request->id_kurirs;
@@ -159,18 +158,18 @@ class PesananController extends Controller
         return view('tampilpesanan', compact('data', 'datakurir', 'datapelanggan', 'infopesanan', 'infopelanggan', 'datakendaraan'));
     }
 
-
     public function updatepesanan(Request $request, $id)
     {
-
         $validated = $request->validate([
+            'kdpsn' => 'required',
             'tgl_msk' => 'required',
-            'image' => 'image|file|max:5000'
+            'image' => 'image|file|max:5000',
+            'image' => 'required'
         ], [
+            'kdpsn.required' => 'Kode Pesanan tidak boleh kosong',
+            'tgl_msk.required' => 'Masukan tanggal masuk',
+            'image.required' => 'Masukan foto',
 
-            'tgl_msk.required' => 'Masukan tanggal!',
-            // 'start_date.required' => 'Masukan Tanggal!',
-            // 'end_date.required' => 'Masukan Tanggal'
         ]);
         $data = Pesanan::all();
         $datakurir = Kurir::all();
@@ -180,16 +179,12 @@ class PesananController extends Controller
         $infopelanggan = Pelanggan::latest()->paginate(1);
 
         $pelanggan = $request->id_pelanggans;
-        // $pelanggans1 = new  Pelanggan(['id_pelanggans' => $pelanggan]);
         $kurir = $request->id_kurirs;
         $kendaraan = $request->id_kendaraans;
 
         $pelanggans1 = Pelanggan::find($pelanggan);
         $kurirs1 = Kurir::find($kurir);
         $kendaraans1 = Kendaraan::find($kendaraan);
-        // dd($kurir, $request);
-
-
 
         $pesanan = Pesanan::find($id);
         $pesanan->kdpsn = $request->kdpsn;
@@ -202,18 +197,12 @@ class PesananController extends Controller
         $pesanan->image = $request->file('image')->store('post-images');
         $pesanan->tgl_krm = $request->tgl_krm;
         $pesanan->tgl_trm = $request->tgl_trm;
-        // dd($pesanan);
-        // dd($request);
 
         $pesanan->pelanggans()->associate($pelanggans1);
         $pesanan->kurirs()->associate($kurirs1);
         $pesanan->kendaraans()->associate($kendaraans1);
         $pesanan->save();
 
-        // if (session('halaman_url')) {
-        //     return Redirect(session('halaman_url'))->with('success', 'Data Berhasil Di Ubah');
-        // }
-        // return view('pesanan', compact('data'))->with('success', 'Data Berhasil Di Ubah');
         return redirect()->route('pesanan')->with('success', 'Data Berhasil Di Ubah');
     }
 

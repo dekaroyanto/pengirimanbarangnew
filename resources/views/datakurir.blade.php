@@ -27,23 +27,8 @@
                         </div>
                         <div class="card-content mt-2">
                             <div class="row">
-                                <div class="col-md-4 mb-1">
-                                    <form action="/kurir" method="GET">
-                                        <div class="input-group mb-3 ms-3">
-
-                                            <span class="input-group-text" id="basic-addon1"><i
-                                                    class="bi bi-search"></i></span>
-                                            <input type="search" name="search" class="form-control"
-                                                placeholder="Cari data..." aria-label="Recipient's username"
-                                                aria-describedby="button-addon2" value="{{ request('search') }}" />
-                                            <button class="btn btn-outline-secondary" type="submit" id="button-addon2">
-                                                Cari
-                                            </button>
-                                        </div>
-                                    </form>
-                                </div>
                                 <div class="col-md-auto">
-                                    <div class="input-group mb-3">
+                                    <div class="input-group mb-3 ms-2">
                                         <a href="/tambahkurir" class="btn btn-outline-secondary" data-bs-toggle="modal"
                                             data-bs-target="#exampleModal2">Tambah Data</a>
                                     </div>
@@ -58,7 +43,7 @@
 
                                             <!-- table striped -->
                                             <div class="table-responsive">
-                                                <table class="table table-striped mb-0">
+                                                <table class="table table-striped mb-0" id="table1">
                                                     <thead class="text-center">
                                                         <tr>
                                                             <th>No</th>
@@ -76,7 +61,7 @@
                                                         @endphp
 
                                                         @foreach ($datak as $index => $row)
-                                                            <tr class="text-center">
+                                                            <tr>
                                                                 <th scope="row">{{ $index + $datak->firstItem() }}</th>
 
                                                                 <td>{{ $row->nik }}</td>
@@ -125,7 +110,7 @@
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title" id="exampleModalLabel">Data Kurir</h1>
+                    <h1 class="modal-title" id="exampleModalLabel">Tambah Data Kurir</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -144,33 +129,59 @@
                                                         <div class="col-12">
                                                             <label class="form-label">NIK</label>
                                                             <div class="position-relative">
-                                                                <input type="text" name="nik" type="number"
-                                                                    class="form-control" placeholder="Masukan NIK"
-                                                                    id="first-name-icon" />
+                                                                <input value="{{ old('nik') }}" type="text"
+                                                                    name="nik" type="number"
+                                                                    class="form-control @error('nik') is-invalid @enderror"
+                                                                    placeholder="Masukan NIK" id="first-name-icon" />
+                                                                @error('nik')
+                                                                    <div class="invalid-feedback">
+                                                                        {{ $message }}
+                                                                    </div>
+                                                                @enderror
                                                             </div>
                                                         </div>
                                                         <div class="col-12">
                                                             <label class="form-label">Nama Lengkap</label>
                                                             <div class="position-relative">
-                                                                <input type="text" name="nama" class="form-control"
+                                                                <input value="{{ old('nama') }}" type="text"
+                                                                    name="nama"
+                                                                    class="form-control @error('nama') is-invalid @enderror"
                                                                     placeholder="Masukan Nama" id="first-name-icon" />
+                                                                @error('nama')
+                                                                    <div class="invalid-feedback">
+                                                                        {{ $message }}
+                                                                    </div>
+                                                                @enderror
                                                             </div>
                                                         </div>
 
                                                         <div class="col-12">
                                                             <label class="form-label">No Telepon</label>
                                                             <div class="position-relative">
-                                                                <input type="text" name="notelpkurir" type="number"
-                                                                    class="form-control" placeholder="Masukan No Telepon"
+                                                                <input value="{{ old('notelpkurir') }}" type="text"
+                                                                    name="notelpkurir" type="number"
+                                                                    class="form-control @error('notelpkurir') is-invalid @enderror"
+                                                                    placeholder="Masukan No Telepon"
                                                                     id="first-name-icon" />
+                                                                @error('notelpkurir')
+                                                                    <div class="invalid-feedback">
+                                                                        {{ $message }}
+                                                                    </div>
+                                                                @enderror
                                                             </div>
                                                         </div>
                                                         <div class="col-12">
                                                             <label class="form-label">Alamat Email</label>
                                                             <div class="position-relative">
-                                                                <input type="text" name="emailkurir"
-                                                                    class="form-control" placeholder="Masukan Email"
-                                                                    id="first-name-icon" />
+                                                                <input value="{{ old('emailkurir') }}" type="text"
+                                                                    name="emailkurir"
+                                                                    class="form-control  @error('emailkurir') is-invalid @enderror"
+                                                                    placeholder="Masukan Email" id="first-name-icon" />
+                                                                @error('emailkurir')
+                                                                    <div class="invalid-feedback">
+                                                                        {{ $message }}
+                                                                    </div>
+                                                                @enderror
                                                             </div>
                                                         </div>
 
@@ -192,10 +203,12 @@
                                                                 <textarea placeholder="Masukan Alamat Lengkap"
                                                                     class="form-control @error('alamatkurir') is-invalid
                                                             @enderror"
-                                                                    name="alamatkurir" id="exampleFormControlTextarea1" rows="3"></textarea>
-                                                                <div class="invalid-feedback">
-                                                                    Masukan alamat dengan benar.
-                                                                </div>
+                                                                    name="alamatkurir" id="exampleFormControlTextarea1" rows="3">{{ old('alamatkurir') }}</textarea>
+                                                                @error('alamatkurir')
+                                                                    <div class="invalid-feedback">
+                                                                        {{ $message }}
+                                                                    </div>
+                                                                @enderror
                                                             </div>
                                                         </div>
                                                         <div class="col-12 d-flex justify-content-end">
@@ -281,7 +294,7 @@
                                 </div>
 
                                 <div class="col-12 d-flex justify-content-end">
-                                    <a class="btn btn-light-secondary me-1 mb-1" href="/pesanan"
+                                    <a class="btn btn-light-secondary me-1 mb-1" href="/datakurir"
                                         role="button">Kembali</a>
                                 </div>
                             </div>
@@ -313,6 +326,11 @@
                                         <input type="text" name="nik" class="form-control"
                                             id="exampleInputEmail1" aria-describedby="emailHelp"
                                             value="{{ $row->nik }}">
+                                        @error('nik')
+                                            <div class="invalid-feedback">
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
                                     </div>
                                 </div>
                                 <div class="col-12">
@@ -321,14 +339,24 @@
                                         <input type="text" name="nama" class="form-control"
                                             id="exampleInputEmail1" aria-describedby="emailHelp"
                                             value="{{ $row->nama }}">
+                                        @error('nama')
+                                            <div class="invalid-feedback">
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
                                     </div>
                                 </div>
                                 <div class="col-12">
                                     <div class="form-group">
-                                        <label for="exampleInputEmail1" class="form-label">Nama Kurir</label>
-                                        <input type="text" name="notelpkurir" class="form-control"
+                                        <label for="exampleInputEmail1" class="form-label">No Telepon</label>
+                                        <input type="number" name="notelpkurir" class="form-control"
                                             id="exampleInputEmail1" aria-describedby="emailHelp"
                                             value="{{ $row->notelpkurir }}">
+                                        @error('notelpkurir')
+                                            <div class="invalid-feedback">
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
                                     </div>
                                 </div>
                                 <div class="col-12">
@@ -337,6 +365,11 @@
                                         <input type="text" name="emailkurir" class="form-control"
                                             id="exampleInputEmail1" aria-describedby="emailHelp"
                                             value="{{ $row->emailkurir }}">
+                                        @error('emailkurir')
+                                            <div class="invalid-feedback">
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
                                     </div>
                                 </div>
 
@@ -360,6 +393,11 @@
                                     <div class="form-group">
                                         <label for="exampleFormControlTextarea1" class="form-label">Alamat Lengkap</label>
                                         <textarea class="form-control" name="alamatkurir" id="exampleFormControlTextarea1" rows="3">{{ $row->alamatkurir }}</textarea>
+                                        @error('alamatkurir')
+                                            <div class="invalid-feedback">
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
                                     </div>
                                 </div>
                                 <div class="col-12 d-flex justify-content-end">

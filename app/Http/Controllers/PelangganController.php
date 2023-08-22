@@ -39,6 +39,18 @@ class PelangganController extends Controller
      */
     public function store(Request $request)
     {
+        $validated = $request->validate([
+            'namapelanggan' => 'required',
+            'notelp' => 'required',
+            'emailpelanggan' => 'required',
+            'alamatpelanggan' => 'required',
+        ], [
+            'namapelanggan.required' => 'Masukan nama pelanggan',
+            'notelp.required' => 'Masukan no telepon',
+            'emailpelanggan.required' => 'Masukan email',
+            'alamatpelanggan.required' => 'Masukan alamat'
+        ]);
+
         $datap = Pelanggan::create($request->all());
         return Redirect()->route('datapelanggan')->with('success', 'Data Berhasil Di Tambahkan');
     }
@@ -52,6 +64,17 @@ class PelangganController extends Controller
 
     public function updatepelanggan(Request $request, $id)
     {
+        $validated = $request->validate([
+            'namapelanggan' => 'required',
+            'notelp' => 'required',
+            'emailpelanggan' => 'required',
+            'alamatpelanggan' => 'required',
+        ], [
+            'namapelanggan.required' => 'Masukan nama pelanggan',
+            'notelp.required' => 'Masukan no telepon',
+            'emailpelanggan.required' => 'Masukan email',
+            'alamatpelanggan.required' => 'Masukan alamat'
+        ]);
         $datap = Pelanggan::find($id);
         $datap->update($request->all());
 

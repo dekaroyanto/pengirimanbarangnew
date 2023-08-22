@@ -41,6 +41,23 @@ class KurirController extends Controller
      */
     public function store(Request $request)
     {
+        $validated = $request->validate([
+            'nik' => 'required|unique:kurirs',
+            'nama' => 'required',
+            'emailkurir' => 'required',
+            'notelpkurir' => 'required',
+            'kelamin' => 'required',
+            'alamatkurir' => 'required',
+        ], [
+            'nik.required' => 'Masukan NIK',
+            'nik.unique' => 'NIK tidak boleh sama',
+            'nama.required' => 'Masukan nama',
+            'emailkurir.required' => 'Masukan email',
+            'notelpkurir.required' => 'Masukan no telepon',
+            'kelamin.required' => 'Masukan jenis kelamin',
+            'alamatkurir.required' => 'Masukan alamat',
+
+        ]);
         $datak = Kurir::create($request->all());
         return Redirect()->route('datakurir')->with('success', 'Data Berhasil Di Tambahkan');
     }
@@ -48,13 +65,28 @@ class KurirController extends Controller
     public function tampilkankurir($id)
     {
         $datak = Kurir::find($id);
-        // dd($data);
 
         return view('tampilkurir', compact('datak'));
     }
 
     public function updatekurir(Request $request, $id)
     {
+        $validated = $request->validate([
+            'nik' => 'required',
+            'nama' => 'required',
+            'emailkurir' => 'required',
+            'notelpkurir' => 'required',
+            'kelamin' => 'required',
+            'alamatkurir' => 'required',
+        ], [
+            'nik.required' => 'Masukan NIK',
+            'nama.required' => 'Masukan nama',
+            'emailkurir.required' => 'Masukan email',
+            'kelamin.required' => 'Masukan jenis kelamin',
+            'alamatkurir.required' => 'Masukan alamat',
+            'notelpkurir.required' => 'Masukan no telepon',
+
+        ]);
         $datak = Kurir::find($id);
         $datak->update($request->all());
 

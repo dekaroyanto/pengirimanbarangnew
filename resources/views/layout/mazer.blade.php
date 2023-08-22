@@ -153,7 +153,7 @@
                             <li class="{{ request()->is('register') ? 'sidebar-item active' : '' }}">
                                 <a href="/register" class="sidebar-link">
                                     <i class="bi bi-person-fill-add"></i>
-                                    <span>Tambah Akun</span>
+                                    <span>Data Akun</span>
                                 </a>
                             </li>
                         @endif

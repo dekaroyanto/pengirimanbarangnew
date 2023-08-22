@@ -2,13 +2,17 @@
 
 @section('content')
     <div class="page-content">
-        <div class="col-md-auto">
-            <div class="input-group mb-3">
-                <a href="/tambahpelanggan" class="btn btn-outline-secondary" data-bs-toggle="modal"
-                    data-bs-target="#exampleModal2">Tambah Data</a>
-            </div>
-        </div>
+
         <section class="section">
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
             <div class="row" id="table-striped">
                 <div class="col-12">
                     <div class="card">
@@ -18,10 +22,16 @@
                         </div>
 
                         <div class="card-content">
+                            <div class="col-md-auto">
+                                <div class="input-group mb-3 ms-2">
+                                    <a href="/tambahpelanggan" class="btn btn-outline-secondary" data-bs-toggle="modal"
+                                        data-bs-target="#exampleModal2">Tambah Data</a>
+                                </div>
+                            </div>
 
                             <!-- table striped -->
                             <div class="table-responsive">
-                                <table class="table table-striped mb-0">
+                                <table class="table table-striped mb-0" id="table1">
                                     <thead class="text-center">
                                         <tr>
                                             {{-- <th>No</th> --}}
@@ -38,7 +48,7 @@
                                         @endphp
 
                                         @foreach ($user as $index => $row)
-                                            <tr class="text-center">
+                                            <tr>
                                                 {{-- <th scope="row">{{ $index + $user->firstItem() }}</th> --}}
                                                 <td>{{ $row->name }}</td>
                                                 <td>{{ $row->username }}</td>
@@ -98,8 +108,15 @@
                                                             <div class="form-group has-icon-left">
                                                                 <label for="first-name-icon">Name</label>
                                                                 <div class="position-relative">
-                                                                    <input type="text" name="name"
-                                                                        class="form-control" id="first-name-icon" />
+                                                                    <input value="{{ old('name') }}" type="text"
+                                                                        name="name"
+                                                                        class="form-control @error('name') is-invalid @enderror"
+                                                                        id="first-name-icon" />
+                                                                    @error('name')
+                                                                        <div class="invalid-feedback">
+                                                                            {{ $message }}
+                                                                        </div>
+                                                                    @enderror
                                                                     <div class="form-control-icon">
                                                                         <i class="bi bi-person"></i>
                                                                     </div>
@@ -110,8 +127,15 @@
                                                             <div class="form-group has-icon-left">
                                                                 <label for="first-name-icon">Username</label>
                                                                 <div class="position-relative">
-                                                                    <input type="text" name="username"
-                                                                        class="form-control" id="first-name-icon" />
+                                                                    <input value="{{ old('username') }}" type="text"
+                                                                        name="username"
+                                                                        class="form-control @error('username') is-invalid @enderror"
+                                                                        id="first-name-icon" />
+                                                                    @error('username')
+                                                                        <div class="invalid-feedback">
+                                                                            {{ $message }}
+                                                                        </div>
+                                                                    @enderror
                                                                     <div class="form-control-icon">
                                                                         <i class="bi bi-person-vcard"></i>
                                                                     </div>
@@ -122,8 +146,15 @@
                                                             <div class="form-group has-icon-left">
                                                                 <label for="email-id-icon">Email</label>
                                                                 <div class="position-relative">
-                                                                    <input type="text" name="email"
-                                                                        class="form-control" id="email-id-icon" />
+                                                                    <input value="{{ old('email') }}" type="text"
+                                                                        name="email"
+                                                                        class="form-control @error('email') is-invalid @enderror"
+                                                                        id="email-id-icon" />
+                                                                    @error('username')
+                                                                        <div class="invalid-feedback">
+                                                                            {{ $message }}
+                                                                        </div>
+                                                                    @enderror
                                                                     <div class="form-control-icon">
                                                                         <i class="bi bi-envelope"></i>
                                                                     </div>
@@ -134,8 +165,15 @@
                                                             <div class="form-group has-icon-left">
                                                                 <label for="password-id-icon">Password</label>
                                                                 <div class="position-relative">
-                                                                    <input type="password" name="password"
-                                                                        class="form-control" id="password-id-icon" />
+                                                                    <input value="{{ old('email') }}" type="password"
+                                                                        name="password"
+                                                                        class="form-control @error('password') is-invalid @enderror"
+                                                                        id="password-id-icon" />
+                                                                    @error('password')
+                                                                        <div class="invalid-feedback">
+                                                                            {{ $message }}
+                                                                        </div>
+                                                                    @enderror
                                                                     <div class="form-control-icon">
                                                                         <i class="bi bi-lock"></i>
                                                                     </div>

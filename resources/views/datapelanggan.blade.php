@@ -28,23 +28,8 @@
                         <div class="card-content mt-2">
                             {{-- {{ Session::get('halaman_url') }} --}}
                             <div class="row">
-                                <div class="col-md-4 mb-1">
-                                    <form action="/pelanggan" method="GET">
-                                        <div class="input-group mb-3 ms-3">
-
-                                            <span class="input-group-text" id="basic-addon1"><i
-                                                    class="bi bi-search"></i></span>
-                                            <input type="search" name="search" class="form-control"
-                                                placeholder="Cari data..." aria-label="Recipient's username"
-                                                aria-describedby="button-addon2" value="{{ request('search') }}" />
-                                            <button class="btn btn-outline-secondary" type="submit" id="button-addon2">
-                                                Cari
-                                            </button>
-                                        </div>
-                                    </form>
-                                </div>
                                 <div class="col-md-auto">
-                                    <div class="input-group mb-3">
+                                    <div class="input-group mb-3 ms-2">
                                         <a href="/tambahpelanggan" class="btn btn-outline-secondary" data-bs-toggle="modal"
                                             data-bs-target="#exampleModal2">Tambah Data</a>
                                     </div>
@@ -60,7 +45,7 @@
 
                                             <!-- table striped -->
                                             <div class="table-responsive">
-                                                <table class="table table-striped mb-0">
+                                                <table class="table table-striped mb-0" id="table1">
                                                     <thead class="text-center">
                                                         <tr>
                                                             <th>No</th>
@@ -77,7 +62,7 @@
                                                         @endphp
 
                                                         @foreach ($datap as $index => $row)
-                                                            <tr class="text-center">
+                                                            <tr>
                                                                 <th scope="row">{{ $index + $datap->firstItem() }}</th>
 
                                                                 <td>{{ $row->namapelanggan }}</td>
@@ -146,18 +131,31 @@
                                                                 <label for="exampleInputEmail1" class="form-label">Nama
                                                                     Lengkap</label>
 
-                                                                <input type="text" name="namapelanggan"
-                                                                    class="form-control"
+                                                                <input value="{{ old('namapelanggan') }}" type="text"
+                                                                    name="namapelanggan"
+                                                                    class="form-control @error('namapelanggan') is-invalid @enderror"
                                                                     placeholder="Masukan Nama Lengkap" />
+                                                                @error('namapelanggan')
+                                                                    <div class="invalid-feedback">
+                                                                        {{ $message }}
+                                                                    </div>
+                                                                @enderror
                                                             </div>
                                                         </div>
                                                         <div class="col-12">
                                                             <div class="form-group">
                                                                 <label class="form-label">No Telepon</label>
                                                                 <div class="position-relative">
-                                                                    <input type="number" name="notelp"
-                                                                        class="form-control" placeholder="Masukan No Telp"
+                                                                    <input value="{{ old('notelp') }}" type="number"
+                                                                        name="notelp"
+                                                                        class="form-control @error('notelp') is-invalid @enderror"
+                                                                        placeholder="Masukan No Telp"
                                                                         id="first-name-icon" />
+                                                                    @error('notelp')
+                                                                        <div class="invalid-feedback">
+                                                                            {{ $message }}
+                                                                        </div>
+                                                                    @enderror
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -167,9 +165,15 @@
                                                                 <label for="exampleInputEmail1"
                                                                     class="form-label">Email</label>
 
-                                                                <input type="text" name="emailpelanggan"
-                                                                    class="form-control"
+                                                                <input value="{{ old('notelp') }}" type="text"
+                                                                    name="emailpelanggan"
+                                                                    class="form-control @error('emailpelanggan') is-invalid @enderror"
                                                                     placeholder="Masukan Alamat Email" />
+                                                                @error('emailpelanggan')
+                                                                    <div class="invalid-feedback">
+                                                                        {{ $message }}
+                                                                    </div>
+                                                                @enderror
                                                             </div>
                                                         </div>
 
@@ -177,13 +181,13 @@
                                                             <div class="form-group">
                                                                 <label for="exampleFormControlTextarea1"
                                                                     class="form-label">Alamat Lengkap</label>
-                                                                <textarea placeholder="Masukan Alamat Lengkap"
-                                                                    class="form-control @error('alamat') is-invalid
-                                                            @enderror"
-                                                                    name="alamatpelanggan" id="exampleFormControlTextarea1" rows="3"></textarea>
-                                                                <div class="invalid-feedback">
-                                                                    Masukan alamat dengan benar.
-                                                                </div>
+                                                                <textarea placeholder="Masukan Alamat Lengkap" class="form-control @error('alamatpelanggan') is-invalid @enderror"
+                                                                    name="alamatpelanggan" id="exampleFormControlTextarea1" rows="3">{{ old('alamatpelanggan') }}</textarea>
+                                                                @error('alamatpelanggan')
+                                                                    <div class="invalid-feedback">
+                                                                        {{ $message }}
+                                                                    </div>
+                                                                @enderror
                                                             </div>
                                                         </div>
                                                         <div class="col-12 d-flex justify-content-end">
@@ -288,31 +292,55 @@
                                 <div class="col-md-6 col-12">
                                     <div class="form-group">
                                         <label for="exampleInputEmail1" class="form-label">Nama Pelanggan</label>
-                                        <input type="text" name="namapelanggan" class="form-control"
+                                        <input type="text" name="namapelanggan"
+                                            class="form-control  @error('namapelanggan') is-invalid @enderror"
                                             id="exampleInputEmail1" aria-describedby="emailHelp"
                                             value="{{ $row->namapelanggan }}">
+                                        @error('namapelanggan')
+                                            <div class="invalid-feedback">
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
                                     </div>
                                 </div>
                                 <div class="col-md-6 col-12">
                                     <div class="form-group">
                                         <label for="exampleInputEmail1" class="form-label">No Telepon</label>
-                                        <input type="text" name="notelp" class="form-control"
+                                        <input type="text" name="notelp"
+                                            class="form-control @error('notelp') is-invalid @enderror"
                                             id="exampleInputEmail1" aria-describedby="emailHelp"
                                             value="0{{ $row->notelp }}">
+                                        @error('notelp')
+                                            <div class="invalid-feedback">
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
                                     </div>
                                 </div>
                                 <div class="col-md-6 col-12">
                                     <div class="form-group">
                                         <label for="exampleInputEmail1" class="form-label">Email</label>
-                                        <input type="text" name="emailpelanggan" class="form-control"
+                                        <input type="text" name="emailpelanggan"
+                                            class="form-control @error('namapelanggan') is-invalid @enderror"
                                             id="exampleInputEmail1" aria-describedby="emailHelp"
                                             value="{{ $row->emailpelanggan }}">
+                                        @error('notelp')
+                                            <div class="invalid-feedback">
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
                                     </div>
                                 </div>
                                 <div class="col-md-6 col-12">
                                     <div class="form-group">
                                         <label for="exampleFormControlTextarea1" class="form-label">Alamat Lengkap</label>
-                                        <textarea class="form-control" name="alamatpelanggan" id="exampleFormControlTextarea1" rows="3">{{ $row->alamatpelanggan }}</textarea>
+                                        <textarea class="form-control @error('namapelanggan') is-invalid @enderror" name="alamatpelanggan"
+                                            id="exampleFormControlTextarea1" rows="3">{{ $row->alamatpelanggan }}</textarea>
+                                        @error('notelp')
+                                            <div class="invalid-feedback">
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
                                     </div>
                                 </div>
                                 <div class="col-12 d-flex justify-content-end">

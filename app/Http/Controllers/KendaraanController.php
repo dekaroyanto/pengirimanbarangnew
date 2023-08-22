@@ -17,18 +17,6 @@ class KendaraanController extends Controller
      */
     public function index(Request $request)
     {
-        if ($request->has('search')) {
-            $data = Pesanan::where('kdpsn', 'LIKE', '%' . $request->search . '%')
-                ->orWhere('namabarang', 'LIKE', '%' . $request->search . '%')
-                ->orWhere('id_pelanggans', 'LIKE', '%' . $request->search . '%')
-                ->orWhere('status', 'LIKE', '%' . $request->search . '%')
-                ->latest()->paginate(5);
-            Session::put('halaman_url', request()->fullUrl());
-        } else {
-            $data = Pesanan::latest()->paginate(5);
-            Session::put('halaman_url', request()->fullUrl());
-        }
-
         $dataken = Kendaraan::paginate('5');
         $infopesanan = Pesanan::latest()->paginate(1);
         $infopelanggan = Pelanggan::latest()->paginate(1);
@@ -53,6 +41,20 @@ class KendaraanController extends Controller
      */
     public function store(Request $request)
     {
+        $validated = $request->validate([
+            'platno' => 'required|unique:kendaraans',
+            'jenis' => 'required',
+            'merk' => 'required',
+            'model' => 'required',
+            'warna' => 'required',
+        ], [
+            'platno.required' => 'Masukan plat nomor kendaraan',
+            'platno.unique' => 'plat nomor tidak boleh sama',
+            'jenis.required' => 'Masukan jenis kendaraan',
+            'merk.required' => 'Masukan merk kendaraan',
+            'model.required' => 'Masukan model kendaraan',
+            'warna.required' => 'Masukan warna kendaraan',
+        ]);
         $dataken = Kendaraan::create($request->all());
         return Redirect()->route('datakendaraan')->with('success', 'Data Berhasil Di Tambahkan');
     }
@@ -67,6 +69,19 @@ class KendaraanController extends Controller
 
     public function updatekendaraan(Request $request, $id)
     {
+        $validated = $request->validate([
+            'platno' => 'required',
+            'jenis' => 'required',
+            'merk' => 'required',
+            'model' => 'required',
+            'warna' => 'required',
+        ], [
+            'platno.required' => 'Masukan plat nomor kendaraan',
+            'jenis.required' => 'Masukan jenis kendaraan',
+            'merk.required' => 'Masukan merk kendaraan',
+            'model.required' => 'Masukan model kendaraan',
+            'warna.required' => 'Masukan warna kendaraan',
+        ]);
         $dataken = Kendaraan::find($id);
         $dataken->update($request->all());
 
