@@ -8,7 +8,7 @@
             width: 100%;
             height: 100%;
             /* justify-content: center;
-                                                                                                                                                    align-items: center; */
+                                                                                                                                                        align-items: center; */
         }
 
         img.imgthumb {
@@ -254,7 +254,7 @@
                                             <label for="exampleInputEmail1" class="form-label">No Telepon</label>
                                             <input type="text" name="id_pelanggans" class="form-control"
                                                 id="exampleInputEmail1" aria-describedby="emailHelp"
-                                                value="{{ $data->pelanggans->notelp }}" readonly>
+                                                value="0{{ $data->pelanggans->notelp }}" readonly>
                                         </div>
                                     </div>
                                     <div class="col-md-6 col-12">
