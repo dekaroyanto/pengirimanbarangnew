@@ -17,7 +17,7 @@ class KurirController extends Controller
      */
     public function index()
     {
-        $datak = Kurir::paginate('5');
+        $datak = Kurir::latest()->get();
         $infopesanan = Pesanan::latest()->paginate(1);
         $infopelanggan = Pelanggan::latest()->paginate(1);
         return view('datakurir', compact('datak', 'infopesanan', 'infopelanggan'));

@@ -1,6 +1,21 @@
 @extends('layout.mazer')
 
+@section('inijs')
+    <script src="{{ asset('mazer/assets/static/js/components/dark.js') }}"></script>
+    <script src="{{ asset('mazer/assets/extensions/perfect-scrollbar/perfect-scrollbar.min.js') }}"></script>
 
+    <script src="{{ asset('mazer/assets/compiled/js/app.js') }}"></script>
+    <script src="{{ asset('mazer/assets/extensions/flatpickr/flatpickr.min.js') }}"></script>
+    <script src="{{ asset('mazer/assets/static/js/pages/date-picker.js') }}"></script>
+
+    <script src="{{ asset('mazer/assets/static/js/components/dark.js') }}"></script>
+    <script src="{{ asset('mazer/assets/extensions/perfect-scrollbar/perfect-scrollbar.min.js') }}"></script>
+
+    <script src="{{ asset('mazer/assets/compiled/js/app.js') }}"></script>
+
+    <script src="{{ asset('mazer/assets/extensions/simple-datatables/umd/simple-datatables.js') }}"></script>
+    <script src="{{ asset('mazer/assets/static/js/pages/simple-datatables.js') }}"></script>
+@endsection
 
 @section('content')
     <div class="page-content">
@@ -46,7 +61,6 @@
                                                 <table class="table table-striped mb-0" id="table1">
                                                     <thead class="text-center">
                                                         <tr>
-                                                            <th>No</th>
                                                             <th>NIK</th>
                                                             <th>Nama Kurir</th>
                                                             <th>No Telepon</th>
@@ -62,7 +76,6 @@
 
                                                         @foreach ($datak as $index => $row)
                                                             <tr>
-                                                                <th scope="row">{{ $index + $datak->firstItem() }}</th>
 
                                                                 <td>{{ $row->nik }}</td>
                                                                 <td>{{ $row->nama }}</td>
@@ -92,7 +105,7 @@
                                                         @endforeach
                                                     </tbody>
                                                 </table>
-                                                {{ $datak->links() }}
+                                                {{-- {{ $datak->links() }} --}}
                                             </div>
                                         </div>
                                     </div>
@@ -161,8 +174,7 @@
                                                                 <input value="{{ old('notelpkurir') }}" type="text"
                                                                     name="notelpkurir" type="number"
                                                                     class="form-control @error('notelpkurir') is-invalid @enderror"
-                                                                    placeholder="Masukan No Telepon"
-                                                                    id="first-name-icon" />
+                                                                    placeholder="Masukan No Telepon" id="first-name-icon" />
                                                                 @error('notelpkurir')
                                                                     <div class="invalid-feedback">
                                                                         {{ $message }}

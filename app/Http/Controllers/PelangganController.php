@@ -15,7 +15,7 @@ class PelangganController extends Controller
      */
     public function index()
     {
-        $datap = Pelanggan::latest()->paginate('5');
+        $datap = Pelanggan::latest()->get();
         $infopesanan = Pesanan::latest()->paginate(1);
         $infopelanggan = Pelanggan::latest()->paginate(1);
         return view('datapelanggan', compact('datap', 'infopesanan', 'infopelanggan'));

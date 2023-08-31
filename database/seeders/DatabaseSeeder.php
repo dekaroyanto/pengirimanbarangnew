@@ -24,6 +24,8 @@ class DatabaseSeeder extends Seeder
     // }
     public function run()
     {
+        Pelanggan::factory(50)->create();
+
         Pesanan::create([
             'kdpsn' => 'KRM-10001',
             'namabarang' => 'Pesanan1',
@@ -52,19 +54,19 @@ class DatabaseSeeder extends Seeder
             'role' => 'Kurir',
         ]);
 
-        Pelanggan::create([
-            'namapelanggan' => 'pelanggan1',
-            'notelp' => '0882006487100',
-            'emailpelanggan' => 'pelanggan1@gmail.com',
-            'alamatpelanggan' => 'Cirebon',
-        ]);
+        // Pelanggan::create([
+        //     'namapelanggan' => 'pelanggan1',
+        //     'notelp' => '0882006487100',
+        //     'emailpelanggan' => 'pelanggan1@gmail.com',
+        //     'alamatpelanggan' => 'Cirebon',
+        // ]);
 
-        Pelanggan::create([
-            'namapelanggan' => 'pelanggan2',
-            'notelp' => '085316260660',
-            'emailpelanggan' => 'pelanggan2@gmail.com',
-            'alamatpelanggan' => 'Purbalingga',
-        ]);
+        // Pelanggan::create([
+        //     'namapelanggan' => 'pelanggan2',
+        //     'notelp' => '085316260660',
+        //     'emailpelanggan' => 'pelanggan2@gmail.com',
+        //     'alamatpelanggan' => 'Purbalingga',
+        // ]);
 
         Kurir::create([
             'nik' => '1234',
