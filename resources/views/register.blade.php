@@ -1,5 +1,22 @@
 @extends('layout.mazer')
 
+@section('inijs')
+    <script src="{{ asset('mazer/assets/static/js/components/dark.js') }}"></script>
+    <script src="{{ asset('mazer/assets/extensions/perfect-scrollbar/perfect-scrollbar.min.js') }}"></script>
+
+    <script src="{{ asset('mazer/assets/compiled/js/app.js') }}"></script>
+    <script src="{{ asset('mazer/assets/extensions/flatpickr/flatpickr.min.js') }}"></script>
+    <script src="{{ asset('mazer/assets/static/js/pages/date-picker.js') }}"></script>
+
+    <script src="{{ asset('mazer/assets/static/js/components/dark.js') }}"></script>
+    <script src="{{ asset('mazer/assets/extensions/perfect-scrollbar/perfect-scrollbar.min.js') }}"></script>
+
+    <script src="{{ asset('mazer/assets/compiled/js/app.js') }}"></script>
+
+    <script src="{{ asset('mazer/assets/extensions/simple-datatables/umd/simple-datatables.js') }}"></script>
+    <script src="{{ asset('mazer/assets/static/js/pages/simple-datatables.js') }}"></script>
+@endsection
+
 @section('content')
     <div class="page-content">
 

@@ -1,6 +1,21 @@
 @extends('layout.mazer')
 
+@section('inijs')
+    <script src="{{ asset('mazer/assets/static/js/components/dark.js') }}"></script>
+    <script src="{{ asset('mazer/assets/extensions/perfect-scrollbar/perfect-scrollbar.min.js') }}"></script>
 
+    <script src="{{ asset('mazer/assets/compiled/js/app.js') }}"></script>
+    <script src="{{ asset('mazer/assets/extensions/flatpickr/flatpickr.min.js') }}"></script>
+    <script src="{{ asset('mazer/assets/static/js/pages/date-picker.js') }}"></script>
+
+    <script src="{{ asset('mazer/assets/static/js/components/dark.js') }}"></script>
+    <script src="{{ asset('mazer/assets/extensions/perfect-scrollbar/perfect-scrollbar.min.js') }}"></script>
+
+    <script src="{{ asset('mazer/assets/compiled/js/app.js') }}"></script>
+
+    <script src="{{ asset('mazer/assets/extensions/simple-datatables/umd/simple-datatables.js') }}"></script>
+    <script src="{{ asset('mazer/assets/static/js/pages/simple-datatables.js') }}"></script>
+@endsection
 
 @section('content')
 
@@ -50,7 +65,6 @@
                                                 <table class="table table-striped mb-0" id="table1">
                                                     <thead class="text-center">
                                                         <tr>
-                                                            <th>No</th>
                                                             <th>Plat Nomor</th>
                                                             <th>Jenis</th>
                                                             <th>Merk</th>
@@ -66,7 +80,6 @@
 
                                                         @foreach ($dataken as $index => $row)
                                                             <tr>
-                                                                <th scope="row">{{ $index + $dataken->firstItem() }}</th>
 
                                                                 <td>{{ $row->platno }}</td>
                                                                 <td>{{ $row->jenis }}</td>
@@ -96,7 +109,7 @@
                                                         @endforeach
                                                     </tbody>
                                                 </table>
-                                                {{ $dataken->links() }}
+                                                {{-- {{ $dataken->links() }} --}}
                                             </div>
                                         </div>
                                     </div>

@@ -26,14 +26,16 @@ class DatabaseSeeder extends Seeder
     {
         Pelanggan::factory(50)->create();
 
+        Kurir::factory(6)->create();
+
         Pesanan::create([
             'kdpsn' => 'KRM-10001',
-            'namabarang' => 'Pesanan1',
+            'namabarang' => 'Stiker',
             'jumlah' => '10',
             'id_pelanggans' => '1',
             'tgl_msk' => '2023-07-31',
             'status' => 'proses',
-            'image' => 'actdiagramkurir.png',
+            'image' => 'post-images/FajarhR2tWvs0Gb3mlDFOFPcHT0sGewSKDLKpLKh.png',
             'id_kurirs' => '1',
             'id_kendaraans' => '1',
         ]);
@@ -68,14 +70,14 @@ class DatabaseSeeder extends Seeder
         //     'alamatpelanggan' => 'Purbalingga',
         // ]);
 
-        Kurir::create([
-            'nik' => '1234',
-            'nama' => 'kurir1',
-            'notelpkurir' => '081805032002',
-            'kelamin' => 'Perempuan',
-            'alamatkurir' => 'Blater',
-            'emailkurir' => 'emailkurir@gmail.com',
-        ]);
+        // Kurir::create([
+        //     'nik' => '1234',
+        //     'nama' => 'kurir1',
+        //     'notelpkurir' => '081805032002',
+        //     'kelamin' => 'Perempuan',
+        //     'alamatkurir' => 'Blater',
+        //     'emailkurir' => 'emailkurir@gmail.com',
+        // ]);
 
         Kendaraan::create([
             'platno' => 'E1305DB',

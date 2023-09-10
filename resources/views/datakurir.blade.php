@@ -65,7 +65,7 @@
                                                             <th>Nama Kurir</th>
                                                             <th>No Telepon</th>
                                                             <th>Email</th>
-                                                            <th>Alamat</th>
+                                                            <th width="300px">Alamat</th>
                                                             <th>Aksi</th>
                                                         </tr>
                                                     </thead>
@@ -174,7 +174,8 @@
                                                                 <input value="{{ old('notelpkurir') }}" type="text"
                                                                     name="notelpkurir" type="number"
                                                                     class="form-control @error('notelpkurir') is-invalid @enderror"
-                                                                    placeholder="Masukan No Telepon" id="first-name-icon" />
+                                                                    placeholder="Masukan No Telepon"
+                                                                    id="first-name-icon" />
                                                                 @error('notelpkurir')
                                                                     <div class="invalid-feedback">
                                                                         {{ $message }}

@@ -17,7 +17,7 @@ class KendaraanController extends Controller
      */
     public function index(Request $request)
     {
-        $dataken = Kendaraan::paginate('5');
+        $dataken = Kendaraan::latest()->get();
         $infopesanan = Pesanan::latest()->paginate(1);
         $infopelanggan = Pelanggan::latest()->paginate(1);
         return view('datakendaraan', compact('dataken', 'infopesanan', 'infopelanggan'));
