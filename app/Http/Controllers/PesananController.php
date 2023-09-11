@@ -94,13 +94,13 @@ class PesananController extends Controller
     public function insertpesanan(Request $request)
     {
         $validated = $request->validate([
-            'kdpsn' => 'required|unique:pesanans',
+            // 'kdpsn' => 'required|unique:pesanans',
             'tgl_msk' => 'required',
             'image' => 'image|file|max:5000',
             'image' => 'required'
         ], [
-            'kdpsn.required' => 'Kode Pesanan tidak boleh kosong',
-            'kdpsn.unique' => 'Kode Pesanan tidak boleh sama',
+            // 'kdpsn.required' => 'Kode Pesanan tidak boleh kosong',
+            // 'kdpsn.unique' => 'Kode Pesanan tidak boleh sama',
             'tgl_msk.required' => 'Masukan tanggal masuk',
             'image.required' => 'Masukan foto',
 
@@ -112,9 +112,11 @@ class PesananController extends Controller
         $pelanggans1 = Pelanggan::find($pelanggan);
         $kurirs1 = Kurir::find($kurir);
         $kendaraans1 = Kendaraan::find($kendaraan);
+        $nomax = Pesanan::count();
+        $nopsn = 'KRM' . date('Y') . sprintf("%04s", abs($nomax + 1));
 
         $pesanan = new Pesanan;
-        $pesanan->kdpsn = $request->kdpsn;
+        $pesanan->kdpsn = $nopsn;
         $pesanan->namabarang = $request->hasilbarang;
         $pesanan->jumlah = $request->hasiljumlah;
         $pesanan->id_pelanggans = $request->id;

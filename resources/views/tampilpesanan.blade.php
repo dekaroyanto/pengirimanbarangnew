@@ -104,7 +104,7 @@
                                                 Pesanan</label>
                                             <input value="{{ old('kdpsn', $data->kdpsn) }}" type="text" name="kdpsn"
                                                 class="form-control @error('kdpsn') is-invalid @enderror"
-                                                id="exampleInputEmail1" aria-describedby="emailHelp">
+                                                id="exampleInputEmail1" aria-describedby="emailHelp" readonly>
                                             @error('kdpsn')
                                                 <div class="invalid-feedback">
                                                     {{ $message }}

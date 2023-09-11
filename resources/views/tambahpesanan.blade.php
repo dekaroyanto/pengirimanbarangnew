@@ -98,7 +98,7 @@
                             <form class="form" action="/insertpesanan" method="POST" enctype="multipart/form-data">
                                 @csrf
                                 <div class="row">
-                                    <div class="col-md-6 col-12">
+                                    {{-- <div class="col-md-6 col-12">
                                         <div class="form-group">
                                             <label for="exampleInputEmail1" class="form-label">Kode
                                                 Pesanan</label>
@@ -111,7 +111,7 @@
                                                 </div>
                                             @enderror
                                         </div>
-                                    </div>
+                                    </div> --}}
                                     <div class="col-md-6 col-12">
                                         <div class="form-group">
                                             <label for="exampleInputEmail1" class="form-label">Kurir</label>
